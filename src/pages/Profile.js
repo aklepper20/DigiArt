@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../style/Profile.css";
-import Avatar from "@mui/material/Avatar";
 import NftCard from "../components/NftCard";
+import EditInputs from "../components/EditInputs";
+import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
 
 function Profile() {
+  const [editInputs, setEditInputs] = useState(false);
+  console.log(editInputs);
   const objectArr = [
     {
       img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
@@ -80,10 +83,9 @@ function Profile() {
               alt="NFT"
             />
             <div className="profile__productDetails">
-              <input placeholder="" />
-              <input placeholder="" />
-              <input placeholder="" />
-              <input placeholder="" />
+              {editInputs ? <EditInputs /> : <ProfileNFTDisplay />}
+              <button onClick={() => setEditInputs(true)}>Edit</button>
+              <button onClick={() => setEditInputs(false)}>Save</button>
             </div>
           </div>
         </div>
