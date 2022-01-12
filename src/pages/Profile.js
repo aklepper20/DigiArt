@@ -7,7 +7,7 @@ function Profile() {
   return (
     <div className="profile">
       <Navbar />
-
+      <h1>hi</h1>
       <div className="profile__top">
         <div className="profile__user">
           <Avatar />
