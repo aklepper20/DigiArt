@@ -58,77 +58,73 @@ function Marketplace() {
             setCoolCats(response.data.nfts);
         });
     }, []);
-    console.log(coolCats);
+    // console.log(coolCats);
+    let copyCryptoPunk = [];
+    let copyCoolCats = [];
+    const randomNum = () => {
+        return Math.floor(Math.random() * 9) + 1;
+    };
 
+    cryptoPunk.map((nft) => {
+        let newKey = Object.assign({}, nft);
+        newKey.price = `0.${randomNum()} ETH`;
+        return copyCryptoPunk.push(newKey);
+    });
+    coolCats.map((nft) => {
+        let newKey = Object.assign({}, nft);
+        newKey.price = `0.${randomNum()} ETH`;
+        return copyCoolCats.push(newKey);
+    });
+
+    console.log(copyCoolCats);
     return (
         <div className="marketplace">
-            <div className="marketplace_Nav">
-                <div className="navbar__logo">
-                    <img
-                        src="https://cdn.logo.com/hotlink-ok/logo-social.png"
-                        alt="DigiArt Logo"
-                    />
-                    <h2>
-                        <a href="/">DigiArt</a>
-                    </h2>
-                </div>
-                <div className="marketplaceBtns">
-                    <button>
-                        <a href="/marketplace">Marketplace</a>
-                    </button>
-                    <button>
-                        <a href="/cart">Cart</a>
-                    </button>
-                    <button>
-                        <a href="/profile">My Profile</a>
-                    </button>
-                    <div className="walletIcon">
-                        <div>
-                            <AccountBalanceWalletIcon />
-                        </div>
+            <Navbar />
+            <div className="marketplace-wrapper">
+                <div className="welcome">Welcome, User</div>
+                <div className="options">
+                    <div className="categories">
+                        <div>Digital</div>
+                        <div>Technology</div>
+                        <div>Everyday Items</div>
                     </div>
+                    <div className="addItem">Upload</div>
                 </div>
-            </div>
-            <div className="welcome">Welcome, User</div>
-            <div className="options">
-                <div className="categories">
-                    <div>Digital</div>
-                    <div>Technology</div>
-                    <div>Everyday Items</div>
+                <p className="title">Featured Products</p>
+                <div className="market-place-features">
+                    {copyCryptoPunk.map((nft) => {
+                        copyCryptoPunk.push(nft);
+                        return (
+                            <Card
+                                name={nft.metadata.name}
+                                img={
+                                    `${nft.file_url}` ||
+                                    nft.metadata.image ||
+                                    nft.file_url
+                                }
+                                price={nft.price}
+                                cryptoPunk={cryptoPunk}
+                            />
+                        );
+                    })}
                 </div>
-                <div className="addItem">Upload</div>
-            </div>
-            <p className="title">Featured Products</p>
-            <div className="market-place-features">
-                {cryptoPunk.map((nft) => {
-                    return (
-                        <Card
-                            name={nft.metadata.name}
-                            img={
-                                `${nft.file_url}` ||
-                                nft.metadata.image ||
-                                nft.file_url
-                            }
-                            cryptoPunk={cryptoPunk}
-                        />
-                    );
-                })}
-            </div>
-            <h2 className="title">Digital Assets</h2>
-            <div className="market-place-assets">
-                {coolCats.map((nft) => {
-                    return (
-                        <Card
-                            name={nft.metadata.name}
-                            img={
-                                `${nft.file_url}` ||
-                                nft.metadata.image ||
-                                nft.file_url
-                            }
-                            description={nft.metadata.description}
-                        />
-                    );
-                })}
+                <h2 className="title">Digital Assets</h2>
+                <div className="market-place-assets">
+                    {copyCoolCats.map((nft) => {
+                        return (
+                            <Card
+                                name={nft.metadata.name}
+                                img={
+                                    `${nft.file_url}` ||
+                                    nft.metadata.image ||
+                                    nft.file_url
+                                }
+                                price={nft.price}
+                                description={nft.metadata.description}
+                            />
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );
