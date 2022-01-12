@@ -1,9 +1,12 @@
 import React from "react";
+import "../style/EditInputs.css";
 
 function EditInputs() {
   return (
     <div className="editInputs">
-      <h2>EDIT INPUTS!!!!!</h2>
+      <input placeholder="Price" />
+      <input placeholder="Description" />
+      <input placeholder="Category" />
     </div>
   );
 }

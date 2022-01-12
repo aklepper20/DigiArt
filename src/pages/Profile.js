@@ -77,15 +77,27 @@ function Profile() {
             <p>@KwesiB</p>
             <p>eth: 3.04</p>
           </div>
+
           <div className="profile__item">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_Sw6z7D4DQY765mD8KyTzXPnvKyNRSrfSQ&usqp=CAU"
-              alt="NFT"
-            />
-            <div className="profile__productDetails">
-              {editInputs ? <EditInputs /> : <ProfileNFTDisplay />}
-              <button onClick={() => setEditInputs(true)}>Edit</button>
-              <button onClick={() => setEditInputs(false)}>Save</button>
+            <div className="profile__name">
+              <h1>PRODUCT DETAILS</h1>
+            </div>
+
+            <div className="profile__itemDesc">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_Sw6z7D4DQY765mD8KyTzXPnvKyNRSrfSQ&usqp=CAU"
+                alt="NFT"
+              />
+              <div className="profile__productDetails">
+                <h1>
+                  Blue <span>#24</span>
+                </h1>
+                {editInputs ? <EditInputs /> : <ProfileNFTDisplay />}
+                <div className="profile__btns">
+                  <button onClick={() => setEditInputs(false)}>Save</button>
+                  <button onClick={() => setEditInputs(true)}>Edit</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

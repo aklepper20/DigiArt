@@ -1,0 +1,17 @@
+.editInputs {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  max-width: 210px;
+  margin: 12px;
+}
+
+.editInputs input {
+  margin: 4px 0px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  background-color: #6bbaec;
+  padding-left: 10px;
+  height: 25px;
+}
