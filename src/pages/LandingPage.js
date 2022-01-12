@@ -15,8 +15,8 @@ function LandingPage() {
         <h2>DigiArt</h2>
       </div>
       <div className='landingbtns'>
-        <button className= 'btns'id='signup'>Sign Up</button>
-        <button className= 'btns' id= 'login'>Login</button>
+        <button className= 'btns'>Sign Up</button>
+        <button className= 'btns'>Login</button>
       </div>
     </div>
     <div className='container'>
