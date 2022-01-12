@@ -1,0 +1,22 @@
+.nftCard {
+  height: 270px;
+  width: 200px;
+  margin: 10px;
+  background-color: #6bbaec;
+  border-radius: 5px;
+}
+
+.nftCard img {
+  height: 167px;
+  margin: 20px;
+  border-radius: 12px;
+}
+
+.nftCard__details {
+  border-top: 1px solid #474954;
+  padding-top: 5px;
+}
+
+.nftCard__details p {
+  margin-left: 4px;
+}

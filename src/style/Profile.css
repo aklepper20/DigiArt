@@ -1,4 +1,127 @@
-.profile__product img {
-  height: 350px;
+.profile {
+  height: 100%;
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: #041010;
+  /* overflow-y: hidden;
+  overflow-x: hidden; */
+}
+
+.profile__top {
+  display: flex;
+  height: 100%;
+}
+
+.profile__user {
+  flex: 0.25;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.profile__product {
+  height: fit-content;
+}
+
+.profile__user .MuiAvatar-root {
+  height: 80px;
+  width: 80px;
+}
+
+.profile__userDetails {
+  color: white;
+}
+
+input {
+  width: 200px;
+  height: 35px;
+  border: 1px solid #b592a0;
+  padding: 8px;
   border-radius: 8px;
+  outline: none;
+  background-color: #474954;
+}
+
+.profile__inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__inputOne {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__inputTwo {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__product img {
+  object-fit: contain;
+  height: 350px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.profile__title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.profile__title h4 {
+  text-transform: uppercase;
+  font-size: 18px;
+  color: white;
+}
+
+.profile__input {
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #41ead4;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #c4a0ae;
+  color: white;
+}
+
+.save-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.profile__bottom {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+h1 {
+  color: white;
+}
+
+.profile__nftDisplay {
+  height: fit-content;
+  max-width: 800px;
+  background-color: #474954;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 5px;
 }
