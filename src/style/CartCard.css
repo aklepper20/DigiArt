@@ -1,0 +1,53 @@
+/* <div className="cart__product">
+<img src={img} />
+<div className="cart__coin">
+  <p>Coin: {price}</p>
+</div>
+<Box sx={{ minWidth: 120 }}>
+  <FormControl fullWidth>
+    <Select
+      className="cart__dropDown"
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      value={count}
+      label="Count"
+      onChange={(e) => setCount(e.target.value)}
+    >
+      <MenuItem value={1}>1</MenuItem>
+      <MenuItem value={2}>2</MenuItem>
+      <MenuItem value={3}>3</MenuItem>
+      <MenuItem value={4}>4</MenuItem>
+      <MenuItem value={5}>5</MenuItem>
+    </Select>
+  </FormControl>
+</Box>
+<DeleteIcon />
+</div> */
+
+.cart__product {
+  width: 500px;
+  height: 120px;
+  background-color: #474954;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5px;
+  margin-left: 20px;
+  color: white;
+}
+
+.cart__dropdown .MuiSelect-select {
+  width: 10px;
+  color: white;
+  background-color: white;
+}
+
+.cart__product img {
+  object-fit: contain;
+  height: 100px;
+}
+
+#demo-simple-select {
+  color: black;
+}
