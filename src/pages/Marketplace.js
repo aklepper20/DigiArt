@@ -8,6 +8,8 @@ import axios from "axios";
 
 function Marketplace() {
     const [cryptoPunk, setCryptoPunk] = useState([]);
+    const [coolCats, setCoolCats] = useState([]);
+
     const cryptopunk = {
         //*********crypotoPunk */
         method: "GET",
@@ -17,15 +19,6 @@ function Marketplace() {
             "Content-Type": "application/json",
             Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
         },
-
-        //************cool cats */
-        // method: "GET",
-        // url: "https://api.nftport.xyz/v0/nfts/0x1a92f7381b9f03921564a437210bb9396471050c",
-        // params: { chain: "ethereum", page_size: "10", include: "all" },
-        // headers: {
-        //     "Content-Type": "application/json",
-        //     Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
-        // },
         //******** deadfellaz*/
         // method: "GET",
         // url: "https://api.nftport.xyz/v0/nfts/0x2acab3dea77832c09420663b0e1cb386031ba17b",
@@ -43,13 +36,29 @@ function Marketplace() {
         //     Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
         // },
     };
+    const coolCatsApi = {
+        //************cool cats */
+        method: "GET",
+        url: "https://api.nftport.xyz/v0/nfts/0x1a92f7381b9f03921564a437210bb9396471050c",
+        params: { chain: "ethereum", page_size: "10", include: "all" },
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
+        },
+    };
     useEffect(() => {
         axios.request(cryptopunk).then((response) => {
             // console.log(response.data);
             setCryptoPunk(response.data.nfts);
         });
     }, []);
-    console.log(cryptoPunk);
+    useEffect(() => {
+        axios.request(coolCatsApi).then((response) => {
+            // console.log(response.data);
+            setCoolCats(response.data.nfts);
+        });
+    }, []);
+    console.log(coolCats);
 
     return (
         <div className="marketplace">
@@ -100,13 +109,14 @@ function Marketplace() {
                                 nft.metadata.image ||
                                 nft.file_url
                             }
+                            cryptoPunk={cryptoPunk}
                         />
                     );
                 })}
             </div>
             <h2 className="title">Digital Assets</h2>
             <div className="market-place-assets">
-                {cryptoPunk.map((nft) => {
+                {coolCats.map((nft) => {
                     return (
                         <Card
                             name={nft.metadata.name}
