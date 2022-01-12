@@ -7,7 +7,7 @@ import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
 
 function Profile() {
   const [editInputs, setEditInputs] = useState(false);
-  console.log(editInputs);
+
   const objectArr = [
     {
       img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
