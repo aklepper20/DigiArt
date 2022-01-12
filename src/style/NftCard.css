@@ -5,11 +5,12 @@
   background-color: #6bbaec;
   border-radius: 5px;
   border: 3px solid #474954;
+  position: relative;
 }
 
 .nftCard img {
   height: 167px;
-  margin: 20px;
+  margin: 0px 20px 4px 20px;
   border-radius: 12px;
 }
 
@@ -20,4 +21,9 @@
 
 .nftCard__details p {
   margin-left: 4px;
+}
+
+.nftCard h3 {
+  text-align: right;
+  padding-right: 5px;
 }

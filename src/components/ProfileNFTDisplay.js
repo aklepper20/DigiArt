@@ -1,5 +1,6 @@
 import React from "react";
 import "../style/ProfileNFTDisplay.css";
+
 function ProfileNFTDisplay() {
   return (
     <div className="profileNFT">

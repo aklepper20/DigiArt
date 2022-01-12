@@ -1,12 +1,13 @@
 .cart__container {
   display: flex;
-  height: 100%;
+  flex-direction: row;
+  height: 100vh;
   background-color: #041010;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .cart {
-  height: 100vh;
+  height: fit-content;
   background-color: #041010;
   padding-top: 20px;
 }
@@ -38,4 +39,13 @@ h1 {
 
 button {
   margin-bottom: 10px;
+}
+
+@media (max-width: 786px) {
+  .cart__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
