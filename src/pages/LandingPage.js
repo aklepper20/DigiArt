@@ -16,8 +16,8 @@ function LandingPage() {
         <h2><a href='/'>DigiArt</a></h2>
       </div>
       <div className='landingbtns'>
-        <button className= 'btns'>Sign Up</button>
-        <button className= 'btns'>Login</button>
+        <button className= 'btns'><a href='/signup'>Sign Up</a></button>
+        <button className= 'btns'><a href='/login'>Login</a></button>
       </div>
     </div>
     <div className='container'>
@@ -25,7 +25,7 @@ function LandingPage() {
         <p>Sell effortlessly using blockchain</p>
         <p>Earn big and sell easy with any item</p>
         <p id='smallerText'>Get ahead of the future...</p>
-        <button className='btns'>Sign Up</button>
+        <button className='btns'><a href='/signup'>Sign Up</a></button>
 
       </div>
       <div className='blockLeft'>
