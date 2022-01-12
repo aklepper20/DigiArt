@@ -1,0 +1,48 @@
+.navbar {
+  height: 60px;
+  width: 100%;
+  background-color: #474954;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+}
+
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.navbar__logo h2 {
+  margin-left: 15px;
+}
+
+.navbar__options {
+  width: 320px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__list {
+  display: flex;
+}
+
+.navbar__list p {
+  margin: 10px;
+}
+
+.navbar__wallet {
+  margin-left: 18px;
+}
+
+.navbar__wallet .MuiSvgIcon-root {
+  color: white;
+}
+
+.navbar__logo img {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+  border-radius: 50%;
+}
