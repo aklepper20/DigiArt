@@ -1,19 +1,18 @@
-import React from 'react'
+import React from "react";
 
-function Card() {
-  return (
-    <div className='card'>
-      <div className='topImg'>
-        {/* xoxo image api should be pulled here */}
-        Image
-      </div>
-      <div className='description'>
-        <p>Price</p>
-        <p>Description</p> 
-        <p>Rating</p>
-      </div>
-    </div>
-  )
+function Card({ name, img, description }) {
+    return (
+        <div className="card">
+            <div className="topImg">
+                {/* xoxo image api should be pulled here */}
+                <img src={img} alt="" />
+            </div>
+            <div className="description">
+                <p>{name}</p>
+                <p>{description}</p>
+            </div>
+        </div>
+    );
 }
 
-export default Card
+export default Card;
