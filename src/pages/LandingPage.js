@@ -13,7 +13,7 @@ function LandingPage() {
           src="https://cdn.logo.com/hotlink-ok/logo-social.png"
           alt="DigiArt Logo"
         />
-        <h2>DigiArt</h2>
+        <h2><a href='/'>DigiArt</a></h2>
       </div>
       <div className='landingbtns'>
         <button className= 'btns'>Sign Up</button>
