@@ -2,6 +2,7 @@ import React from "react";
 import "../style/LandingPage.css";
 import Navbar from "../components/Navbar";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Card from "../components/Card";
 
 function Marketplace() {
   return (
@@ -24,6 +25,35 @@ function Marketplace() {
         </div>
       </div>
       <div className="welcome">Welcome, User</div>
+      <div className='options'>
+        <div className='categories'>
+          <div>Digital</div>
+          <div>Technology</div>
+          <div>Everyday Items</div>
+        </div>
+        <div className='addItem'>Upload</div>
+      </div>
+      <p className='title'>Featured Products</p>
+      <div  id='marketFooter'>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      </div>
+      <p className='title'>Digital  Assets</p>
+      <div  id='marketFooter'>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      </div>
+      <p className='title'>Everyday Items</p>
+      <div  id='marketFooter'>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      </div>
       </div>
   );
 }

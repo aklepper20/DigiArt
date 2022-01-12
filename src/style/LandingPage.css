@@ -2,6 +2,7 @@
   height: 100vh;
   width: 100wh;
   background-color: #041010;
+  overflow: hidden;
 }
 
 .landingNavbar, .marketplace_Nav {
@@ -145,7 +146,26 @@ align-items: center;
 justify-content: space-around;
 }
 
-.bannerImg{
+#marketFooter{
+  margin-top: 5px;
+  height: 180px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;  
+}
+.title{
+  height: 50px;
+  width: 200px;
+  /* background-color: #41EAD4; */
+  font-size: 20px;
+  color:white;
+  margin-left:110px;
+  /* padding-left: 115px; */
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.card{
   border-radius: 10px;
   height: 100%;
   width: 280px;
@@ -157,12 +177,49 @@ justify-content: space-around;
 .welcome{
   height: 80px;
   width: 100%;
-  /* background-color: rgb(10, 9, 9); */
-  /* padding-top: 10px;*/
   padding-left: 100px;
   display: flex;
   align-items: center;
   color: white;
   font-weight: 800;
   font-size: 30px;
+}
+
+.options{
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.categories{
+  height: 60px;
+  width: 40%;
+  background-color: #41EAD4;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 50px;
+  border-radius: 10px;
+  margin-left: 100px;
+  cursor: pointer;
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.addItem{
+  height: 80px;
+  width: 280px;
+  background-color: #41EAD4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-left: 10px; */
+  margin-right: 115px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
 }

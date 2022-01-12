@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "../components/Card";
 import Navbar from "../components/Navbar";
 import "../style/LandingPage.css";
 
@@ -36,10 +37,11 @@ function LandingPage() {
       </div>
     </div>
     <div className='footer'>
-      <div className='bannerImg'>ON1</div>
-      <div className='bannerImg'>Oxmons</div>
-      <div className='bannerImg'>33</div>
-      <div className='bannerImg'>3LAU</div>
+     <Card/>
+     <Card/>
+     <Card/>
+     <Card/>
+
     </div>
   </div>
   );
