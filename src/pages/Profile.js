@@ -23,7 +23,7 @@ function Profile() {
             src="https://ca-times.brightspotcdn.com/dims4/default/6dee0c9/2147483647/strip/true/crop/3529x2604+0+0/resize/1486x1096!/quality/90/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fee%2F1f%2F66bec92d4cc6930855a95619237e%2Fla-jolla-cove.jpg"
             alt="Product 1"
           />
-          <div className="profile__">
+          <div className="profile__title">
             <h4>Product Details</h4>
             <button>edit</button>
           </div>
