@@ -1,4 +1,5 @@
 import React from "react";
+import PopUpCard from "./PopUpCard";
 
 function Card({ name, img, description }) {
     return (
@@ -10,6 +11,10 @@ function Card({ name, img, description }) {
             <div className="description">
                 <p>{name}</p>
                 <p>{description}</p>
+                <a class="button" href="#popup1">
+                    More Details
+                </a>
+                <PopUpCard name={name} img={img} description={description} />
             </div>
         </div>
     );
