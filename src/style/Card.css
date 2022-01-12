@@ -1,0 +1,35 @@
+.market-place-features {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+}
+.market-place-features .card {
+    width: 200px;
+}
+.market-place-assets {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.market-place-assets .topImg,
+.market-place-features .topImg {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+.topImg img {
+    width: 90%;
+    border-radius: 10px;
+}
+.description p:first-child {
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+.description p:last-child {
+    padding: 10px 20px;
+}
