@@ -1,11 +1,18 @@
 .market-place-features {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     padding: 30px;
     gap: 20px;
 }
 .market-place-features .card {
-    width: 200px;
+    width: 250px;
+}
+.price {
+    font-weight: bold;
+    color: red;
+    font-size: 12px;
+    padding-left: 7px;
 }
 .market-place-assets {
     display: flex;
@@ -15,16 +22,16 @@
     gap: 20px;
 }
 .market-place-assets .card {
-    width: 320px;
+    width: 250px;
 }
 .market-place-assets .topImg,
 .market-place-features .topImg {
     display: flex;
     justify-content: center;
-    padding-top: 10px;
+    padding: 20px;
 }
 .topImg img {
-    width: 90%;
+    width: 100%;
     border-radius: 10px;
 }
 .description {
@@ -41,7 +48,7 @@
 .description p:nth-child(2) {
     padding: 10px 20px;
     font-size: 14px;
-    width: 280px;
+    width: 210px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -63,6 +70,9 @@
 
 .overlay {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 0;
     bottom: 0;
     left: 0;
@@ -78,10 +88,9 @@
 }
 
 .popup {
-    margin: 250px auto;
     padding: 30px;
     background: #fff;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 50%;
     position: relative;
     transition: all 5s ease-in-out;
@@ -92,6 +101,9 @@
     color: #333;
     font-family: Tahoma, Arial, sans-serif;
     text-align: center;
+}
+.content .topImg img {
+    width: 60%;
 }
 hr {
     background-color: #fff;
