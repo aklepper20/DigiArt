@@ -1,0 +1,26 @@
+/* <div className="profileNFT">
+<h1>Blue</h1>
+<div className="profileNFT__desc">
+  <p>Price</p>
+  <p>description</p>
+  <p>Category</p>
+</div>
+</div> */
+
+.profileNFT__desc {
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.profileNFT__category {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profileNFT__category span {
+  color: #6bbaec;
+}
