@@ -14,7 +14,7 @@ function Card({ name, img, description, price }) {
                 </p>
                 <p>{description}</p>
 
-                <a class="button" href="#popup1">
+                <a className="button" href="#popup1">
                     More Details
                 </a>
                 <PopUpCard name={name} img={img} description={description} />

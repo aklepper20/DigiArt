@@ -2,14 +2,14 @@ import React from "react";
 
 function PopUpCard({ name, img, description }) {
     return (
-        <div id="popup1" class="overlay">
-            <div class="popup">
+        <div id="popup1" className="overlay">
+            <div className="popup">
                 <h2>{name}</h2>
-                <hr class="hr-1" />
-                <a class="close" href="#">
+                <hr className="hr-1" />
+                <a className="close" href="#">
                     &times;
                 </a>
-                <div class="content">
+                <div className="content">
                     <div className="topImg">
                         {/* xoxo image api should be pulled here */}
                         <img src={img} alt="" />
