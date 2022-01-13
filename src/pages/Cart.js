@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import CartCard from "../components/CartCard";
 import "../style/Cart.css";
 import Navbar from "../components/Navbar";
+import { styled, Box } from "@mui/system";
+import ModalUnstyled from "@mui/base/ModalUnstyled";
+
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled("div")`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`;
+
+const style = {
+  width: 480,
+  bgcolor: "#041010",
+  color: "white",
+  border: "2px solid #6bbaec",
+  p: 2,
+  px: 4,
+  pb: 3,
+};
 
 function Cart() {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+
   const objArray = [
     {
       img: "https://i.insider.com/61a7a6965d47cc0018e8ce17?width=600&format=jpeg&auto=webp",
@@ -18,10 +56,13 @@ function Cart() {
       price: 0.7,
     },
   ];
+
   return (
     <>
       <Navbar />
+
       <h1>Cart Items:</h1>
+
       <div className="cart__container">
         <div className="cart">
           {objArray.map((obj) => (
@@ -38,7 +79,46 @@ function Cart() {
               Cart total: <span>2.4eth</span>
             </p>
           </div>
-          <button>Checkout</button>
+          <div style={{ display: "flex", justifyContent: "end" }}>
+            <button
+              type="button"
+              style={{
+                background: "transparent",
+                color: "black",
+                margin: 0,
+                padding: 3,
+              }}
+              onClick={() => setOpen(true)}
+            >
+              Checkout
+            </button>
+            <StyledModal
+              aria-labelledby="unstyled-modal-title"
+              aria-describedby="unstyled-modal-description"
+              open={open}
+              onClose={handleClose}
+              BackdropComponent={Backdrop}
+            >
+              <Box sx={style}>
+                <div
+                  style={{
+                    width: "480px",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  <iframe
+                    src="https://giphy.com/embed/3o6fJ1BM7R2EBRDnxK"
+                    width="480"
+                    height="234"
+                    frameBorder="0"
+                    class="giphy-embed"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </Box>
+            </StyledModal>
+          </div>
         </div>
       </div>
     </>
