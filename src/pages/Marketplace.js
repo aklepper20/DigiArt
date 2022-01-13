@@ -4,7 +4,7 @@ import "../style/Card.css";
 import Navbar from "../components/Navbar";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Card from "../components/Card";
-import axios from "axios";
+import axios from 'axios';
 
 function Marketplace() {
     const [cryptoPunk, setCryptoPunk] = useState([]);
