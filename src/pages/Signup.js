@@ -22,9 +22,9 @@ function Signup() {
       const user = result.user;
       const username = user.displayName;
       console.log(username)
-      // if(user){
-      //   window.location = '/marketplace'
-      // }
+      if(user){
+        window.location = '/marketplace'
+      }
     }).catch((error) => {
       console.log(error);
     });
