@@ -38,18 +38,19 @@ button:hover {
 
 h1 {
   color: white;
+  margin-left: 30px;
+  margin-top: 40px;
+  margin-bottom: 18px;
 }
 
 .profile__nftDisplay {
   height: fit-content;
-  max-width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   border-radius: 5px;
 }
-
-/* ////////// */
 
 .profile__top {
   display: flex;
@@ -59,10 +60,15 @@ h1 {
   overflow-x: hidden;
 }
 
+.profile__top h1 {
+  color: white;
+  margin-bottom: 0px;
+  margin-top: 40px;
+}
+
 .profile__user {
   height: 400px;
   width: 280px;
-  border-radius: 5px;
 }
 
 .profile__user img {
@@ -70,17 +76,19 @@ h1 {
   height: 270px;
   object-fit: contain;
   margin-left: 15px;
+  border-radius: 20%;
 }
 
 .profile__user h2 {
   text-align: center;
   color: white;
-  font-size: 45px;
+  font-size: 50px;
 }
 
 .profile__user p {
   color: white;
   text-align: center;
+  color: #41ead4;
 }
 
 .profile__item img {
@@ -119,7 +127,7 @@ h1 {
   padding-top: 10px;
   display: flex;
   justify-content: space-between;
-  margin-left: 10px;
+  margin-left: 18px;
 }
 
 @media (max-width: 786px) {
