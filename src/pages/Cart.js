@@ -60,32 +60,43 @@ function Cart() {
   return (
     <>
       <Navbar />
-
-      <h1>Cart Items:</h1>
-
+      <h1>Cart Items</h1>
       <div className="cart__container">
         <div className="cart">
           {objArray.map((obj) => (
             <CartCard img={obj.img} price={obj.price} />
           ))}
+          <div className="cart__container__subtotal">
+            <h3>SUB-TOTAL</h3>
+            <h3 style={{ marginLeft: "50px" }}>3.01 ETH</h3>
+          </div>
         </div>
-
         <div className="cart__checkout">
           <div className="cart__total">
             <p>
-              Wallet total: <span>.29eth</span>
+              Wallet total <span>.29eth</span>
             </p>
             <p>
-              Cart total: <span>2.4eth</span>
+              Cart total <span>2.4eth</span>
             </p>
           </div>
-          <div style={{ display: "flex", justifyContent: "end" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "end",
+              flexDirection: "column",
+            }}
+          >
             <button
               type="button"
               style={{
-                background: "transparent",
-                color: "black",
-                margin: 0,
+                backgroundColor: "lightskyblue",
+                paddingTop: "8px",
+                paddingBottom: "8px",
+                paddingLeft: "12px",
+                paddingRight: "12px",
+                color: "white",
+                marginBottom: "12px",
                 padding: 3,
               }}
               onClick={() => setOpen(true)}
@@ -118,6 +129,7 @@ function Cart() {
                 </div>
               </Box>
             </StyledModal>
+            <button className="cart__continueBtn">Continue Shopping</button>
           </div>
         </div>
       </div>
