@@ -3,16 +3,17 @@ import "../style/LandingPage.css";
 import "../style/Card.css";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
-import axios from "axios";
+import axios from 'axios';
 /////upload popup import below
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import { Input } from "@mui/material";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Input } from '@mui/material';
+
 
 function Marketplace({ username }) {
     const [cryptoPunk, setCryptoPunk] = useState([]);
@@ -20,25 +21,27 @@ function Marketplace({ username }) {
     const [veeFriends, setVeeFriends] = useState([]);
     const [deadFellaz, setDeadFellaz] = useState([]);
 
-    //upload model below
-    const productNameRef = useRef();
-    const productPriceRef = useRef();
-    const productFileRef = useRef();
 
-    const [open, setOpen] = React.useState(false);
+//upload model below
+const productNameRef = useRef();
+const productPriceRef = useRef();
+const productFileRef = useRef();
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+const [open, setOpen] = React.useState(false);
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+const handleClickOpen = () => {
+  setOpen(true);
+};
 
-    const handleSubmit = () => {
-        console.log("upload successful");
-    };
-    ///upload modal ends
+const handleClose = () => {
+  setOpen(false);
+};
+
+const handleSubmit = ()=>{
+  console.log("upload successful")
+
+}
+///upload modal ends
     const cryptopunk = {
         //*********crypotoPunk */
         method: "GET",
@@ -152,7 +155,6 @@ function Marketplace({ username }) {
         ...copyDeadFellaz,
     ];
     // console.log(nfts);
-
     return (
         <div className="marketplace">
             <Navbar />
@@ -165,6 +167,52 @@ function Marketplace({ username }) {
                         <div>Everyday Items</div>
                     </div>
 
+        {/* upload modal html begins here */}
+                    <div className="addItem">
+                                    
+                    <Button style={{width: '280px', height: '80px', ':hover': {
+                    bgcolor: 'pink',
+                    color: 'white',
+                    }}}  onClick={handleClickOpen}>
+                        Upload
+                    </Button>
+                    <Dialog open={open} onClose={handleClose}>
+                        <DialogTitle>Upload your Art!!!</DialogTitle>
+                        <DialogContent>
+                        <DialogContentText>
+                        
+                        </DialogContentText>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Name of the product"
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            ref={productNameRef}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            label="Price"
+                            type="number"
+                            fullWidth
+                            variant="standard"
+                            ref={productPriceRef}
+
+                        />
+                        <Input type="file" accept="image/*" ref={productFileRef} />
+
+                        </DialogContent>
+                        <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleSubmit}>Submit</Button>
+                        </DialogActions>
+                    </Dialog>
+                    </div>
+     {/* upload modal HTML ends here */}
                     {/* upload modal html begins here */}
                     <div className="addItem">
                         <Button
@@ -229,6 +277,7 @@ function Marketplace({ username }) {
                                     nft.metadata.image ||
                                     nft.file_url
                                 }
+                                
                                 price={nft.price}
                                 cryptoPunk={cryptoPunk}
                             />

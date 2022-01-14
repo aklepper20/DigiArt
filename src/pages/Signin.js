@@ -20,6 +20,31 @@ function Signin() {
                 // console.log(user)
                 const username = user.displayName;
 
+  const googleFunction = async()=>{
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, provider)
+    .then((result) => {
+   
+      const user = result.user;
+      // console.log(user)
+      const username = user.displayName;
+
+      if(user){
+        // console.log(user)
+        window.location = '/marketplace'
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
+}
+  const login = async()=>{
+    // console.log("hello")
+    try{
+      await signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
+      .then((user)=>{
+        if(user){
+          window.location = '/marketplace'
                 if (user) {
                     // console.log(user)
                     window.location = "/marketplace";
@@ -29,20 +54,6 @@ function Signin() {
                 console.log(error);
             });
     };
-    const login = async () => {
-        // console.log("hello")
-        try {
-            await signInWithEmailAndPassword(
-                auth,
-                emailRef.current.value,
-                passwordRef.current.value
-            ).then((user) => {
-                if (user) {
-                    window.location = "/marketplace";
-                }
-            });
-        } catch (error) {
-            alert(error.message);
         }
     };
     return (
