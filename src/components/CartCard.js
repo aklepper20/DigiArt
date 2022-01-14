@@ -52,7 +52,7 @@ function CartCard({ img, price }) {
         </Box>
       </div>
 
-      <DeleteIcon />
+      <DeleteIcon style={{ cursor: "pointer" }} />
     </div>
   );
 }

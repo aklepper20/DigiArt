@@ -29,6 +29,12 @@ h1 {
   border-radius: 5px;
 }
 
+.cart__container__subtotal {
+  display: flex;
+  color: white;
+  justify-content: end;
+}
+
 .cart__total {
   color: white;
   padding-top: 10px;

@@ -70,7 +70,7 @@ function Profile() {
         <div className="profile__top">
           <div className="profile__user">
             <img
-              src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc"
+              src="https://portraitsrefined.com/wp-content/uploads/2020/03/Headshot.jpg"
               alt=""
             />
             <h2>Kwesi</h2>
@@ -101,8 +101,7 @@ function Profile() {
             </div>
           </div>
         </div>
-
-        <h1>Your Items:</h1>
+        <h1>Your Items</h1>
         <div className="profile__bottom">
           <div className="profile__nftDisplay">
             {objectArr.map((obj) => (
