@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+/* <div className="profileNFT">
+<h1>Blue</h1>
+<div className="profileNFT__desc">
+  <p>Price</p>
+  <p>description</p>
+  <p>Category</p>
+</div>
+</div> */
+
+>>>>>>> mergenabzbranch
 .profileNFT__desc {
   color: white;
   margin-bottom: 10px;
@@ -13,6 +25,7 @@
 }
 
 .profileNFT__category span {
+<<<<<<< HEAD
   color: #41ead4;
 }
 
@@ -24,4 +37,7 @@ button {
 button:hover {
   background-color: black;
   color: #46f8e0;
+=======
+  color: #6bbaec;
+>>>>>>> mergenabzbranch
 }

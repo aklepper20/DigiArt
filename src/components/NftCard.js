@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../style/NftCard.css";
+<<<<<<< HEAD
 import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
 
@@ -82,6 +83,27 @@ function NftCard({ img, id }) {
           </Box>
         </StyledModal>
       </div>
+=======
+import ProfileModal from "./ProfileModal";
+function NftCard({ img, id }) {
+  const [openModal, setOpenModal] = useState(false);
+
+  const hideModal = openModal ? "" : "hideModal";
+
+  return (
+    <div className="nftCard">
+      <h3 onClick={() => setOpenModal(true)}>
+        {openModal ? (
+          <ProfileModal
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            hideModal={hideModal}
+          />
+        ) : (
+          "X"
+        )}
+      </h3>
+>>>>>>> mergenabzbranch
       <img src={img} alt="Nft card display" />
       <div className="nftCard__details">
         <p>ID: {id}</p>

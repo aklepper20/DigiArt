@@ -1,4 +1,5 @@
 .cart__container {
+<<<<<<< HEAD
     display: flex;
     flex-direction: row;
     height: 100vh;
@@ -12,6 +13,19 @@
 .cart {
     height: fit-content;
     background-color: #041010;
+=======
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  background-color: #041010;
+  justify-content: space-evenly;
+}
+
+.cart {
+  height: fit-content;
+  background-color: #041010;
+  padding-top: 20px;
+>>>>>>> mergenabzbranch
 }
 
 h3 {
@@ -57,4 +71,13 @@ button {
         align-items: center;
         padding-top: 20px;
     }
+}
+
+@media (max-width: 786px) {
+  .cart__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 }
