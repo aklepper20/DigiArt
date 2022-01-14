@@ -5,8 +5,7 @@ function EditInputs() {
   return (
     <div className="editInputs">
       <input placeholder="Price" />
-      <input placeholder="Description" />
-      <input placeholder="Category" />
+      <input style={{ height: "55px" }} placeholder="Description" />
     </div>
   );
 }
