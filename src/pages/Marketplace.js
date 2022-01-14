@@ -4,10 +4,10 @@ import "../style/Card.css";
 import Navbar from "../components/Navbar";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Card from "../components/Card";
-import axios from 'axios';
-import username from '../pages/Signin'
+import axios from "axios";
+import username from "../pages/Signin";
 
-function Marketplace({username}) {
+function Marketplace({ username }) {
     const [cryptoPunk, setCryptoPunk] = useState([]);
     const [coolCats, setCoolCats] = useState([]);
     const [veeFriends, setVeeFriends] = useState([]);
