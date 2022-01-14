@@ -19,7 +19,7 @@
   box-shadow: 0px 15px 20px -6px rgba(82, 82, 82, 0.75);
 }
 
-.login-email, .login-password {
+.login-email, .login-password, .login-name{
 margin-bottom: 50px;
 padding: 20px;
 width: 50%;
@@ -28,7 +28,7 @@ font-size: 16px;
 
 }
 
-.login-email:focus, .login-password:focus {
+.login-email:focus, .login-password:focus , .login-name:focus{
   width: 90%;
   border-bottom: 3px solid #753188c2;
   border-width: 50%;

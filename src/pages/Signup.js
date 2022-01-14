@@ -9,54 +9,69 @@ function Signup() {
 
   const emailRef= useRef()
   const passwordRef = useRef()
+  const NameInput = useRef()
 
   const googleFunction = async()=>{
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
-    signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
-      // The signed-in user info.
+    try{ signInWithPopup(auth, provider)
+    .then(async(result) => {
+  
       const user = result.user;
       const username = user.displayName;
-      console.log(username)
-      if(user){
-        window.location = '/marketplace'
-      }
-    }).catch((error) => {
-      console.log(error);
-    });
-}
-  const register = async() =>{
-    try{
-      await  createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
-      .then(async(cred)=>{
-        
-        await setDoc(doc(db,'users',`${cred.user.uid}`),
-        {
-          tasks:[
-            {
-              text: 'create your todo',
-              status: true
-            }
-          ]
+      // console.log(username)
+      // console.log(user.email)
+     
+      await setDoc(doc(db,'users',`${user.uid}`),
+      {
+        userData:[
+          {
+           
+            emailID: user.email,
+            name : username
+          }
+        ]
         }) 
-      if(cred){
+      if(user){
         window.location = '/marketplace'
       } 
     })
   }
-
-    catch(error){
-      alert(error.message)
-    }
+  catch(error){
+    alert(error.message)
   }
+}
+const register = async() =>{
+  try{
+    await  createUserWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
+    .then(async(cred)=>{
+      // console.log(cred)
+      await setDoc(doc(db,'users',`${cred.user.uid}`),
+      {
+        userData:[
+          {
+           
+            emailID: emailRef.current.value,
+            name : NameInput.current.value
+          }
+        ]
+      }) 
+    if(cred){
+      window.location = '/marketplace'
+    } 
+  })
+}
+
+  catch(error){
+    alert(error.message)
+  }
+}
 
   return (
     <div className='signup'>
+      
       <Login
+        nameInputBlock = {<input ref= {NameInput} className='login-name' type='text' placeholder='Enter your name'/>}
         title = 'Sign Up'
         button = 'Sign Up'
         href = '/login'
@@ -66,6 +81,7 @@ function Signup() {
         emailInput={emailRef}
         passwordInput={passwordRef}
         googleFunction={googleFunction}
+        // NameInput = {NameInput}
       />
     </div>
   )
