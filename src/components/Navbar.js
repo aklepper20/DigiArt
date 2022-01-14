@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import "../style/Navbar.css";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
 function Navbar() {
   const [state, setState] = useState({
@@ -35,10 +37,19 @@ function Navbar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="navbar__drawer">
-        <CloseIcon onClick={() => setState(false)} className="navbar__close" />
-        <div className="navbar__userDetails">
-          <p>@user</p>
-          <p>Eth: {0.3}</p>
+        <div className="navbar__drawerTop">
+          <div>Account</div>
+          <p>ID: 45235</p>
+        </div>
+        <div className="navbar__drawerBottom">
+          <div className="navbar__eth">
+            <img
+              src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+              alt="ethereum logo"
+            />
+          </div>
+          <p className="eth__number">Eth: {0.3}</p>
+          <p className="eth__username">@user</p>
         </div>
       </div>
     </Box>
@@ -61,9 +72,16 @@ function Navbar() {
           <p>
             <a href="/marketplace">Marketplace</a>
           </p>
+
           <p>
-            <a href="/cart">Cart</a>
+            <Link to="/cart">
+              <div style={{ display: "flex" }}>
+                <a href="/cart">Cart</a>
+                <ShoppingBagIcon style={{ color: "yellow" }} />
+              </div>
+            </Link>
           </p>
+
           <p>
             <a href="/profile">My Profile</a>
           </p>
@@ -77,7 +95,11 @@ function Navbar() {
                 </Button>
                 <Drawer
                   PaperProps={{
-                    style: { height: "40vh" },
+                    style: {
+                      height: "30vh",
+                      borderRadius: "10px 0 0 10px",
+                      marginTop: "60px",
+                    },
                   }}
                   anchor={anchor}
                   open={state[anchor]}
