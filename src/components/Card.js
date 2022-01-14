@@ -1,6 +1,7 @@
 import React from "react";
+import PopUpCard from "./PopUpCard";
 
-function Card({ name, img, description }) {
+function Card({ name, img, description, price }) {
     return (
         <div className="card">
             <div className="topImg">
@@ -8,8 +9,15 @@ function Card({ name, img, description }) {
                 <img src={img} alt="" />
             </div>
             <div className="description">
-                <p>{name}</p>
+                <p>
+                    {name} <span className="price">{price}</span>
+                </p>
                 <p>{description}</p>
+
+                <a className="button" href="#popup1">
+                    More Details
+                </a>
+                <PopUpCard name={name} img={img} description={description} />
             </div>
         </div>
     );

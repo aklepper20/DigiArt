@@ -4,8 +4,10 @@ import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-import Signup from "./components/Signup";
+import Signup from "./pages/Signup";
 import Login from "./components/Login";
+import Signin from "./pages/Signin";
+import UploadForm from "./components/UploadForm";
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/signup" element={<Signup/>} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<Signin/>} />
+          <Route path="/upload" element={<UploadForm/>} />
+
         </Routes>
     </div>
     </BrowserRouter>

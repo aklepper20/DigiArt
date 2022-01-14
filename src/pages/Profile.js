@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import "../style/Profile.css";
-import Avatar from "@mui/material/Avatar";
 import NftCard from "../components/NftCard";
+import EditInputs from "../components/EditInputs";
+import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
 
 function Profile() {
+  const [editInputs, setEditInputs] = useState(false);
+
   const objectArr = [
     {
       img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
@@ -66,41 +69,39 @@ function Profile() {
       <div className="profile">
         <div className="profile__top">
           <div className="profile__user">
-            <Avatar />
-          </div>
-
-          <div className="profile__userDetails">
-            <p>Username</p>
-            <p># of items: 13</p>
-            <p>Amount of coin: 2.3</p>
-          </div>
-
-          <div className="profile__product">
             <img
-              src="https://i.insider.com/61a7a6965d47cc0018e8ce17?width=600&format=jpeg&auto=webp"
-              alt="Product 1"
+              src="https://preview.redd.it/v0caqchbtn741.jpg?auto=webp&s=c5d05662a039c031f50032e22a7c77dfcf1bfddc"
+              alt=""
             />
+            <h2>Kwesi</h2>
+            <p>@KwesiB</p>
+            <p>eth: 3.04</p>
+          </div>
 
-            <div className="profile__title">
-              <h4>Product Details:</h4>
-              <button>Edit</button>
+          <div className="profile__item">
+            <div className="profile__name">
+              <h1>PRODUCT DETAILS</h1>
             </div>
 
-            <div className="profile__inputs">
-              <div className="profile__inputOne">
-                <input placeholder="Title" className="profile__input" />
-                <input placeholder="Category" />
+            <div className="profile__itemDesc">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_Sw6z7D4DQY765mD8KyTzXPnvKyNRSrfSQ&usqp=CAU"
+                alt="NFT"
+              />
+              <div className="profile__productDetails">
+                <h1>
+                  Blue <span>#24</span>
+                </h1>
+                {editInputs ? <EditInputs /> : <ProfileNFTDisplay />}
+                <div className="profile__btns">
+                  <button onClick={() => setEditInputs(false)}>Save</button>
+                  <button onClick={() => setEditInputs(true)}>Edit</button>
+                </div>
               </div>
-              <div className="profile__inputTwo">
-                <input placeholder="Description" className="profile__input" />
-                <input placeholder="Price" />
-              </div>
-            </div>
-            <div className="save-btn">
-              <button>Save</button>
             </div>
           </div>
         </div>
+
         <h1>Your Items:</h1>
         <div className="profile__bottom">
           <div className="profile__nftDisplay">
