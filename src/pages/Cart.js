@@ -61,7 +61,7 @@ function Cart() {
         <>
             <Navbar />
 
-            <h1>Cart Items</h1>
+            <h3>Cart Items</h3>
             <div className="cart__container">
                 <div className="cart">
                     {objArray.map((obj) => (

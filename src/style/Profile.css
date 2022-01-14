@@ -1,138 +1,140 @@
 .profile {
-  height: 100%;
-  padding-top: 28px;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  background-color: #041010;
+    height: 100%;
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: #041010;
 }
 
 .profile__title h4 {
-  text-transform: uppercase;
-  font-size: 18px;
-  color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: white;
 }
 
 button {
-  border: none;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background-color: #41ead4;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #41ead4;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 button:hover {
-  cursor: pointer;
-  background-color: #c4a0ae;
-  color: white;
+    cursor: pointer;
+    background-color: #c4a0ae;
+    color: white;
 }
 
 .profile__bottom {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  place-items: center;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
 }
 
-h1 {
-  color: white;
-  margin-left: 30px;
-  margin-top: 40px;
-  margin-bottom: 18px;
+h3 {
+    color: white;
+    margin-left: 30px;
+    margin-top: 40px;
+    margin-bottom: 18px;
 }
 
 .profile__nftDisplay {
-  height: fit-content;
-  max-width: 1200px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  border-radius: 5px;
+    height: fit-content;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 5px;
 }
 
 .profile__top {
-  display: flex;
-  height: 100%;
-  justify-content: space-evenly;
-  align-items: center;
-  overflow-x: hidden;
+    display: flex;
+    height: 100%;
+    justify-content: space-evenly;
+    overflow-x: hidden;
 }
 
-.profile__top h1 {
-  color: white;
-  margin-bottom: 0px;
-  margin-top: 40px;
+.profile__top h4 {
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 00px;
 }
 
 .profile__user {
-  height: 400px;
-  width: 280px;
+    height: 400px;
+    width: 280px;
 }
 
 .profile__user img {
-  width: 270px;
-  height: 270px;
-  object-fit: contain;
-  margin-left: 15px;
-  border-radius: 20%;
+    width: 270px;
+    height: 270px;
+    object-fit: contain;
+    margin-left: 15px;
+    border-radius: 20%;
 }
 
 .profile__user h2 {
-  text-align: center;
-  color: white;
-  font-size: 50px;
+    text-align: center;
+    color: white;
+    font-size: 50px;
 }
 
 .profile__user p {
-  color: white;
-  text-align: center;
-  color: #41ead4;
+    color: white;
+    text-align: center;
+    color: #41ead4;
 }
 
 .profile__item img {
-  width: 190px;
-  height: 190px;
-  border-radius: 5px;
+    width: 190px;
+    height: 190px;
+    border-radius: 5px;
 }
 
 .profile__item {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile__name {
-  color: white;
-  text-align: center;
+    color: white;
+    text-align: center;
 }
-
+.profile__name h3 {
+    margin-top: 0;
+}
 .profile__itemDesc {
-  width: 500px;
-  height: 260px;
-  border-radius: 5px;
-  margin-left: 30px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+    width: 500px;
+    height: 260px;
+    border-radius: 5px;
+    margin-left: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .profile__productDetails {
-  flex: 1;
-  text-align: center;
-  max-width: 300px;
+    flex: 1;
+    text-align: center;
+    max-width: 300px;
 }
 
 .profile__btns {
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  margin-left: 18px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 18px;
 }
 
 @media (max-width: 786px) {
-  .profile__top {
-    display: flex;
-    flex-direction: column;
-  }
+    .profile__top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
