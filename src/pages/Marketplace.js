@@ -3,55 +3,42 @@ import "../style/LandingPage.css";
 import "../style/Card.css";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
-<<<<<<< HEAD
 import axios from "axios";
-import username from "../pages/Signin";
+/////upload popup import below
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Input } from "@mui/material";
 
 function Marketplace({ username }) {
-=======
-import axios from 'axios';
-/////upload popup import below
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Input } from '@mui/material';
-
-
-function Marketplace({username}) {
->>>>>>> mergenabzbranch
     const [cryptoPunk, setCryptoPunk] = useState([]);
     const [coolCats, setCoolCats] = useState([]);
     const [veeFriends, setVeeFriends] = useState([]);
     const [deadFellaz, setDeadFellaz] = useState([]);
 
-<<<<<<< HEAD
-=======
+    //upload model below
+    const productNameRef = useRef();
+    const productPriceRef = useRef();
+    const productFileRef = useRef();
 
-//upload model below
-const productNameRef = useRef();
-const productPriceRef = useRef();
-const productFileRef = useRef();
+    const [open, setOpen] = React.useState(false);
 
-const [open, setOpen] = React.useState(false);
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-const handleClickOpen = () => {
-  setOpen(true);
-};
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-const handleClose = () => {
-  setOpen(false);
-};
-
-const handleSubmit = ()=>{
-  console.log("upload successful")
-
-}
-///upload modal ends
->>>>>>> mergenabzbranch
+    const handleSubmit = () => {
+        console.log("upload successful");
+    };
+    ///upload modal ends
     const cryptopunk = {
         //*********crypotoPunk */
         method: "GET",
@@ -164,12 +151,8 @@ const handleSubmit = ()=>{
         ...copyVeeFriends,
         ...copyDeadFellaz,
     ];
-<<<<<<< HEAD
-    console.log(nfts);
-=======
     // console.log(nfts);
-  
->>>>>>> mergenabzbranch
+
     return (
         <div className="marketplace">
             <Navbar />
@@ -181,57 +164,59 @@ const handleSubmit = ()=>{
                         <div>Technology</div>
                         <div>Everyday Items</div>
                     </div>
-<<<<<<< HEAD
-                    <div className="addItem">Upload</div>
-=======
 
-        {/* upload modal html begins here */}
+                    {/* upload modal html begins here */}
                     <div className="addItem">
-                                    
-                    <Button style={{width: '280px', height: '80px', ':hover': {
-                    bgcolor: 'pink',
-                    color: 'white',
-                    }}}  onClick={handleClickOpen}>
-                        Upload
-                    </Button>
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>Upload your Art!!!</DialogTitle>
-                        <DialogContent>
-                        <DialogContentText>
-                        
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Name of the product"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            ref={productNameRef}
-                        />
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Price"
-                            type="number"
-                            fullWidth
-                            variant="standard"
-                            ref={productPriceRef}
-
-                        />
-                        <Input type="file" accept="image/*" ref={productFileRef} />
-
-                        </DialogContent>
-                        <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={handleSubmit}>Submit</Button>
-                        </DialogActions>
-                    </Dialog>
+                        <Button
+                            style={{
+                                width: "280px",
+                                height: "80px",
+                                ":hover": {
+                                    bgcolor: "pink",
+                                    color: "white",
+                                },
+                            }}
+                            onClick={handleClickOpen}
+                        >
+                            Upload
+                        </Button>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogTitle>Upload your Art!!!</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText></DialogContentText>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Name of the product"
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                    ref={productNameRef}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Price"
+                                    type="number"
+                                    fullWidth
+                                    variant="standard"
+                                    ref={productPriceRef}
+                                />
+                                <Input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={productFileRef}
+                                />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button onClick={handleSubmit}>Submit</Button>
+                            </DialogActions>
+                        </Dialog>
                     </div>
-     {/* upload modal HTML ends here */}
->>>>>>> mergenabzbranch
+                    {/* upload modal HTML ends here */}
                 </div>
                 <p className="title">Featured Products</p>
                 <div className="market-place-features">
@@ -244,10 +229,6 @@ const handleSubmit = ()=>{
                                     nft.metadata.image ||
                                     nft.file_url
                                 }
-<<<<<<< HEAD
-=======
-                                
->>>>>>> mergenabzbranch
                                 price={nft.price}
                                 cryptoPunk={cryptoPunk}
                             />
