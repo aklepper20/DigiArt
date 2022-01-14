@@ -48,3 +48,23 @@
   object-fit: contain;
   border-radius: 50%;
 }
+
+.navbar__drawer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #474954;
+  position: relative;
+}
+
+.navbar__close {
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  color: white;
+}
+
+.navbar__close:hover {
+  color: rgb(207, 182, 182);
+}
