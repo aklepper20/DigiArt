@@ -5,8 +5,9 @@ import Navbar from "../components/Navbar";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Card from "../components/Card";
 import axios from 'axios';
+import username from '../pages/Signin'
 
-function Marketplace() {
+function Marketplace({username}) {
     const [cryptoPunk, setCryptoPunk] = useState([]);
     const [coolCats, setCoolCats] = useState([]);
     const [veeFriends, setVeeFriends] = useState([]);
@@ -129,7 +130,7 @@ function Marketplace() {
         <div className="marketplace">
             <Navbar />
             <div className="marketplace-wrapper">
-                <div className="welcome">Welcome, User</div>
+                <div className="welcome">Welcome, {username}</div>
                 <div className="options">
                     <div className="categories">
                         <div>Digital</div>
