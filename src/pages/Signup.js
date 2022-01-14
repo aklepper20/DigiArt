@@ -1,11 +1,14 @@
-import React, {useRef} from 'react'
-import Login from '../components/Login'
-import db, { auth } from '../utils/firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React, { useRef } from "react";
+import Login from "../components/Login";
+import db, { auth } from "../utils/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 function Signup() {
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const NameInput = useRef();
 
   const emailRef= useRef()
   const passwordRef = useRef()
@@ -85,6 +88,7 @@ const register = async() =>{
       />
     </div>
   )
+
 }
 
-export default Signup
+export default Signup;

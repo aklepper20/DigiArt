@@ -1,11 +1,24 @@
-import React, {useRef} from 'react'
-import Login from '../components/Login'
-import { auth } from '../utils/firebase'
-import { signInWithEmailAndPassword, getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import React, { useRef } from "react";
+import Login from "../components/Login";
+import { auth } from "../utils/firebase";
+import {
+    signInWithEmailAndPassword,
+    getAuth,
+    signInWithPopup,
+    GoogleAuthProvider,
+} from "firebase/auth";
 function Signin() {
+    const emailRef = useRef();
+    const passwordRef = useRef();
 
-  const emailRef= useRef()
-  const passwordRef = useRef()
+    const googleFunction = async () => {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                // console.log(user)
+                const username = user.displayName;
 
   const googleFunction = async()=>{
     const provider = new GoogleAuthProvider();
@@ -32,28 +45,32 @@ function Signin() {
       .then((user)=>{
         if(user){
           window.location = '/marketplace'
+                if (user) {
+                    // console.log(user)
+                    window.location = "/marketplace";
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
         }
-      })
-    }
-    catch(error){
-      alert(error.message)
-    }
-  }
-  return (
-    <div className='signin'>
-      <Login 
-        title = 'Login'
-        button = 'Login'
-        href = '/signup'
-        link = 'Sign up'
-        headerStatement = 'Need an account?'
-        emailInput={emailRef}
-        passwordInput={passwordRef}
-        btnFunction={login}
-        googleFunction={googleFunction}
-      />
-    </div>
-  )
+    };
+    return (
+        <div className="signin">
+            <Login
+                title="Login"
+                button="Login"
+                href="/signup"
+                link="Sign up"
+                headerStatement="Need an account?"
+                emailInput={emailRef}
+                passwordInput={passwordRef}
+                btnFunction={login}
+                googleFunction={googleFunction}
+            />
+        </div>
+    );
 }
 
-export default Signin
+export default Signin;

@@ -15,7 +15,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Input } from '@mui/material';
 
 
-function Marketplace({username}) {
+function Marketplace({ username }) {
     const [cryptoPunk, setCryptoPunk] = useState([]);
     const [coolCats, setCoolCats] = useState([]);
     const [veeFriends, setVeeFriends] = useState([]);
@@ -155,7 +155,6 @@ const handleSubmit = ()=>{
         ...copyDeadFellaz,
     ];
     // console.log(nfts);
-  
     return (
         <div className="marketplace">
             <Navbar />
@@ -214,6 +213,58 @@ const handleSubmit = ()=>{
                     </Dialog>
                     </div>
      {/* upload modal HTML ends here */}
+                    {/* upload modal html begins here */}
+                    <div className="addItem">
+                        <Button
+                            style={{
+                                width: "280px",
+                                height: "80px",
+                                ":hover": {
+                                    bgcolor: "pink",
+                                    color: "white",
+                                },
+                            }}
+                            onClick={handleClickOpen}
+                        >
+                            Upload
+                        </Button>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogTitle>Upload your Art!!!</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText></DialogContentText>
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Name of the product"
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                    ref={productNameRef}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="dense"
+                                    id="name"
+                                    label="Price"
+                                    type="number"
+                                    fullWidth
+                                    variant="standard"
+                                    ref={productPriceRef}
+                                />
+                                <Input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={productFileRef}
+                                />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button onClick={handleSubmit}>Submit</Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
+                    {/* upload modal HTML ends here */}
                 </div>
                 <p className="title">Featured Products</p>
                 <div className="market-place-features">
