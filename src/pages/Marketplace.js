@@ -10,15 +10,23 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import Grid from "@mui/material/Grid";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Input } from "@mui/material";
+import { REACT_APP_API_KEY } from "../utils/keys";
 
+const deadFellaz = "0x2acab3dea77832c09420663b0e1cb386031ba17b";
+const pudgyPenguins = "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8";
+const theSandbox = "0x3845badAde8e6dFF049820680d1F14bD3903a5d0";
+const mutantApe = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
+const shiba = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
+const wow = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
+
+// require("dotenv").config();
 function Marketplace({ username }) {
-    const [cryptoPunk, setCryptoPunk] = useState([]);
-    const [coolCats, setCoolCats] = useState([]);
-    const [veeFriends, setVeeFriends] = useState([]);
-    const [deadFellaz, setDeadFellaz] = useState([]);
+    const [mrkt, setMrtk] = useState([]);
+    const [featured, setFeatured] = useState([]);
 
     //upload model below
     const productNameRef = useRef();
@@ -39,119 +47,52 @@ function Marketplace({ username }) {
         console.log("upload successful");
     };
     ///upload modal ends
-    const cryptopunk = {
-        //*********crypotoPunk */
-        method: "GET",
-        url: "https://api.nftport.xyz/v0/nfts/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
-        params: { chain: "ethereum", include: "metadata", page_size: "4" },
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
-        },
-        //******** deadfellaz*/
-        // method: "GET",
-        // url: "https://api.nftport.xyz/v0/nfts/0x2acab3dea77832c09420663b0e1cb386031ba17b",
-        // params: { chain: "ethereum", page_size: "10", include: "all" },
-        // headers: {
-        //     "Content-Type": "application/json",
-        //     Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
-        // },
-    };
-    const coolCatsApi = {
-        //************cool cats */
-        method: "GET",
-        url: "https://api.nftport.xyz/v0/nfts/0x1a92f7381b9f03921564a437210bb9396471050c",
-        params: { chain: "ethereum", page_size: "10", include: "all" },
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
-        },
-    };
-    const veeFriendsApi = {
-        //******v */
-        method: "GET",
-        url: "https://api.nftport.xyz/v0/nfts/0xa3aee8bce55beea1951ef834b99f3ac60d1abeeb",
-        params: { chain: "ethereum", page_size: "10", include: "all" },
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
-        },
-    };
-    const deadFellazApi = {
-        //******** deadfellaz*/
-        method: "GET",
-        url: "https://api.nftport.xyz/v0/nfts/0x2acab3dea77832c09420663b0e1cb386031ba17b",
-        params: { chain: "ethereum", page_size: "10", include: "all" },
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: "52f0d4d5-e48d-47e7-b558fb101c99205e",
-        },
-    };
-    useEffect(() => {
-        axios.request(cryptopunk).then((response) => {
-            // console.log(response.data);
-            setCryptoPunk(response.data.nfts);
-        });
-    }, []);
-    useEffect(() => {
-        axios.request(coolCatsApi).then((response) => {
-            // console.log(response.data);
-            setCoolCats(response.data.nfts);
-        });
-    }, []);
-    useEffect(() => {
-        axios.request(veeFriendsApi).then((response) => {
-            // console.log(response.data);
-            setVeeFriends(response.data.nfts);
-        });
-    }, []);
-    useEffect(() => {
-        axios.request(deadFellazApi).then((response) => {
-            // console.log(response.data);
-            setDeadFellaz(response.data.nfts);
-        });
-    }, []);
 
-    let copyCryptoPunk = [];
-    let copyCoolCats = [];
-    let copyVeeFriends = [];
-    let copyDeadFellaz = [];
+    // ******************* opensea api **********
+    const options = {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "X-API-KEY": REACT_APP_API_KEY,
+        },
+    };
+    //************     featured */
+    useEffect(() => {
+        fetch(
+            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${mutantApe}&order_direction=desc&offset=0&limit=4`,
+            options
+        )
+            .then((response) => response.json())
+            .then((response) => setFeatured(response))
+            .catch((err) => console.error(err));
+    }, []);
+    // ******************  mrkt */
+    useEffect(() => {
+        fetch(
+            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${wow}&order_direction=desc&offset=0&limit=10`,
+            options
+        )
+            .then((response) => response.json())
+            .then((response) => setMrtk(response))
+            .catch((err) => console.error(err));
+    }, []);
 
     const randomNum = () => {
         return Math.floor(Math.random() * 9) + 1;
     };
 
-    cryptoPunk.map((nft) => {
-        let newKey = Object.assign({}, nft);
-        newKey.price = `0.${randomNum()} ETH`;
-        newKey.category = "crypto punk";
-        return copyCryptoPunk.push(newKey);
-    });
-    coolCats.map((nft) => {
-        let newKey = Object.assign({}, nft);
-        newKey.price = `0.${randomNum()} ETH`;
-        newKey.category = "cool cats";
-        return copyCoolCats.push(newKey);
-    });
-    veeFriends.map((nft) => {
-        let newKey = Object.assign({}, nft);
-        newKey.price = `0.${randomNum()} ETH`;
-        newKey.category = "vee friends";
-        return copyVeeFriends.push(newKey);
-    });
-    deadFellaz.map((nft) => {
-        let newKey = Object.assign({}, nft);
-        newKey.price = `0.${randomNum()} ETH`;
-        newKey.category = "vee friends";
-        return copyDeadFellaz.push(newKey);
-    });
-    const nfts = [
-        ...copyCryptoPunk,
-        ...copyCoolCats,
-        ...copyVeeFriends,
-        ...copyDeadFellaz,
-    ];
-    // console.log(nfts);
+    let copyFeatured = [];
+    featured.assets &&
+        featured.assets.map((nft) => {
+            let newKey = Object.assign({}, nft);
+            newKey.price = `0.${randomNum()} ETH`;
+            newKey.category = "crypto punk";
+            return copyFeatured.push(newKey);
+        });
+
+    console.log(copyFeatured, "open sea");
+
+    // ******************* opensea api end **********
     return (
         <div className="marketplace">
             <Navbar />
@@ -163,7 +104,6 @@ function Marketplace({ username }) {
                         <div>Technology</div>
                         <div>Everyday Items</div>
                     </div>
-
                     {/* upload modal html begins here */}
                     <div className="addItem">
                         <Button
@@ -219,38 +159,49 @@ function Marketplace({ username }) {
                 </div>
                 <p className="title">Featured Products</p>
                 <div className="market-place-features">
-                    {copyCryptoPunk.map((nft) => {
-                        return (
-                            <Card
-                                name={nft.metadata.name}
-                                img={
-                                    `${nft.file_url}` ||
-                                    nft.metadata.image ||
-                                    nft.file_url
-                                }
-                                price={nft.price}
-                                cryptoPunk={cryptoPunk}
-                            />
-                        );
-                    })}
+                    {copyFeatured &&
+                        copyFeatured.map((nft) => {
+                            return (
+                                <>
+                                    <Grid key={nft.id}>
+                                        <Card
+                                            id={nft.id}
+                                            // {...nft}
+                                            // id={nft.id}
+                                            name={nft.collection.name}
+                                            img={nft.image_url}
+                                            price={nft.price}
+                                            description={
+                                                nft.collection.description
+                                            }
+                                        />
+                                    </Grid>
+                                </>
+                            );
+                        })}
                 </div>
                 <h2 className="title">Digital Assets</h2>
                 <div className="market-place-assets">
-                    {nfts.map((nft) => {
-                        return (
-                            <Card
-                                name={nft.metadata.name}
-                                img={
-                                    nft.file_url ||
-                                    nft.metadata.image ||
-                                    nft.metadata.ipfs_image ||
-                                    nft.file_url
-                                }
-                                price={nft.price}
-                                description={nft.metadata.description}
-                            />
-                        );
-                    })}
+                    {mrkt.assets &&
+                        mrkt.assets.map((nft) => {
+                            return (
+                                <>
+                                    <Grid key={nft.id}>
+                                        <Card
+                                            id={nft.id}
+                                            {...nft}
+                                            // id={nft.id}
+                                            // name={nft.name}
+                                            img={nft.image_url}
+                                            // // price={Number(nft.stats.average_price).toFixed(
+                                            // //     2
+                                            // // )}
+                                            // description={nft.description}
+                                        />
+                                    </Grid>
+                                </>
+                            );
+                        })}
                 </div>
             </div>
         </div>
