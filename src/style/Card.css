@@ -30,6 +30,10 @@
     justify-content: center;
     padding: 20px;
 }
+.topImg {
+    display: flex;
+    justify-content: center;
+}
 .topImg img {
     width: 100%;
     height: 200px;
@@ -44,15 +48,34 @@
     font-weight: bold;
     width: 100%;
     text-align: center;
-    padding-top: 10px;
+    padding-bottom: 10px;
 }
-.description p:nth-child(2) {
+.MuiModal-root .MuiBox-root {
+    border: none;
+}
+.MuiGrid-root .description p:nth-child(3) {
     padding: 10px 20px;
     font-size: 14px;
     width: 210px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.popup .content {
+    width: 300px;
+}
+.popup .content .description {
+    padding: 0 20px;
+    color: #000;
+    text-align: center;
+    gap: 15px;
+}
+.popup .content .description p:nth-child(2) {
+    font-size: 14px;
+}
+.popup .content .description h3 {
+    background-color: transparent;
+    font-weight: bolder;
 }
 .button {
     font-size: 12px;
@@ -68,31 +91,25 @@
 .button:hover {
     background: #06d85f;
 }
-
+/* pop up card */
 .overlay {
-    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
 }
 .overlay:target {
     visibility: visible;
     opacity: 1;
+}
+.overlay .popup .content .topImg {
+    padding: 0 20px;
 }
 
 .popup {
     padding: 30px;
     background: #fff;
     border-radius: 10px;
-    width: 50%;
     position: relative;
     transition: all 5s ease-in-out;
 }
@@ -104,12 +121,12 @@
     text-align: center;
 }
 .content .topImg img {
-    width: 60%;
+    width: 100%;
 }
 hr {
     background-color: #fff;
     padding: 0;
-    margin: 10px;
+    margin: 15px;
 }
 
 hr.hr-1 {
@@ -134,8 +151,4 @@ hr.hr-1 {
 }
 .popup .close:hover {
     color: #06d85f;
-}
-.popup .content {
-    max-height: 30%;
-    overflow: auto;
 }

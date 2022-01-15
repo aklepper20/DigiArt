@@ -31,7 +31,6 @@ function Login({
                     type="password"
                     placeholder="Password"
                 />
-
                 <button onClick={btnFunction} className="login-button">
                     {button}
                 </button>
@@ -42,10 +41,13 @@ function Login({
                 >
                     {title} with <GoogleIcon />
                 </button>
-
                 <div className="links">
                     <p>{headerStatement}</p>
                     <a href={href}>{link}</a>
+                    <div className="links">
+                        <p>{headerStatement}</p>
+                        <a href={href}>{link}</a>
+                    </div>
                 </div>
             </div>
         </div>

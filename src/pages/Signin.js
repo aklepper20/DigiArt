@@ -16,12 +16,16 @@ function Signin() {
         const auth = getAuth();
         signInWithPopup(auth, provider)
             .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                // const credential = GoogleAuthProvider.credentialFromResult(result);
+                // const token = credential.accessToken;
+                // The signed-in user info.
                 const user = result.user;
-                // console.log(user)
+                console.log(user);
                 const username = user.displayName;
 
                 if (user) {
-                    // console.log(user)
+                    console.log(user);
                     window.location = "/marketplace";
                 }
             })
@@ -30,7 +34,7 @@ function Signin() {
             });
     };
     const login = async () => {
-        // console.log("hello")
+        console.log("hello");
         try {
             await signInWithEmailAndPassword(
                 auth,

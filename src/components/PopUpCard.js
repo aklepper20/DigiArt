@@ -6,16 +6,11 @@ function PopUpCard({ name, img, description }) {
             <div className="popup">
                 <h2>{name}</h2>
                 <hr className="hr-1" />
-                <a className="close" href="#">
-                    &times;
-                </a>
                 <div className="content">
                     <div className="topImg">
-                        {/* xoxo image api should be pulled here */}
                         <img src={img} alt="" />
                     </div>
                     <div className="description">
-                        <p>{name}</p>
                         <p>{description}</p>
                     </div>
                 </div>

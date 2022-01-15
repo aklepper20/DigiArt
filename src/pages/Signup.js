@@ -18,8 +18,7 @@ function Signup() {
                 const user = result.user;
                 const username = user.displayName;
                 // console.log(username)
-                // console.log(user.email)
-
+                // console.log(user.email
                 await setDoc(doc(db, "users", `${user.uid}`), {
                     userData: [
                         {
