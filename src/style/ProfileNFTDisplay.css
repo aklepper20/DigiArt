@@ -1,37 +1,28 @@
-/* <div className="profileNFT">
-<h1>Blue</h1>
-<div className="profileNFT__desc">
-  <p>Price</p>
-  <p>description</p>
-  <p>Category</p>
-</div>
-</div> */
-
 .profileNFT__desc {
-    color: white;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-left: 20px;
-    text-align: left;
-    margin-top: 20px;
+  color: white;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+  text-align: left;
+  margin-top: 20px;
 }
 
 .profileNFT__category {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .profileNFT__category span {
-    color: #41ead4;
+  color: #41ead4;
 }
 
 button {
-    background-color: #41ead4;
-    color: black;
+  background-color: #41ead4;
+  color: black;
 }
 
 button:hover {
-    background-color: black;
-    color: #46f8e0;
-    color: #6bbaec;
+  background-color: black;
+  color: #46f8e0;
+  color: #6bbaec;
 }

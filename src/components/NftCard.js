@@ -1,30 +1,65 @@
 import React, { useState } from "react";
 import "../style/NftCard.css";
-import ProfileModal from "./ProfileModal";
-function NftCard({ img, id }) {
-    const [openModal, setOpenModal] = useState(false);
+import DeleteIcon from "@mui/icons-material/Delete";
+import Box from "@mui/material/Box";
+import Popper from "@mui/material/Popper";
 
-    const hideModal = openModal ? "" : "hideModal";
+function NftCard({ img, ID }) {
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-    return (
-        <div className="nftCard">
-            <h3 onClick={() => setOpenModal(true)}>
-                {openModal ? (
-                    <ProfileModal
-                        openModal={openModal}
-                        setOpenModal={setOpenModal}
-                        hideModal={hideModal}
-                    />
-                ) : (
-                    "X"
-                )}
-            </h3>
-            <img src={img} alt="Nft card display" />
-            <div className="nftCard__details">
-                <p>ID: {id}</p>
-            </div>
-        </div>
-    );
+  const handleClick = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const handleDelete = () => {
+    console.log("Delete item in database");
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
+
+  return (
+    <div className="nftCard">
+      <div style={{ height: "35px", display: "flex", justifyContent: "end" }}>
+        <button
+          style={{ background: "none" }}
+          aria-describedby={id}
+          type="button"
+          onClick={handleClick}
+        >
+          <DeleteIcon className="nftCard__delete" />
+        </button>
+      </div>
+      <Popper id={id} open={open} anchorEl={anchorEl}>
+        <Box
+          style={{
+            width: "300px",
+            backgroundColor: "black",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            borderRadius: "5px",
+            position: "absolute",
+            top: "0",
+            left: "0",
+          }}
+          sx={{ border: 1, p: 1, bgcolor: "background.paper" }}
+        >
+          Are you sure you want to DELETE? ID: 342
+          <div className="nftCard__btns">
+            <button onClick={handleDelete}>DELETE</button>
+            <button onClick={() => setAnchorEl(null)}>CANCEL</button>
+          </div>
+        </Box>
+      </Popper>
+
+      <img src={img} alt="Nft card display" />
+      <div className="nftCard__details">
+        <p>ID: {ID}</p>
+      </div>
+    </div>
+  );
 }
 
 export default NftCard;
