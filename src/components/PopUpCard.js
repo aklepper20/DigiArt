@@ -1,6 +1,6 @@
 import React from "react";
 
-function PopUpCard({ name, img, description }) {
+function PopUpCard({ name, img, description, price }) {
     return (
         <div id="popup1" className="overlay">
             <div className="popup">
@@ -11,6 +11,7 @@ function PopUpCard({ name, img, description }) {
                         <img src={img} alt="" />
                     </div>
                     <div className="description">
+                        <h6 className="price">{price}</h6>
                         <p>{description}</p>
                     </div>
                 </div>
