@@ -44,11 +44,39 @@
     flex-direction: column;
     align-items: center;
 }
-.description p:first-child {
+/* .description p:first-child {
     font-weight: bold;
     width: 100%;
     text-align: center;
-    padding-bottom: 10px;
+    padding: 20px 0 0;
+    color: red;
+} */
+.description .card-name {
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+}
+.card-btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.card-btns button {
+    transition: all 500ms ease-in-out;
+    background-color: lightskyblue;
+}
+.card-btns button:hover {
+    background-color: yellowgreen;
+}
+.card-btns svg {
+    cursor: pointer;
+    font-size: 32px;
+    transition: all 500ms ease-in-out;
+}
+.card-btns svg:hover {
+    transform: scale(1.2);
+    color: yellowgreen;
 }
 .MuiModal-root .MuiBox-root {
     border: none;
@@ -65,13 +93,16 @@
     width: 300px;
 }
 .popup .content .description {
-    padding: 0 20px;
+    padding: 20px 20px;
     color: #000;
     text-align: center;
     gap: 15px;
 }
 .popup .content .description p:nth-child(2) {
     font-size: 14px;
+}
+.content .description .price {
+    font-size: 16px;
 }
 .popup .content .description h3 {
     background-color: transparent;

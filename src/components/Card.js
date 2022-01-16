@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
 import PopUpCard from "./PopUpCard";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const StyledModal = styled(ModalUnstyled)`
     position: fixed;
@@ -45,25 +46,23 @@ function Card({ name, img, description, price, key, id }) {
                 <img src={img} alt="" />
             </div>
             <div className="description">
-                <p>{name}</p>
+                <p className="card-name">{name}</p>
                 <h6 className="price">{price}</h6>
                 <p>{description}</p>
             </div>
-            <button
-                type="button"
-                style={{
-                    backgroundColor: "lightskyblue",
-                    padding: "8px 12px",
-                    color: "white",
-                    width: "100px",
-                    display: "flex",
-                    margin: "10px auto 20px",
-                    textAlign: "center",
-                }}
-                onClick={() => setOpen(true)}
-            >
-                Checkout
-            </button>
+            <div className="card-btns">
+                <button
+                    className="moredts"
+                    type="button"
+                    style={{
+                        color: "white",
+                    }}
+                    onClick={() => setOpen(true)}
+                >
+                    More Details...
+                </button>
+                <ShoppingCartIcon />
+            </div>
             <StyledModal
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"
@@ -83,6 +82,7 @@ function Card({ name, img, description, price, key, id }) {
                             name={name}
                             img={img}
                             description={description}
+                            price={price}
                         />
                     </div>
                 </Box>
