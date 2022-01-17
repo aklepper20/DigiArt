@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "../style/LandingPage.css";
 import "../style/Card.css";
 import Navbar from "../components/Navbar";
@@ -12,14 +12,24 @@ import Grid from "@mui/material/Grid";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Input } from "@mui/material";
+import { auth } from "../utils/firebase";
+import { signOut } from "firebase/auth";
 
 // require("dotenv").config();
-function Marketplace({ username, copyFeatured, mrkt }) {
+function Marketplace({ user, copyFeatured, mrkt }) {
   // console.log(mrkt, "openseamrkt");
   //upload model below
   const productNameRef = useRef();
   const productPriceRef = useRef();
   const productFileRef = useRef();
+
+  // console.log(user)
+
+  const logout = async () => {
+    await signOut(auth);
+    window.location = "/";
+    
+  };
 
   const [open, setOpen] = React.useState(false);
 
@@ -37,9 +47,10 @@ function Marketplace({ username, copyFeatured, mrkt }) {
   ///upload modal ends
   return (
     <div className="marketplace">
-      <Navbar />
+      <Navbar 
+      logoutbtn ={<button onClick={logout}>LOGOUT</button>}/>
       <div className="marketplace-wrapper">
-        <div className="welcome">Welcome, {username}</div>
+        <div className="welcome">Welcome, {user} </div>
         <div className="options">
           <div className="categories">
             <div>Digital</div>

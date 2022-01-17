@@ -10,6 +10,10 @@ import Signin from "./pages/Signin";
 import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
 
+import db, { auth } from "./utils/firebase";
+import {onSnapshot, doc} from 'firebase/firestore';
+import { signOut } from "firebase/auth";
+
 const deadFellazApi = "0x2acab3dea77832c09420663b0e1cb386031ba17b";
 const pudgyPenguinsApi = "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8";
 const mutantApeApi = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
@@ -17,6 +21,43 @@ const shibaApi = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
 const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 
 function App() {
+
+  //// user verification code starts here
+
+    const data =[];
+    const[userData, setUserData] = useState({});
+    const [user, setUser] = useState({});
+    const [userProfile, setUserProfile] = useState(userData);
+
+
+    useEffect(()=>{
+        //verify the user who signed in using "user" usestate
+        auth.onAuthStateChanged((currentUser)=>{
+            if(currentUser.uid){
+                setUser(currentUser.uid)
+                console.log("user set")
+            } else{
+                console.log("please sign in");
+                //do something that user cant see the marketplace without signing in
+            }
+        })
+        
+    //onsnapshot gets data from our database
+    onSnapshot(doc(db, 'users', `${user}`), (snapshot)=>{
+    
+    let username = snapshot.data().userData[0].name;
+   
+    let eachUserData = snapshot.data().userData.map((data, id)=>({...data, id:id}))
+    // what do u need this data to do?
+    //setProfile(eachUserData) data with users uploads if any
+    setUserProfile(eachUserData)
+    console.log(userProfile, "userprofile has been set");
+        })
+    },[])
+
+
+  //// user verification code ends here
+
     const [featured, setFeatured] = useState([]);
     const [mrkt, setMrkt] = useState([]);
 
@@ -70,7 +111,7 @@ function App() {
 
         fetchData();
     }, []);
-    console.log(mrkt, "new data");
+    // console.log(mrkt, "new data");
 
     const randomNum = () => {
         return Math.floor(Math.random() * 9) + 1;
