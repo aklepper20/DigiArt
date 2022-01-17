@@ -8,67 +8,64 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import { useStateValue } from "../StateProvider";
 
-<<<<<<< HEAD
-function CartCard({ img, price }) {
-    // console.log(img, price);
-    const [count, setCount] = useState(1);
-=======
 function CartCard({ img, price, name, id }) {
-  const [{ basket }, dispatch] = useStateValue();
-  const [count, setCount] = useState(1);
->>>>>>> 21f8f9887a0ff55390f31b025328a1478ab557cf
+    const [{ basket }, dispatch] = useStateValue();
+    const [count, setCount] = useState(1);
 
-  const removeFromBasket = () => {
-    dispatch({
-      type: "REMOVE_FROM_BASKET",
-      id: id,
-    });
-  };
+    const removeFromBasket = () => {
+        dispatch({
+            type: "REMOVE_FROM_BASKET",
+            id: id,
+        });
+    };
 
-  return (
-    <div className="cart__product">
-      <img src={img} />
-      <div className="cart__coin">
-        <p>{name}</p>
-        <p>Price: {price}</p>
-      </div>
-      <div className="cart__dropdown">
-        QTY:
-        <Box
-          sx={{
-            minWidth: 50,
-            borderRadius: "5px",
-            outline: "none",
-          }}
-        >
-          <FormControl>
-            {/* <InputLabel
+    return (
+        <div className="cart__product">
+            <img src={img} />
+            <div className="cart__coin">
+                <p>{name}</p>
+                <p>Price: {price}</p>
+            </div>
+            <div className="cart__dropdown">
+                QTY:
+                <Box
+                    sx={{
+                        minWidth: 50,
+                        borderRadius: "5px",
+                        outline: "none",
+                    }}
+                >
+                    <FormControl>
+                        {/* <InputLabel
                             id="demo-simple-select-label"
                             style={{ color: "black" }}
                         >
                             Quantity
                         </InputLabel> */}
-            <Select
-              className="cart__dropDown"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={count}
-              label="Count"
-              onChange={(e) => setCount(e.target.value)}
-            >
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </div>
+                        <Select
+                            className="cart__dropDown"
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={count}
+                            label="Count"
+                            onChange={(e) => setCount(e.target.value)}
+                        >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
 
-      <DeleteIcon onClick={removeFromBasket} style={{ cursor: "pointer" }} />
-    </div>
-  );
+            <DeleteIcon
+                onClick={removeFromBasket}
+                style={{ cursor: "pointer" }}
+            />
+        </div>
+    );
 }
 
 export default CartCard;
