@@ -5,10 +5,11 @@ import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+// import Signup from "./pages/Signup";
+// import Signin from "./pages/Signin";
 import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
+import Auth from "./components/Auth";
 
 import db, { auth } from "./utils/firebase";
 import {onSnapshot, doc} from 'firebase/firestore';
@@ -60,6 +61,8 @@ function App() {
 
     const [featured, setFeatured] = useState([]);
     const [mrkt, setMrkt] = useState([]);
+    const [filterMarket, setFilterMarket] = useState("all");
+    const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
 
     let copyFeatured = [];
     let copyMrkt = [];
@@ -72,6 +75,22 @@ function App() {
             "X-API-KEY": REACT_APP_API_KEY,
         },
     };
+    // 7. useEffefct that has a handleFilter() function
+    // useEffect(() => {
+    //     // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+    //     const handleFilter = () => {
+    //         if (filterMarket === "active") {
+    //             return setFilteredMrkt(mrkt.filter((task) => !task.status));
+    //         } else if (filterMarket === "completed") {
+    //             // if the filter status is completed i should setFilteredMrkt to only mrkt that have the status of true
+    //             return setFilteredMrkt(mrkt.filter((task) => task.status));
+    //         } else {
+    //             // if the status is all setFilteredMrkt to mrkt
+    //             return setFilteredMrkt(mrkt);
+    //         }
+    //     };
+    //     handleFilter();
+    // }, [filterMarket, mrkt]);
     //************     featured */
     useEffect(() => {
         fetch(
@@ -165,8 +184,8 @@ function App() {
                     />
                     <Route exact path="/profile" element={<Profile />} />
                     <Route exact path="/cart" element={<Cart />} />
-                    <Route exact path="/signup" element={<Signup />} />
-                    <Route exact path="/login" element={<Signin />} />
+                    <Route exact path="/signup" element={<Auth />} />
+                    <Route exact path="/login" element={<Auth />} />
                     <Route exact path="/upload" element={<UploadForm />} />
                 </Routes>
             </div>
