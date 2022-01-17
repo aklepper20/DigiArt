@@ -5,10 +5,11 @@ import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+// import Signup from "./pages/Signup";
+// import Signin from "./pages/Signin";
 import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
+import Auth from "./components/Auth";
 
 const deadFellazApi = "0x2acab3dea77832c09420663b0e1cb386031ba17b";
 const pudgyPenguinsApi = "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8";
@@ -142,8 +143,8 @@ function App() {
                     />
                     <Route exact path="/profile" element={<Profile />} />
                     <Route exact path="/cart" element={<Cart />} />
-                    <Route exact path="/signup" element={<Signup />} />
-                    <Route exact path="/login" element={<Signin />} />
+                    <Route exact path="/signup" element={<Auth />} />
+                    <Route exact path="/login" element={<Auth />} />
                     <Route exact path="/upload" element={<UploadForm />} />
                 </Routes>
             </div>

@@ -34,7 +34,7 @@ function LandingPage() {
                         </p>
                         <p id="smallerText">Get ahead of the future...</p>
                         <button className="btns">
-                            <a href="/signup">Sign Up</a>
+                            <a href="/login">Sign Up</a>
                         </button>
                     </div>
                     <div className="blockLeft">
