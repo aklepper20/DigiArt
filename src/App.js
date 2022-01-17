@@ -12,32 +12,17 @@ import { REACT_APP_API_KEY } from "./utils/keys";
 
 const deadFellazApi = "0x2acab3dea77832c09420663b0e1cb386031ba17b";
 const pudgyPenguinsApi = "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8";
-const theSandboxApi = "0x3845badAde8e6dFF049820680d1F14bD3903a5d0";
 const mutantApeApi = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
 const shibaApi = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
 const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 
-// const assetAddressesArr = [
-//     deadFellaz,
-//     pudgyPenguins,
-//     theSandbox,
-//     mutantApe,
-//     shiba,
-//     wow,
-// ];
-
-// console.log(assetAddressesArr);
 function App() {
-    // const [mrkt, setMrtk] = useState([]);
     const [featured, setFeatured] = useState([]);
-    const [deadFellaz, setDeadFellaz] = useState([]);
-    const [pudgyPenguins, setPudgyPenguins] = useState([]);
-    const [theSandbox, setTheSandbox] = useState([]);
-    const [shiba, setShiba] = useState([]);
-    const [wow, setWow] = useState([]);
+    const [mrkt, setMrkt] = useState([]);
 
     let copyFeatured = [];
-    let mrkt = [];
+    let copyMrkt = [];
+
     // ******************* opensea api **********
     const options = {
         method: "GET",
@@ -56,58 +41,36 @@ function App() {
             .then((response) => setFeatured(response))
             .catch((err) => console.error(err));
     }, []);
+    // ************ merging all api calls into one array */
+    useEffect(() => {
+        const fetchData = async () => {
+            let market = [];
+            let finishedArr = [];
+            const arr = [
+                mutantApeApi,
+                deadFellazApi,
+                pudgyPenguinsApi,
+                wowApi,
+                shibaApi,
+            ];
+            for (let i = 0; i < arr.length; i++) {
+                await fetch(
+                    `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+                )
+                    .then((res) => res.json())
+                    .then((response) => market.push(response.assets));
+            }
+            market.map((mrktItem) => {
+                mrktItem.map((item) => {
+                    return finishedArr.push(item);
+                });
+            });
+            setMrkt(finishedArr);
+        };
 
-    // ******************  mrkt */
-    // ******************  deadFellaz */
-    useEffect(() => {
-        fetch(
-            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${deadFellazApi}&order_direction=desc&offset=0&limit=10`,
-            options
-        )
-            .then((response) => response.json())
-            .then((response) => setDeadFellaz(response))
-            .catch((err) => console.error(err));
+        fetchData();
     }, []);
-    // ******************  pudgyPenguins */
-    useEffect(() => {
-        fetch(
-            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${pudgyPenguinsApi}&order_direction=desc&offset=0&limit=10`,
-            options
-        )
-            .then((response) => response.json())
-            .then((response) => setPudgyPenguins(response))
-            .catch((err) => console.error(err));
-    }, []);
-    // ******************  theSandbox */
-    useEffect(() => {
-        fetch(
-            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${theSandboxApi}&order_direction=desc&offset=0&limit=10`,
-            options
-        )
-            .then((response) => response.json())
-            .then((response) => setTheSandbox(response))
-            .catch((err) => console.error(err));
-    }, []);
-    // ******************  shiba */
-    useEffect(() => {
-        fetch(
-            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${shibaApi}&order_direction=desc&offset=0&limit=10`,
-            options
-        )
-            .then((response) => response.json())
-            .then((response) => setShiba(response))
-            .catch((err) => console.error(err));
-    }, []);
-    // ******************  wow */
-    useEffect(() => {
-        fetch(
-            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${wowApi}&order_direction=desc&offset=0&limit=10`,
-            options
-        )
-            .then((response) => response.json())
-            .then((response) => setWow(response))
-            .catch((err) => console.error(err));
-    }, []);
+    console.log(mrkt, "new data");
 
     const randomNum = () => {
         return Math.floor(Math.random() * 9) + 1;
@@ -120,45 +83,12 @@ function App() {
             newKey.category = "crypto punk";
             return copyFeatured.push(newKey);
         });
-
-    deadFellaz.assets &&
-        deadFellaz.assets.map((nft) => {
+    mrkt &&
+        mrkt.map((nft) => {
             let newKey = Object.assign({}, nft);
             newKey.price = `0.${randomNum()} ETH`;
             newKey.category = "crypto punk";
-            return mrkt.push(newKey);
-        });
-
-    pudgyPenguins.assets &&
-        pudgyPenguins.assets.map((nft) => {
-            let newKey = Object.assign({}, nft);
-            newKey.price = `0.${randomNum()} ETH`;
-            newKey.category = "crypto punk";
-            return mrkt.push(newKey);
-        });
-
-    theSandbox.assets &&
-        theSandbox.assets.map((nft) => {
-            let newKey = Object.assign({}, nft);
-            newKey.price = `0.${randomNum()} ETH`;
-            newKey.category = "crypto punk";
-            return mrkt.push(newKey);
-        });
-
-    shiba.assets &&
-        shiba.assets.map((nft) => {
-            let newKey = Object.assign({}, nft);
-            newKey.price = `0.${randomNum()} ETH`;
-            newKey.category = "crypto punk";
-            return mrkt.push(newKey);
-        });
-
-    wow.assets &&
-        wow.assets.map((nft) => {
-            let newKey = Object.assign({}, nft);
-            newKey.price = `0.${randomNum()} ETH`;
-            newKey.category = "crypto punk";
-            return mrkt.push(newKey);
+            return copyMrkt.push(newKey);
         });
 
     function shuffle(array) {
@@ -172,12 +102,10 @@ function App() {
                 array[currentIndex],
             ];
         }
-        // console.log(array);
         return array;
     }
-    shuffle(mrkt);
-    console.log(shuffle(mrkt, "new"));
-    // console.log(mrkt, "open sea");
+    shuffle(copyMrkt);
+
     // ******************* opensea api end **********
     return (
         <BrowserRouter>
@@ -190,11 +118,10 @@ function App() {
                         element={
                             <Marketplace
                                 copyFeatured={copyFeatured}
-                                mrkt={mrkt}
+                                mrkt={copyMrkt}
                             />
                         }
                     />
-                    {/* <Route exact path="/nft/:id" element={<PopUpCard />} /> */}
                     <Route exact path="/profile" element={<Profile />} />
                     <Route exact path="/cart" element={<Cart />} />
                     <Route exact path="/signup" element={<Signup />} />
