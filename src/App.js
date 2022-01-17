@@ -19,6 +19,8 @@ const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 function App() {
     const [featured, setFeatured] = useState([]);
     const [mrkt, setMrkt] = useState([]);
+    const [filterMarket, setFilterMarket] = useState("all");
+    const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
 
     let copyFeatured = [];
     let copyMrkt = [];
@@ -31,6 +33,22 @@ function App() {
             "X-API-KEY": REACT_APP_API_KEY,
         },
     };
+    // 7. useEffefct that has a handleFilter() function
+    // useEffect(() => {
+    //     // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+    //     const handleFilter = () => {
+    //         if (filterMarket === "active") {
+    //             return setFilteredMrkt(mrkt.filter((task) => !task.status));
+    //         } else if (filterMarket === "completed") {
+    //             // if the filter status is completed i should setFilteredMrkt to only mrkt that have the status of true
+    //             return setFilteredMrkt(mrkt.filter((task) => task.status));
+    //         } else {
+    //             // if the status is all setFilteredMrkt to mrkt
+    //             return setFilteredMrkt(mrkt);
+    //         }
+    //     };
+    //     handleFilter();
+    // }, [filterMarket, mrkt]);
     //************     featured */
     useEffect(() => {
         fetch(
@@ -70,7 +88,7 @@ function App() {
 
         fetchData();
     }, []);
-    console.log(mrkt, "new data");
+    // console.log(mrkt, "new data");
 
     const randomNum = () => {
         return Math.floor(Math.random() * 9) + 1;
