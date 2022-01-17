@@ -8,7 +8,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 
 function CartCard({ img, price }) {
-    console.log(img, price);
+    // console.log(img, price);
     const [count, setCount] = useState(1);
 
     return (
