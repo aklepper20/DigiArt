@@ -1,104 +1,44 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../style/Profile.css";
+import "../style/NftCard.css";
 import NftCard from "../components/NftCard";
-import EditInputs from "../components/EditInputs";
-import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
+import ProfileProductDetails from "../components/ProfileProductDetails";
 
-
-function Profile({data}) {
-  const [editInputs, setEditInputs] = useState(false);
-
-  const objectArr = [
-    {
-      img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
-      id: 1934,
-    },
-    {
-      img: "https://1734811051.rsc.cdn77.org/data/images/full/392064/youtuber-shares-how-you-can-create-your-nft-on-iphone-heres-how-it-works.jpg",
-      id: 54359,
-    },
-    {
-      img: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6170e01f8d7639b95a7f2eeb%2FSotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs%2F0x0.png%3Ffit%3Dscale",
-      id: 2344,
-    },
-    {
-      img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
-      id: 1934,
-    },
-    {
-      img: "https://1734811051.rsc.cdn77.org/data/images/full/392064/youtuber-shares-how-you-can-create-your-nft-on-iphone-heres-how-it-works.jpg",
-      id: 54359,
-    },
-    {
-      img: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6170e01f8d7639b95a7f2eeb%2FSotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs%2F0x0.png%3Ffit%3Dscale",
-      id: 2344,
-    },
-    {
-      img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
-      id: 1934,
-    },
-    {
-      img: "https://1734811051.rsc.cdn77.org/data/images/full/392064/youtuber-shares-how-you-can-create-your-nft-on-iphone-heres-how-it-works.jpg",
-      id: 54359,
-    },
-    {
-      img: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6170e01f8d7639b95a7f2eeb%2FSotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs%2F0x0.png%3Ffit%3Dscale",
-      id: 2344,
-    },
-    {
-      img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
-      id: 1934,
-    },
-    {
-      img: "https://1734811051.rsc.cdn77.org/data/images/full/392064/youtuber-shares-how-you-can-create-your-nft-on-iphone-heres-how-it-works.jpg",
-      id: 54359,
-    },
-    {
-      img: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6170e01f8d7639b95a7f2eeb%2FSotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs%2F0x0.png%3Ffit%3Dscale",
-      id: 2344,
-    },
-    {
-      img: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6170e01f8d7639b95a7f2eeb%2FSotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs%2F0x0.png%3Ffit%3Dscale",
-      id: 2344,
-    }, 
-  ];
-//below code for passing user props
-  // useEffect(()=>{
-  //   auth.onAuthStateChanged((currentUser)=>{
-  //     if(currentUser.uid){
-  //     setUser(currentUser.uid)
-  //     console.log(currentUser)
-  //     }
-  //   })
-  // },[])
-    //verify the user who signed in using "user" usestate
-    // 
-  // console.log(userProfile)
-
-  ////code ends for user props
+function Profile({ randomUserCoin, mrkt }) {
+  const [selectedNft, setSelectedNft] = useState(0);
+  // const [editInputs, setEditInputs] = useState(false);
+  // const [activeNft, setActiveNft] = useState(mrkt[0]);
+  // useEffect(() => {
+  //   setActiveNft(mrkt[selectedNft]);
+  // }, [mrkt, selectedNft]);
 
   return (
     <>
-      <Navbar />
-      <div className="profile">
-        <div className="profile__top">
-          <div className="profile__user">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7xkKmOxNZeatDKzjesmJG-s2clYi3gsncQ&usqp=CAU"
-              alt=""
-            />
-            <h2>Kwesi</h2>
-            <p>@KwesiB</p>
-            <p>eth: 3.04</p>
-          </div>
+      <Navbar randomUserCoin={randomUserCoin} />
 
-          <div className="profile__item">
-            <div className="profile__name">
-              <h2>PRODUCT DETAILS</h2>
+      {mrkt.length > 0 && (
+        <div className="profile">
+          <div className="profile__top">
+            <div className="profile__user">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7xkKmOxNZeatDKzjesmJG-s2clYi3gsncQ&usqp=CAU"
+                alt=""
+              />
+              <h2>Kwesi</h2>
+              <p>@KwesiB</p>
+              <p>eth: {randomUserCoin}</p>
             </div>
 
-            <div className="profile__itemDesc">
+            <div className="profile__item">
+              <div className="profile__name">
+                <h2>PRODUCT DETAILS</h2>
+              </div>
+
+              {mrkt && (
+                <ProfileProductDetails mrkt={mrkt} selectedNft={selectedNft} />
+              )}
+              {/* <div className="profile__itemDesc">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8_Sw6z7D4DQY765mD8KyTzXPnvKyNRSrfSQ&usqp=CAU"
                 alt="NFT"
@@ -113,19 +53,22 @@ function Profile({data}) {
                   <button onClick={() => setEditInputs(true)}>Edit</button>
                 </div>
               </div>
+            </div> */}
+            </div>
+          </div>
+
+          <h2 style={{ margin: "35px 15px 15px 45px" }}>Your Items</h2>
+          <div className="profile__bottom">
+            <div className="profile__nftDisplay">
+              {mrkt.map((obj) => (
+                <div onClick={() => setSelectedNft(obj.id)} className="nftCard">
+                  <NftCard img={obj.image_url} ID={obj.id} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
-        <h2 style={{ margin: "35px 15px 15px 45px" }}>Your Items</h2>
-        <div className="profile__bottom">
-          <div className="profile__nftDisplay">
-            {objectArr.map((obj) => (
-              <NftCard img={obj.img} ID={obj.id} />
-            ))}
-          </div>
-        </div>
-      </div>
+      )}
     </>
   );
 }

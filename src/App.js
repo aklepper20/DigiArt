@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
@@ -11,7 +11,7 @@ import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
 import Auth from "./components/Auth";
 
-import db, { auth } from "./utils/firebase";
+import db, { auth, app } from "./utils/firebase";
 import { onSnapshot, doc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 
@@ -24,35 +24,34 @@ const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 function App() {
     //// user verification code starts here
 
+    const NameInput = useRef();
+    // console.log(NameInput);
     const data = [];
-    const [userData, setUserData] = useState({});
+    const [dataUser, setDataUser] = useState(data);
+    const [username, setUserName] = useState("");
     const [user, setUser] = useState({});
-    const [userProfile, setUserProfile] = useState(userData);
-
+    const [userProfile, setUserProfile] = useState(dataUser);
+    const getData = () => {
+        onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
+            // const regularUsername = snapshot.data();
+            // console.log(regularUsername, "yello")
+        });
+    };
     useEffect(() => {
         //verify the user who signed in using "user" usestate
         auth.onAuthStateChanged((currentUser) => {
-            if (currentUser.uid) {
+            if (currentUser) {
                 setUser(currentUser.uid);
-                console.log("user set");
+                console.log("user set", currentUser.displayName);
+
+                setUserName(currentUser.displayName);
             } else {
                 console.log("please sign in");
                 //do something that user cant see the marketplace without signing in
             }
         });
-
         //onsnapshot gets data from our database
-        onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
-            let username = snapshot.data().userData[0].name;
-
-            let eachUserData = snapshot
-                .data()
-                .userData.map((data, id) => ({ ...data, id: id }));
-            // what do u need this data to do?
-            //setProfile(eachUserData) data with users uploads if any
-            setUserProfile(eachUserData);
-            console.log(userProfile, "userprofile has been set");
-        });
+        getData();
     }, []);
 
     //// user verification code ends here
@@ -162,6 +161,7 @@ function App() {
         }
         return array;
     }
+
     shuffle(copyMrkt);
 
     // ******************* opensea api end **********
@@ -175,15 +175,29 @@ function App() {
                         path="/marketplace"
                         element={
                             <Marketplace
+                                username={username}
                                 copyFeatured={copyFeatured}
                                 mrkt={copyMrkt}
                             />
                         }
                     />
-                    <Route exact path="/profile" element={<Profile />} />
+                    <Route
+                        exact
+                        path="/profile"
+                        element={
+                            <Profile
+                                username={username}
+                                NameInput={NameInput}
+                            />
+                        }
+                    />
                     <Route exact path="/cart" element={<Cart />} />
                     <Route exact path="/signup" element={<Auth />} />
-                    <Route exact path="/login" element={<Auth />} />
+                    <Route
+                        exact
+                        path="/login"
+                        element={<Auth NameInput={NameInput} />}
+                    />
                     <Route exact path="/upload" element={<UploadForm />} />
                 </Routes>
             </div>

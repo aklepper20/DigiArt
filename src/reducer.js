@@ -1,5 +1,3 @@
-import { ContactSupportOutlined } from "@mui/icons-material";
-
 export const initialState = {
   basket: [],
   // user: null,
@@ -29,6 +27,13 @@ const reducer = (state, action) => {
         basket: newBasket,
       };
 
+    case "CHANGE_QTY":
+      return {
+        ...state,
+        basket: state.basket.filter((item) =>
+          item.id === action.id ? (item.qty = action.qty) : item.qty
+        ),
+      };
     default:
       return state;
   }
