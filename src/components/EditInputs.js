@@ -1,11 +1,14 @@
 import React from "react";
 import "../style/EditInputs.css";
 
-function EditInputs() {
+function EditInputs({ activeNft }) {
   return (
     <div className="editInputs">
-      <input placeholder="Price" />
-      <input style={{ height: "70px" }} placeholder="Description" />
+      <input placeholder={activeNft?.price} />
+      {/* <input
+        style={{ height: "70px" }}
+        placeholder={activeNft?.collection.description}
+      /> */}
     </div>
   );
 }
