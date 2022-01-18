@@ -5,49 +5,66 @@ import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+// import Signup from "./pages/Signup";
+// import Signin from "./pages/Signin";
 import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
+import Auth from "./components/Auth";
+
+import db, { auth } from "./utils/firebase";
+import { onSnapshot, doc } from "firebase/firestore";
+import { signOut } from "firebase/auth";
 
 const deadFellazApi = "0x2acab3dea77832c09420663b0e1cb386031ba17b";
 const pudgyPenguinsApi = "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8";
-const theSandboxApi = "0x3845badAde8e6dFF049820680d1F14bD3903a5d0";
 const mutantApeApi = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
 const shibaApi = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
 const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 
-// const assetAddressesArr = [
-//     deadFellaz,
-//     pudgyPenguins,
-//     theSandbox,
-//     mutantApe,
-//     shiba,
-//     wow,
-// ];
-
-// console.log(assetAddressesArr);
 function App() {
-  // const [mrkt, setMrtk] = useState([]);
-  const [featured, setFeatured] = useState([]);
-  const [deadFellaz, setDeadFellaz] = useState([]);
-  const [pudgyPenguins, setPudgyPenguins] = useState([]);
-  const [theSandbox, setTheSandbox] = useState([]);
-  const [shiba, setShiba] = useState([]);
-  const [wow, setWow] = useState([]);
-  // const [selectedNft, setSelectedNft] = useState(0);
-  const [randomUserCoin, setRandomUserCoin] = useState(0);
+  //// user verification code starts here
+
+  const data = [];
+  const [userData, setUserData] = useState({});
+  const [user, setUser] = useState({});
+  const [userProfile, setUserProfile] = useState(userData);
 
   useEffect(() => {
-    const randomEth = () => {
-      let random = Math.random() * (15 - 5) + 5;
-      setRandomUserCoin(random.toFixed(2));
-    };
-    randomEth();
+    //verify the user who signed in using "user" usestate
+    auth.onAuthStateChanged((currentUser) => {
+      if (currentUser.uid) {
+        setUser(currentUser.uid);
+        console.log("user set");
+      } else {
+        console.log("please sign in");
+        //do something that user cant see the marketplace without signing in
+      }
+    });
+
+    //onsnapshot gets data from our database
+    onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
+      let username = snapshot.data().userData[0].name;
+
+      let eachUserData = snapshot
+        .data()
+        .userData.map((data, id) => ({ ...data, id: id }));
+      // what do u need this data to do?
+      //setProfile(eachUserData) data with users uploads if any
+      setUserProfile(eachUserData);
+      console.log(userProfile, "userprofile has been set");
+    });
   }, []);
 
+  //// user verification code ends here
+
+  const [featured, setFeatured] = useState([]);
+  const [mrkt, setMrkt] = useState([]);
+  const [filterMarket, setFilterMarket] = useState("all");
+  const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
+
   let copyFeatured = [];
-  let mrkt = [];
+  let copyMrkt = [];
+
   // ******************* opensea api **********
   const options = {
     method: "GET",
@@ -56,6 +73,22 @@ function App() {
       "X-API-KEY": REACT_APP_API_KEY,
     },
   };
+  // 7. useEffefct that has a handleFilter() function
+  // useEffect(() => {
+  //     // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+  //     const handleFilter = () => {
+  //         if (filterMarket === "active") {
+  //             return setFilteredMrkt(mrkt.filter((task) => !task.status));
+  //         } else if (filterMarket === "completed") {
+  //             // if the filter status is completed i should setFilteredMrkt to only mrkt that have the status of true
+  //             return setFilteredMrkt(mrkt.filter((task) => task.status));
+  //         } else {
+  //             // if the status is all setFilteredMrkt to mrkt
+  //             return setFilteredMrkt(mrkt);
+  //         }
+  //     };
+  //     handleFilter();
+  // }, [filterMarket, mrkt]);
   //************     featured */
   useEffect(() => {
     fetch(
@@ -66,58 +99,36 @@ function App() {
       .then((response) => setFeatured(response))
       .catch((err) => console.error(err));
   }, []);
+  // ************ merging all api calls into one array */
+  useEffect(() => {
+    const fetchData = async () => {
+      let market = [];
+      let finishedArr = [];
+      const arr = [
+        mutantApeApi,
+        deadFellazApi,
+        pudgyPenguinsApi,
+        wowApi,
+        shibaApi,
+      ];
+      for (let i = 0; i < arr.length; i++) {
+        await fetch(
+          `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+        )
+          .then((res) => res.json())
+          .then((response) => market.push(response.assets));
+      }
+      market.map((mrktItem) => {
+        mrktItem.map((item) => {
+          return finishedArr.push(item);
+        });
+      });
+      setMrkt(finishedArr);
+    };
 
-  // ******************  mrkt */
-  // ******************  deadFellaz */
-  useEffect(() => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${deadFellazApi}&order_direction=desc&offset=0&limit=10`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setDeadFellaz(response))
-      .catch((err) => console.error(err));
+    fetchData();
   }, []);
-  // ******************  pudgyPenguins */
-  useEffect(() => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${pudgyPenguinsApi}&order_direction=desc&offset=0&limit=10`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setPudgyPenguins(response))
-      .catch((err) => console.error(err));
-  }, []);
-  // ******************  theSandbox */
-  useEffect(() => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${theSandboxApi}&order_direction=desc&offset=0&limit=10`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setTheSandbox(response))
-      .catch((err) => console.error(err));
-  }, []);
-  // ******************  shiba */
-  useEffect(() => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${shibaApi}&order_direction=desc&offset=0&limit=10`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setShiba(response))
-      .catch((err) => console.error(err));
-  }, []);
-  // ******************  wow */
-  useEffect(() => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${wowApi}&order_direction=desc&offset=0&limit=10`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setWow(response))
-      .catch((err) => console.error(err));
-  }, []);
+  // console.log(mrkt, "new data");
 
   const randomNum = () => {
     return Math.floor(Math.random() * 9) + 1;
@@ -130,45 +141,12 @@ function App() {
       newKey.category = "crypto punk";
       return copyFeatured.push(newKey);
     });
-
-  deadFellaz.assets &&
-    deadFellaz.assets.map((nft) => {
+  mrkt &&
+    mrkt.map((nft) => {
       let newKey = Object.assign({}, nft);
       newKey.price = `0.${randomNum()} ETH`;
       newKey.category = "crypto punk";
-      return mrkt.push(newKey);
-    });
-
-  pudgyPenguins.assets &&
-    pudgyPenguins.assets.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return mrkt.push(newKey);
-    });
-
-  theSandbox.assets &&
-    theSandbox.assets.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return mrkt.push(newKey);
-    });
-
-  shiba.assets &&
-    shiba.assets.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return mrkt.push(newKey);
-    });
-
-  wow.assets &&
-    wow.assets.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return mrkt.push(newKey);
+      return copyMrkt.push(newKey);
     });
 
   function shuffle(array) {
@@ -182,12 +160,10 @@ function App() {
         array[currentIndex],
       ];
     }
-    // console.log(array);
     return array;
   }
-  shuffle(mrkt);
-  console.log(shuffle(mrkt, "new"));
-  // console.log(mrkt, "open sea");
+  shuffle(copyMrkt);
+
   // ******************* opensea api end **********
   return (
     <BrowserRouter>
@@ -197,21 +173,14 @@ function App() {
           <Route
             exact
             path="/marketplace"
-            element={<Marketplace copyFeatured={copyFeatured} mrkt={mrkt} />}
+            element={
+              <Marketplace copyFeatured={copyFeatured} mrkt={copyMrkt} />
+            }
           />
-          {/* <Route exact path="/nft/:id" element={<PopUpCard />} /> */}
-          <Route
-            exact
-            path="/profile"
-            element={<Profile randomUserCoin={randomUserCoin} mrkt={mrkt} />}
-          />
-          <Route
-            exact
-            path="/cart"
-            element={<Cart randomUserCoin={randomUserCoin} />}
-          />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/login" element={<Signin />} />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/signup" element={<Auth />} />
+          <Route exact path="/login" element={<Auth />} />
           <Route exact path="/upload" element={<UploadForm />} />
         </Routes>
       </div>

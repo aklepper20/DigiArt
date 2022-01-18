@@ -1,22 +1,23 @@
 .cart__container {
   display: flex;
-  flex-direction: row;
   height: 100vh;
-  min-width: 1000px;
+  min-width: 900px;
   background-color: #041010;
   justify-content: space-evenly;
+  padding-top: 20px;
+  gap: 20px;
 }
 
 .cart {
   height: fit-content;
   background-color: #041010;
-  padding-top: 20px;
 }
 
-h3 {
-  background-color: #041010;
-  color: white;
-  padding-left: 20px;
+.cart-wrapper h3 {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
 }
 
 .cart__checkout {
@@ -82,7 +83,6 @@ button {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100%;
   }
   .cart__container__subtotal {
     justify-content: center;

@@ -103,100 +103,95 @@ function Cart({ randomUserCoin }) {
                   Wallet:<span>{randomUserCoin} eth</span>
                 </p>
               </div>
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <span
-                    style={{
-                      marginBottom: "8px",
-                      paddingRight: "6px",
-                      fontSize: "12px",
-                      color: "white",
-                    }}
-                  >
-                    TOTAL:
-                  </span>
-                  <h1
-                    style={{
-                      textAlign: "center",
-                      marginBottom: "8px",
-                      color: "white",
-                    }}
-                  >
-                    {cartSum.toFixed(2)}
-                  </h1>
-                </div>
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <span
-                    style={{
-                      fontSize: "12px",
-                      color: "white",
-                      marginRight: "7px",
-                    }}
-                  >
-                    Updated Wallet:{" "}
-                  </span>
-                  <h2 style={{ color: "white" }}>
-                    {(randomUserCoin - cartSum).toFixed(2)}
-                  </h2>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "end",
-                  flexDirection: "column",
-                }}
-              >
-                <button
-                  type="button"
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span
                   style={{
-                    backgroundColor: "lightskyblue",
-                    paddingTop: "8px",
-                    paddingBottom: "8px",
-                    paddingLeft: "12px",
-                    paddingRight: "12px",
+                    marginBottom: "8px",
+                    paddingRight: "6px",
+                    fontSize: "12px",
                     color: "white",
-                    marginBottom: "12px",
-                    padding: 3,
                   }}
-                  onClick={() => setOpen(true)}
                 >
-                  Checkout
-                </button>
-                <StyledModal
-                  aria-labelledby="unstyled-modal-title"
-                  aria-describedby="unstyled-modal-description"
-                  open={open}
-                  onClose={handleClose}
-                  BackdropComponent={Backdrop}
+                  TOTAL:
+                </span>
+                <h1
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "8px",
+                    color: "white",
+                  }}
                 >
-                  <Box sx={style}>
-                    <div
-                      style={{
-                        width: "480px",
-                        display: "grid",
-                        placeItems: "center",
-                      }}
-                    >
-                      <iframe
-                        src="https://giphy.com/embed/3o6fJ1BM7R2EBRDnxK"
-                        width="480"
-                        height="234"
-                        frameBorder="0"
-                        class="giphy-embed"
-                        allowFullScreen
-                      ></iframe>
-                    </div>
-                  </Box>
-                </StyledModal>
-                <Link to="/marketplace">
-                  <button className="cart__continueBtn">
-                    Continue Shopping
-                  </button>
-                </Link>
+                  {cartSum.toFixed(2)}
+                </h1>
+              </div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span
+                  style={{
+                    fontSize: "12px",
+                    color: "white",
+                    marginRight: "7px",
+                  }}
+                >
+                  Updated Wallet:{" "}
+                </span>
+                <h2 style={{ color: "white" }}>
+                  {(randomUserCoin - cartSum).toFixed(2)}
+                </h2>
               </div>
             </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "end",
+                flexDirection: "column",
+              }}
+            >
+              <button
+                type="button"
+                style={{
+                  backgroundColor: "lightskyblue",
+                  paddingTop: "8px",
+                  paddingBottom: "8px",
+                  paddingLeft: "12px",
+                  paddingRight: "12px",
+                  color: "white",
+                  marginBottom: "12px",
+                  padding: 3,
+                }}
+                onClick={() => setOpen(true)}
+              >
+                Checkout
+              </button>
+            </div>
+            <StyledModal
+              aria-labelledby="unstyled-modal-title"
+              aria-describedby="unstyled-modal-description"
+              open={open}
+              onClose={handleClose}
+              BackdropComponent={Backdrop}
+            >
+              <Box sx={style}>
+                <div
+                  style={{
+                    width: "480px",
+                    display: "grid",
+                    placeItems: "center",
+                  }}
+                >
+                  <iframe
+                    src="https://giphy.com/embed/3o6fJ1BM7R2EBRDnxK"
+                    width="480"
+                    height="234"
+                    frameBorder="0"
+                    class="giphy-embed"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </Box>
+            </StyledModal>
           </div>
         </>
       )}

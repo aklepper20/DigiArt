@@ -44,10 +44,6 @@ function Login({
                 <div className="links">
                     <p>{headerStatement}</p>
                     <a href={href}>{link}</a>
-                    <div className="links">
-                        <p>{headerStatement}</p>
-                        <a href={href}>{link}</a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -71,6 +71,7 @@ function Navbar({ randomUserCoin }) {
             <a href="/">DigiArt</a>
           </Link>
         </h2>
+        {logoutbtn}
       </div>
 
       <div className="navbar__options">
