@@ -9,7 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useStateValue } from "../StateProvider";
 
-function Navbar({logoutbtn}) {
+function Navbar({ randomUserCoin }) {
   const [{ basket }] = useStateValue();
   const [state, setState] = useState({
     top: false,
@@ -17,8 +17,6 @@ function Navbar({logoutbtn}) {
     bottom: false,
     right: false,
   });
-
- 
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -52,7 +50,9 @@ function Navbar({logoutbtn}) {
               alt="ethereum logo"
             />
           </div>
-          <p className="eth__number">Eth: {0.3}</p>
+          <p className="eth__number" style={{ color: "white" }}>
+            Eth: {randomUserCoin}
+          </p>
           <p className="eth__username">@user</p>
         </div>
       </div>

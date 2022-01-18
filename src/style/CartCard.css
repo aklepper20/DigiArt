@@ -1,34 +1,12 @@
-/* <div className="cart__product">
-<img src={img} />
-<div className="cart__coin">
-  <p>Coin: {price}</p>
-</div>
-<Box sx={{ minWidth: 120 }}>
-  <FormControl fullWidth>
-    <Select
-      className="cart__dropDown"
-      labelId="demo-simple-select-label"
-      id="demo-simple-select"
-      value={count}
-      label="Count"
-      onChange={(e) => setCount(e.target.value)}
-    >
-      <MenuItem value={1}>1</MenuItem>
-      <MenuItem value={2}>2</MenuItem>
-      <MenuItem value={3}>3</MenuItem>
-      <MenuItem value={4}>4</MenuItem>
-      <MenuItem value={5}>5</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-<DeleteIcon />
-</div> */
-
 .cart__dropdown {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.cart__coin {
+  width: 200px;
 }
 .cart__product {
   width: 100%;

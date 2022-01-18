@@ -1,18 +1,18 @@
 import React from "react";
 import "../style/ProfileNFTDisplay.css";
 
-function ProfileNFTDisplay() {
+function ProfileNFTDisplay({ activeNft }) {
   return (
     <div className="profileNFT">
       <div className="profileNFT__desc">
         <div className="profileNFT__category">
-          <p>Price</p> <span>0.4eth</span>
+          <p>Price</p> <span>{activeNft?.price}</span>
         </div>
+        {/* <div className="profileNFT__category">
+          <p>Description</p> <span>{activeNft?.description}</span>
+        </div> */}
         <div className="profileNFT__category">
-          <p>description</p> <span>desc</span>
-        </div>
-        <div className="profileNFT__category">
-          <p>Category</p> <span>Cool Cats</span>
+          <p>Category</p> <span>{activeNft?.category}</span>
         </div>
       </div>
     </div>
