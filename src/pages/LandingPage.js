@@ -1,9 +1,31 @@
 import React from "react";
 import Card from "../components/Card";
+import ImageSlider from "../components/ImageSlider";
 import Navbar from "../components/Navbar";
 import "../style/LandingPage.css";
 
-function LandingPage() {
+function LandingPage({ slides }) {
+    const randomNum = () => Math.floor(Math.random() * 50);
+    let getSlides = slides.slice(0, 8);
+    // const [loginRedboxClass, setLoginRedboxClass] = useState("");
+    // const [signupRedboxClass, setSignupRedboxClass] = useState("right-panel-active");
+
+    // const toggleLogin = (e) => {
+    //     e.preventDefault();
+    //     if (loginRedboxClass === "") {
+    //         setLoginRedboxClass("right-panel-active");
+    //     } else if (loginRedboxClass === "right-panel-active") {
+    //         setLoginRedboxClass("");
+    //     }
+    // };
+    // const toggleSignup = (e) => {
+    //     e.preventDefault();
+    //     if (signupRedboxClass === "right-panel-active") {
+    //         setSignupRedboxClass("");
+    //     } else if (signupRedboxClass === "") {
+    //         setSignupRedboxClass("right-panel-active");
+    //     }
+    // };
     return (
         <div className="landingPage">
             <div className="landingNavbar">
@@ -18,7 +40,7 @@ function LandingPage() {
                 </div>
                 <div className="landingbtns">
                     <button className="btns">
-                        <a href="/signup">Sign Up</a>
+                        <a href="/login">Sign Up</a>
                     </button>
                     <button className="btns">
                         <a href="/login  ">Login</a>
@@ -41,15 +63,9 @@ function LandingPage() {
                         <div className="leftImg">
                             NFT ART
                             {/* <img src="huh.jpeg" alt="nft"/> */}
-                            <Card />
+                            <ImageSlider getSlides={getSlides} />
                         </div>
                     </div>
-                </div>
-                <div className="landingPage-body-container">
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
                 </div>
             </div>
         </div>
