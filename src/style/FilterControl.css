@@ -59,3 +59,6 @@
     align-items: flex-end;
     justify-content: flex-start;
 }
+.items-statuses .active {
+    background-color: hsl(220, 98%, 61%);
+}
