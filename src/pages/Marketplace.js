@@ -15,45 +15,45 @@ import { Input } from "@mui/material";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
-import {setDoc, doc} from 'firebase/firestore'
+import { setDoc, doc } from "firebase/firestore";
 // #1b import db from ../utils/firebase.js
-import db from '../utils/firebase'
+import db from "../utils/firebase";
 
 // require("dotenv").config();
-function Marketplace({username, user,userData, copyFeatured, mrkt }) {
-  // console.log(mrkt, "openseamrkt");
-  
-  //upload model below
-  const [inputName, setInputName] = useState('')
-  const [inputPrice, setInputPrice] = useState('')
-  const [inputFile, setInputFile] = useState({})
+function Marketplace({ username, user, userData, copyFeatured, mrkt }) {
+    // console.log(mrkt, "openseamrkt");
 
-  // when i type, a function should run that saves the states of the input
-  const handleChangeName = (e) => {
-      setInputName(e.target.value)
-  }
+    //upload model below
+    const [inputName, setInputName] = useState("");
+    const [inputPrice, setInputPrice] = useState("");
+    const [inputFile, setInputFile] = useState({});
 
-  const handleChangePrice = (e) => {
-      setInputPrice(e.target.value)
-  }
+    // when i type, a function should run that saves the states of the input
+    const handleChangeName = (e) => {
+        setInputName(e.target.value);
+    };
 
-  const handleChangeFile = (e) => {
-      setInputFile(e.target.value)
-  }
+    const handleChangePrice = (e) => {
+        setInputPrice(e.target.value);
+    };
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-    if(inputFile) {
-      console.log(inputName, inputPrice, inputFile);
-    }
-  }
+    const handleChangeFile = (e) => {
+        setInputFile(e.target.value);
+    };
 
-  const logout = async () => {
-    await signOut(auth);
-    window.location = "/";
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (inputFile) {
+            console.log(inputName, inputPrice, inputFile);
+        }
+    };
 
-  const [open, setOpen] = React.useState(false);
+    const logout = async () => {
+        await signOut(auth);
+        window.location = "/";
+    };
+
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -63,7 +63,7 @@ function Marketplace({username, user,userData, copyFeatured, mrkt }) {
         setOpen(false);
     };
 
-// console.log({username})
+    // console.log({username})
 
     // const handleSubmit = () => {
     //     console.log("upload successful");
@@ -72,9 +72,9 @@ function Marketplace({username, user,userData, copyFeatured, mrkt }) {
 
     return (
         <div className="marketplace">
-            <Navbar  logoutbtn ={<button onClick={logout}>LOGOUT</button>}/>
+            <Navbar />
             <div className="marketplace-wrapper">
-                <div className="welcome">Welcome, {username }</div>
+                <div className="welcome">Welcome, {username}</div>
                 <div className="options">
                     <div className="categories">
                         <FilterControl />
@@ -109,8 +109,7 @@ function Marketplace({username, user,userData, copyFeatured, mrkt }) {
                                     type="text"
                                     fullWidth
                                     variant="standard"
-                                    onChange=
-                                    {handleChangeName}
+                                    onChange={handleChangeName}
                                 />
                                 <TextField
                                     autoFocus
@@ -120,14 +119,12 @@ function Marketplace({username, user,userData, copyFeatured, mrkt }) {
                                     type="number"
                                     fullWidth
                                     variant="standard"
-                                    onChange=
-                                    {handleChangePrice}
+                                    onChange={handleChangePrice}
                                 />
                                 <Input
                                     type="file"
                                     accept="image/*"
-                                    onChange=
-                                    {handleChangeFile}
+                                    onChange={handleChangeFile}
                                 />
                             </DialogContent>
                             <DialogActions>
