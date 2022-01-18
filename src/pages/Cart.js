@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CartCard from "../components/CartCard";
 import "../style/Cart.css";
 import Navbar from "../components/Navbar";
@@ -40,25 +40,23 @@ const style = {
   pb: 3,
 };
 
-function Cart() {
+function Cart({ randomUserCoin }) {
   const [{ basket }, dispatch] = useStateValue();
+  let [cartSum, setCartSum] = useState(0);
+  let [cartTotal, setCartTotal] = useState(0);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
 
-  // const objArray = [
-  //   {
-  //     img: "https://i.insider.com/61a7a6965d47cc0018e8ce17?width=600&format=jpeg&auto=webp",
-  //     price: 0.5,
-  //   },
-  //   {
-  //     img: "https://www.artnews.com/wp-content/uploads/2022/01/unnamed-2.png?w=631",
-  //     price: 0.2,
-  //   },
-  //   {
-  //     img: "https://1734811051.rsc.cdn77.org/data/images/full/392064/youtuber-shares-how-you-can-create-your-nft-on-iphone-heres-how-it-works.jpg",
-  //     price: 0.7,
-  //   },
-  // ];
+  useEffect(() => {
+    let sum = 0;
+
+    basket.map((nft) => {
+      let price = nft.price.slice(0, 4);
+      let nftTotal = price * nft.qty;
+      sum += nftTotal;
+      setCartSum(sum);
+    });
+  }, [basket, cartSum]);
 
   return (
     <>
@@ -83,28 +81,66 @@ function Cart() {
           <h3>Cart Items</h3>
           <div className="cart__container">
             <div className="cart">
-              {basket?.map((obj) => (
-                <CartCard
-                  img={obj.img}
-                  price={obj.price}
-                  name={obj.name}
-                  id={obj.id}
-                />
-              ))}
+              {basket?.map((obj) => {
+                return (
+                  <CartCard
+                    img={obj.img}
+                    price={obj.price}
+                    name={obj.name}
+                    id={obj.id}
+                    qty={obj.qty}
+                  />
+                );
+              })}
               <div className="cart__container__subtotal">
                 <h3>SUB-TOTAL</h3>
-                <h3 style={{ marginLeft: "50px" }}>3.01 ETH</h3>
+                <h3 style={{ marginLeft: "50px" }}>{cartSum.toFixed(2)} ETH</h3>
               </div>
             </div>
             <div className="cart__checkout">
               <div className="cart__total">
                 <p>
-                  Wallet total <span>.29eth</span>
-                </p>
-                <p>
-                  Cart total <span>2.4eth</span>
+                  Wallet:<span>{randomUserCoin} eth</span>
                 </p>
               </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span
+                    style={{
+                      marginBottom: "8px",
+                      paddingRight: "6px",
+                      fontSize: "12px",
+                      color: "white",
+                    }}
+                  >
+                    TOTAL:
+                  </span>
+                  <h1
+                    style={{
+                      textAlign: "center",
+                      marginBottom: "8px",
+                      color: "white",
+                    }}
+                  >
+                    {cartSum.toFixed(2)}
+                  </h1>
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span
+                    style={{
+                      fontSize: "12px",
+                      color: "white",
+                      marginRight: "7px",
+                    }}
+                  >
+                    Updated Wallet:{" "}
+                  </span>
+                  <h2 style={{ color: "white" }}>
+                    {(randomUserCoin - cartSum).toFixed(2)}
+                  </h2>
+                </div>
+              </div>
+
               <div
                 style={{
                   display: "flex",
