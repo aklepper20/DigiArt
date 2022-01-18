@@ -20,7 +20,7 @@ function NftCard({ img, ID }) {
   const id = open ? "simple-popper" : undefined;
 
   return (
-    <div className="nftCard">
+    <>
       <div style={{ height: "35px", display: "flex", justifyContent: "end" }}>
         <button
           style={{ background: "none" }}
@@ -58,7 +58,7 @@ function NftCard({ img, ID }) {
       <div className="nftCard__details">
         <p>ID: {ID}</p>
       </div>
-    </div>
+    </>
   );
 }
 
