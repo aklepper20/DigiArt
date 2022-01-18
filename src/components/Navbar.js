@@ -9,7 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { useStateValue } from "../StateProvider";
 
-function Navbar() {
+function Navbar({logoutbtn}) {
   const [{ basket }] = useStateValue();
   const [state, setState] = useState({
     top: false,
@@ -17,6 +17,8 @@ function Navbar() {
     bottom: false,
     right: false,
   });
+
+ 
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -69,6 +71,7 @@ function Navbar() {
             <a href="/">DigiArt</a>
           </Link>
         </h2>
+        {logoutbtn}
       </div>
 
       <div className="navbar__options">

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import "../style/Profile.css";
 import NftCard from "../components/NftCard";
 import EditInputs from "../components/EditInputs";
 import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
 
-function Profile() {
+
+function Profile({data}) {
   const [editInputs, setEditInputs] = useState(false);
 
   const objectArr = [
@@ -60,8 +61,22 @@ function Profile() {
     {
       img: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6170e01f8d7639b95a7f2eeb%2FSotheby-s-NFT-Natively-Digital-1-2-sale-Bored-Ape-Yacht-Club--8817-by-Yuga-Labs%2F0x0.png%3Ffit%3Dscale",
       id: 2344,
-    },
+    }, 
   ];
+//below code for passing user props
+  // useEffect(()=>{
+  //   auth.onAuthStateChanged((currentUser)=>{
+  //     if(currentUser.uid){
+  //     setUser(currentUser.uid)
+  //     console.log(currentUser)
+  //     }
+  //   })
+  // },[])
+    //verify the user who signed in using "user" usestate
+    // 
+  // console.log(userProfile)
+
+  ////code ends for user props
 
   return (
     <>
