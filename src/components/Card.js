@@ -51,6 +51,7 @@ function Card({ name, img, description, price, key, id }) {
         name: name,
         img: img,
         price: price,
+        qty: 1,
       },
     });
   };
