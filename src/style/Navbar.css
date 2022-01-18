@@ -172,10 +172,11 @@ nav {
     display: flex;
     list-style: none;
     width: 88vw;
-    padding: 0 0.7vw;
-    justify-content: space-evenly;
+    padding: 0 0.7vw 0;
+    justify-content: flex-start;
     align-items: center;
     text-transform: uppercase;
+    /* gap: 40px; */
 }
 .nav-links li a {
     text-decoration: none;
@@ -262,6 +263,16 @@ nav {
         transition: all 0.7s ease;
     }
     .nav-links {
+        display: flex;
+        list-style: none;
+        width: 88vw;
+        padding: 40px 0.7vw 0;
+        justify-content: flex-start;
+        align-items: center;
+        text-transform: uppercase;
+        gap: 40px;
+    }
+    .nav-links {
         position: fixed;
         background: #131418;
         height: 100vh;
@@ -273,8 +284,8 @@ nav {
         pointer-events: none;
     }
     .nav-links.open {
-        clip-path: circle(1000px at 90% -10%);
-        -webkit-clip-path: circle(1000px at 90% -10%);
+        clip-path: circle(800px at 50% -10%);
+        -webkit-clip-path: circle(800px at 50% -10%);
         pointer-events: all;
     }
     .nav-links li {
