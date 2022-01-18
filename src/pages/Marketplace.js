@@ -18,21 +18,19 @@ import FilterControl from "../components/FilterControl";
 
 // require("dotenv").config();
 function Marketplace({ user, copyFeatured, mrkt }) {
-  // console.log(mrkt, "openseamrkt");
-  
-  //upload model below
-  const productNameRef = useRef();
-  const productPriceRef = useRef();
-  const productFileRef = useRef();
+    // console.log(mrkt, "openseamrkt");
 
+    //upload model below
+    const productNameRef = useRef();
+    const productPriceRef = useRef();
+    const productFileRef = useRef();
 
-  const logout = async () => {
-    await signOut(auth);
-    window.location = "/";
-    
-  };
+    const logout = async () => {
+        await signOut(auth);
+        window.location = "/";
+    };
 
-  const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,7 +46,7 @@ function Marketplace({ user, copyFeatured, mrkt }) {
     ///upload modal ends
     return (
         <div className="marketplace">
-            <Navbar  logoutbtn ={<button onClick={logout}>LOGOUT</button>}/>
+            <Navbar />
             <div className="marketplace-wrapper">
                 <div className="welcome">Welcome, {user}</div>
                 <div className="options">
