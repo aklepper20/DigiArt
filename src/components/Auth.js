@@ -30,6 +30,8 @@ function Auth(
     // const emailRef = useRef();
     // const passwordRef = useRef();
     const NameInput = useRef();
+    const loginEmailRef = useRef()
+    const loginPasswordRef = useRef()
 
     // const googleFunction = async () => {
     //     const provider = new GoogleAuthProvider();
@@ -64,12 +66,12 @@ function Auth(
                 // console.log(username)
                 // console.log(user.email
                 await setDoc(doc(db, "users", `${user.uid}`), {
-                    userData: [
+                    userData: 
                         {
                             emailID: user.email,
                             name: username,
                         },
-                    ],
+                    
                 });
                 if (user) {
                     window.location = "/marketplace";
@@ -79,23 +81,20 @@ function Auth(
             alert(error.message);
         }
     };
-    const login = async (e) => {
-        e.preventDefault();
-        console.log("hello");
-        try {
-            await signInWithEmailAndPassword(
-                auth,
-                emailRef.current.value,
-                passwordRef.current.value
-            ).then((user) => {
-                if (user) {
-                    window.location = "/marketplace";
-                }
-            });
-        } catch (error) {
-            alert(error.message);
+    const login = async() => {
+        try{
+            await signInWithEmailAndPassword(auth, loginEmailRef.current.value, loginPasswordRef.current.value)
+            .then((user)=>{
+              if(user){
+                window.location = '/marketplace'
+              }
+            })
+          }
+          catch(error){
+            alert(error.message, "error")
+          }
         }
-    };
+    
     const register = async (e) => {
         e.preventDefault();
         try {
@@ -106,12 +105,12 @@ function Auth(
             ).then(async (cred) => {
                 // console.log(cred)
                 await setDoc(doc(db, "users", `${cred.user.uid}`), {
-                    userData: [
+                    userData: 
                         {
                             emailID: emailRef.current.value,
                             name: NameInput.current.value,
                         },
-                    ],
+                    
                 });
                 if (cred) {
                     window.location = "/marketplace";
@@ -175,13 +174,13 @@ function Auth(
                         <h1>Login</h1>
                     </div>
                     <input
-                        ref={emailRef}
+                        ref={loginEmailRef}
                         className="login-email"
                         type="email"
                         placeholder="Email"
                     />
                     <input
-                        ref={passwordRef}
+                        ref={loginPasswordRef}
                         className="login-password"
                         type="password"
                         placeholder="Password"

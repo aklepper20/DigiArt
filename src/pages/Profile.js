@@ -9,7 +9,6 @@ function Profile({ randomUserCoin, mrkt }) {
   const [selectedNft, setSelectedNft] = useState(0);
   // const [editInputs, setEditInputs] = useState(false);
   // const [activeNft, setActiveNft] = useState(mrkt[0]);
-
   // useEffect(() => {
   //   setActiveNft(mrkt[selectedNft]);
   // }, [mrkt, selectedNft]);

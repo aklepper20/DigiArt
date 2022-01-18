@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../style/LandingPage.css";
 import "../style/Card.css";
 import Navbar from "../components/Navbar";
@@ -15,24 +15,45 @@ import { Input } from "@mui/material";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
+import { setDoc, doc } from "firebase/firestore";
+// #1b import db from ../utils/firebase.js
+import db from "../utils/firebase";
 
 // require("dotenv").config();
-function Marketplace({ user, copyFeatured, mrkt }) {
-  // console.log(mrkt, "openseamrkt");
-  
-  //upload model below
-  const productNameRef = useRef();
-  const productPriceRef = useRef();
-  const productFileRef = useRef();
+function Marketplace({ username, user, userData, copyFeatured, mrkt }) {
+    // console.log(mrkt, "openseamrkt");
 
+    //upload model below
+    const [inputName, setInputName] = useState("");
+    const [inputPrice, setInputPrice] = useState("");
+    const [inputFile, setInputFile] = useState({});
 
-  const logout = async () => {
-    await signOut(auth);
-    window.location = "/";
-    
-  };
+    // when i type, a function should run that saves the states of the input
+    const handleChangeName = (e) => {
+        setInputName(e.target.value);
+    };
 
-  const [open, setOpen] = React.useState(false);
+    const handleChangePrice = (e) => {
+        setInputPrice(e.target.value);
+    };
+
+    const handleChangeFile = (e) => {
+        setInputFile(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (inputFile) {
+            console.log(inputName, inputPrice, inputFile);
+        }
+    };
+
+    const logout = async () => {
+        await signOut(auth);
+        window.location = "/";
+    };
+
+    const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,15 +63,18 @@ function Marketplace({ user, copyFeatured, mrkt }) {
         setOpen(false);
     };
 
-    const handleSubmit = () => {
-        console.log("upload successful");
-    };
+    // console.log({username})
+
+    // const handleSubmit = () => {
+    //     console.log("upload successful");
+    // };
     ///upload modal ends
+
     return (
         <div className="marketplace">
-            <Navbar  logoutbtn ={<button onClick={logout}>LOGOUT</button>}/>
+            <Navbar />
             <div className="marketplace-wrapper">
-                <div className="welcome">Welcome, {user}</div>
+                <div className="welcome">Welcome, {username}</div>
                 <div className="options">
                     <div className="categories">
                         <FilterControl />
@@ -85,7 +109,7 @@ function Marketplace({ user, copyFeatured, mrkt }) {
                                     type="text"
                                     fullWidth
                                     variant="standard"
-                                    ref={productNameRef}
+                                    onChange={handleChangeName}
                                 />
                                 <TextField
                                     autoFocus
@@ -95,12 +119,12 @@ function Marketplace({ user, copyFeatured, mrkt }) {
                                     type="number"
                                     fullWidth
                                     variant="standard"
-                                    ref={productPriceRef}
+                                    onChange={handleChangePrice}
                                 />
                                 <Input
                                     type="file"
                                     accept="image/*"
-                                    ref={productFileRef}
+                                    onChange={handleChangeFile}
                                 />
                             </DialogContent>
                             <DialogActions>

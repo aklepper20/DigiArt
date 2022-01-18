@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
@@ -11,7 +11,7 @@ import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
 import Auth from "./components/Auth";
 
-import db, { auth } from "./utils/firebase";
+import db, { auth, app } from "./utils/firebase";
 import { onSnapshot, doc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 
@@ -22,6 +22,7 @@ const shibaApi = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
 const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 
 function App() {
+<<<<<<< HEAD
   //// user verification code starts here
 
   const data = [];
@@ -130,45 +131,148 @@ function App() {
       market.map((mrktItem) => {
         mrktItem.map((item) => {
           return finishedArr.push(item);
+=======
+    //// user verification code starts here
+
+    const NameInput = useRef();
+    // console.log(NameInput);
+    const data = [];
+    const [dataUser, setDataUser] = useState(data);
+    const [username, setUserName] = useState("");
+    const [user, setUser] = useState({});
+    const [userProfile, setUserProfile] = useState(dataUser);
+    const getData = () => {
+        onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
+            // const regularUsername = snapshot.data();
+            // console.log(regularUsername, "yello")
         });
-      });
-      setMrkt(finishedArr);
+    };
+    useEffect(() => {
+        //verify the user who signed in using "user" usestate
+        auth.onAuthStateChanged((currentUser) => {
+            if (currentUser) {
+                setUser(currentUser.uid);
+                console.log("user set", currentUser.displayName);
+
+                setUserName(currentUser.displayName);
+            } else {
+                console.log("please sign in");
+                //do something that user cant see the marketplace without signing in
+            }
+>>>>>>> a1820993b82a923682be87c1578c34a621898fc0
+        });
+        //onsnapshot gets data from our database
+        getData();
+    }, []);
+
+    //// user verification code ends here
+
+    const [featured, setFeatured] = useState([]);
+    const [mrkt, setMrkt] = useState([]);
+    const [filterMarket, setFilterMarket] = useState("all");
+    const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
+
+    let copyFeatured = [];
+    let copyMrkt = [];
+
+    // ******************* opensea api **********
+    const options = {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "X-API-KEY": REACT_APP_API_KEY,
+        },
+    };
+    // 7. useEffefct that has a handleFilter() function
+    // useEffect(() => {
+    //     // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+    //     const handleFilter = () => {
+    //         if (filterMarket === "active") {
+    //             return setFilteredMrkt(mrkt.filter((task) => !task.status));
+    //         } else if (filterMarket === "completed") {
+    //             // if the filter status is completed i should setFilteredMrkt to only mrkt that have the status of true
+    //             return setFilteredMrkt(mrkt.filter((task) => task.status));
+    //         } else {
+    //             // if the status is all setFilteredMrkt to mrkt
+    //             return setFilteredMrkt(mrkt);
+    //         }
+    //     };
+    //     handleFilter();
+    // }, [filterMarket, mrkt]);
+    //************     featured */
+    useEffect(() => {
+        fetch(
+            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${mutantApeApi}&order_direction=desc&offset=0&limit=4`,
+            options
+        )
+            .then((response) => response.json())
+            .then((response) => setFeatured(response))
+            .catch((err) => console.error(err));
+    }, []);
+    // ************ merging all api calls into one array */
+    useEffect(() => {
+        const fetchData = async () => {
+            let market = [];
+            let finishedArr = [];
+            const arr = [
+                mutantApeApi,
+                deadFellazApi,
+                pudgyPenguinsApi,
+                wowApi,
+                shibaApi,
+            ];
+            for (let i = 0; i < arr.length; i++) {
+                await fetch(
+                    `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+                )
+                    .then((res) => res.json())
+                    .then((response) => market.push(response.assets));
+            }
+            market.map((mrktItem) => {
+                mrktItem.map((item) => {
+                    return finishedArr.push(item);
+                });
+            });
+            setMrkt(finishedArr);
+        };
+
+        fetchData();
+    }, []);
+    // console.log(mrkt, "new data");
+
+    const randomNum = () => {
+        return Math.floor(Math.random() * 9) + 1;
     };
 
-    fetchData();
-  }, []);
-  // console.log(mrkt, "new data");
+    featured.assets &&
+        featured.assets.map((nft) => {
+            let newKey = Object.assign({}, nft);
+            newKey.price = `0.${randomNum()} ETH`;
+            newKey.category = "crypto punk";
+            return copyFeatured.push(newKey);
+        });
+    mrkt &&
+        mrkt.map((nft) => {
+            let newKey = Object.assign({}, nft);
+            newKey.price = `0.${randomNum()} ETH`;
+            newKey.category = "crypto punk";
+            return copyMrkt.push(newKey);
+        });
 
-  const randomNum = () => {
-    return Math.floor(Math.random() * 9) + 1;
-  };
-
-  featured.assets &&
-    featured.assets.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return copyFeatured.push(newKey);
-    });
-  mrkt &&
-    mrkt.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return copyMrkt.push(newKey);
-    });
-
-  function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+    function shuffle(array) {
+        let currentIndex = array.length,
+            randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex],
+                array[currentIndex],
+            ];
+        }
+        return array;
     }
+<<<<<<< HEAD
     return array;
   }
   shuffle(copyMrkt);
@@ -205,6 +309,50 @@ function App() {
       </div>
     </BrowserRouter>
   );
+=======
+
+    shuffle(copyMrkt);
+
+    // ******************* opensea api end **********
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Routes>
+                    <Route exact path="/" element={<LandingPage />} />
+                    <Route
+                        exact
+                        path="/marketplace"
+                        element={
+                            <Marketplace
+                                username={username}
+                                copyFeatured={copyFeatured}
+                                mrkt={copyMrkt}
+                            />
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/profile"
+                        element={
+                            <Profile
+                                username={username}
+                                NameInput={NameInput}
+                            />
+                        }
+                    />
+                    <Route exact path="/cart" element={<Cart />} />
+                    <Route exact path="/signup" element={<Auth />} />
+                    <Route
+                        exact
+                        path="/login"
+                        element={<Auth NameInput={NameInput} />}
+                    />
+                    <Route exact path="/upload" element={<UploadForm />} />
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
+>>>>>>> a1820993b82a923682be87c1578c34a621898fc0
 }
 
 export default App;
