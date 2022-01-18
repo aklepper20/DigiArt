@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style/CartCard.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
@@ -8,9 +8,8 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import { useStateValue } from "../StateProvider";
 
-function CartCard({ img, price, name, id }) {
+function CartCard({ img, price, name, id, qty }) {
   const [{ basket }, dispatch] = useStateValue();
-  const [count, setCount] = useState(1);
 
   const removeFromBasket = () => {
     dispatch({
@@ -35,28 +34,32 @@ function CartCard({ img, price, name, id }) {
             outline: "none",
           }}
         >
-          <FormControl>
-            {/* <InputLabel
+          {/* <InputLabel
                             id="demo-simple-select-label"
                             style={{ color: "black" }}
                         >
                             Quantity
                         </InputLabel> */}
-            <Select
-              className="cart__dropDown"
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={count}
-              label="Count"
-              onChange={(e) => setCount(e.target.value)}
-            >
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-            </Select>
-          </FormControl>
+          <Select
+            className="cart__dropDown"
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={qty}
+            label="Quantity"
+            onChange={(e) =>
+              dispatch({
+                type: "CHANGE_QTY",
+                id: id,
+                qty: e.target.value,
+              })
+            }
+          >
+            <MenuItem value={1}>1</MenuItem>
+            <MenuItem value={2}>2</MenuItem>
+            <MenuItem value={3}>3</MenuItem>
+            <MenuItem value={4}>4</MenuItem>
+            <MenuItem value={5}>5</MenuItem>
+          </Select>
         </Box>
       </div>
 
