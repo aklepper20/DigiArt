@@ -35,6 +35,16 @@ function App() {
   const [theSandbox, setTheSandbox] = useState([]);
   const [shiba, setShiba] = useState([]);
   const [wow, setWow] = useState([]);
+  // const [selectedNft, setSelectedNft] = useState(0);
+  const [randomUserCoin, setRandomUserCoin] = useState(0);
+
+  useEffect(() => {
+    const randomEth = () => {
+      let random = Math.random() * (15 - 5) + 5;
+      setRandomUserCoin(random.toFixed(2));
+    };
+    randomEth();
+  }, []);
 
   let copyFeatured = [];
   let mrkt = [];
@@ -190,8 +200,16 @@ function App() {
             element={<Marketplace copyFeatured={copyFeatured} mrkt={mrkt} />}
           />
           {/* <Route exact path="/nft/:id" element={<PopUpCard />} /> */}
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/cart" element={<Cart />} />
+          <Route
+            exact
+            path="/profile"
+            element={<Profile randomUserCoin={randomUserCoin} mrkt={mrkt} />}
+          />
+          <Route
+            exact
+            path="/cart"
+            element={<Cart randomUserCoin={randomUserCoin} />}
+          />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/login" element={<Signin />} />
           <Route exact path="/upload" element={<UploadForm />} />
