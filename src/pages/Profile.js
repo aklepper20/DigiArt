@@ -6,7 +6,7 @@ import EditInputs from "../components/EditInputs";
 import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
 
 
-function Profile({data}) {
+function Profile({username, NameInput}) {
   const [editInputs, setEditInputs] = useState(false);
 
   const objectArr = [
@@ -88,7 +88,7 @@ function Profile({data}) {
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7xkKmOxNZeatDKzjesmJG-s2clYi3gsncQ&usqp=CAU"
               alt=""
             />
-            <h2>Kwesi</h2>
+            <h2>{username}</h2>
             <p>@KwesiB</p>
             <p>eth: 3.04</p>
           </div>
