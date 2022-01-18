@@ -28,6 +28,15 @@ function App() {
   const [userData, setUserData] = useState({});
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState(userData);
+  let [randomUserCoin, setRandomUserCoin] = useState(null);
+
+  useEffect(() => {
+    const randomEth = () => {
+      let random = Math.random() * (15 - 5) + 5;
+      setRandomUserCoin(random.toFixed(2));
+    };
+    randomEth();
+  }, []);
 
   useEffect(() => {
     //verify the user who signed in using "user" usestate
@@ -177,8 +186,18 @@ function App() {
               <Marketplace copyFeatured={copyFeatured} mrkt={copyMrkt} />
             }
           />
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/cart" element={<Cart />} />
+          <Route
+            exact
+            path="/profile"
+            element={
+              <Profile mrkt={copyMrkt} randomUserCoin={randomUserCoin} />
+            }
+          />
+          <Route
+            exact
+            path="/cart"
+            element={<Cart randomUserCoin={randomUserCoin} />}
+          />
           <Route exact path="/signup" element={<Auth />} />
           <Route exact path="/login" element={<Auth />} />
           <Route exact path="/upload" element={<UploadForm />} />
