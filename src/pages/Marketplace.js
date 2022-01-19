@@ -15,11 +15,12 @@ import { Input } from "@mui/material";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+// import { uploadBytes } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 //import storage from "../utils/firebase";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // require("dotenv").config();
 function Marketplace({
@@ -44,10 +45,6 @@ function Marketplace({
   // when i type, a function should run that saves the states of the input
   const handleChangeName = (e) => {
     setInputName(e.target.value);
-  };
-
-  const handleChangePrice = (e) => {
-    setInputPrice(e.target.value);
   };
 
   const handleChangeFile = (e) => {
