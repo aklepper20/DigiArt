@@ -15,38 +15,35 @@ import { Input } from "@mui/material";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+// import { uploadBytes } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
 //import storage from "../utils/firebase";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // require("dotenv").config();
 function Marketplace({
-  username,
-  user,
-  userData,
-  copyFeatured,
-  mrkt,
-  filteredMrkt,
-  filterMarket,
-  setFilterMarket,
+    username,
+    user,
+    userData,
+    copyFeatured,
+    mrkt,
+    filteredMrkt,
+    filterMarket,
+    setFilterMarket,
 }) {
-  // console.log(filterMarket, "openseamrkt");
+    // console.log(filterMarket, "openseamrkt");
 
-  //upload model below
-  const [inputName, setInputName] = useState("");
-  const [inputPrice, setInputPrice] = useState("");
-  const [inputFile, setInputFile] = useState({});
+    //upload model below
+    const [inputName, setInputName] = useState("");
+    const [inputPrice, setInputPrice] = useState("");
+    const [inputFile, setInputFile] = useState({});
 
-  // when i type, a function should run that saves the states of the input
-  const handleChangeName = (e) => {
-    setInputName(e.target.value);
-  };
-
-  const handleChangePrice = (e) => {
-    setInputPrice(e.target.value);
-  };
+    // when i type, a function should run that saves the states of the input
+    const handleChangeName = (e) => {
+        setInputName(e.target.value);
+    };
 
   const handleChangeFile = (e) => {
     const file = e.target.files[0];
@@ -75,27 +72,27 @@ function Marketplace({
     }
   };
 
-  const logout = async () => {
-    await signOut(auth);
-    window.location = "/";
-  };
+    const logout = async () => {
+        await signOut(auth);
+        window.location = "/";
+    };
 
-  const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  // console.log({username})
+    // console.log({username})
 
-  // const handleSubmit = () => {
-  //     console.log("upload successful");
-  // };
-  ///upload modal ends
+    // const handleSubmit = () => {
+    //     console.log("upload successful");
+    // };
+    ///upload modal ends
 
   return (
     <div className="marketplace">
@@ -201,10 +198,10 @@ function Marketplace({
                 </>
               );
             })}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Marketplace;

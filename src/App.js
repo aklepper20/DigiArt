@@ -28,6 +28,7 @@ function App() {
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState(userData);
 
+
   let [randomUserCoin, setRandomUserCoin] = useState(null);
   useEffect(() => {
     const randomEth = () => {
@@ -111,6 +112,49 @@ function App() {
         // if the status is all setFilteredMrkt to mrkt
         return setFilteredMrkt(copyMrkt);
       }
+        };
+        handleFilter();
+    }, [filterMarket, mrkt]);
+    //************     featured */
+    useEffect(() => {
+        fetch(
+            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${mutantApeApi}&order_direction=desc&offset=0&limit=4`,
+            options
+        )
+            .then((response) => response.json())
+            .then((response) => setFeatured(response))
+            .catch((err) => console.error(err));
+    }, []);
+    // ************ merging all api calls into one array */
+    useEffect(() => {
+        const fetchData = async () => {
+            let market = [];
+            let finishedArr = [];
+            const arr = [
+                mutantApeApi,
+                deadFellazApi,
+                pudgyPenguinsApi,
+                wowApi,
+                shibaApi,
+            ];
+            for (let i = 0; i < arr.length; i++) {
+                await fetch(
+                    `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+                )
+                    .then((res) => res.json())
+                    .then((response) => market.push(response.assets));
+            }
+            market.map((mrktItem) => {
+                mrktItem.map((item) => {
+                    return finishedArr.push(item);
+                });
+            });
+            setMrkt(finishedArr);
+        };
+        fetchData();
+    }, []);
+    const randomNum = () => {
+        return Math.floor(Math.random() * 9) + 1;
     };
     handleFilter();
   }, [filterMarket, mrkt]);
