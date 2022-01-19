@@ -67,11 +67,11 @@ function LandingPage({ slides }) {
                         </p>
                         <p id="smallerText">Get ahead of the future...</p>
                         <div class="join-logo" href="/login">
-                            <p>
+                            <a href="/login">
                                 <p>
                                     j<span>oi</span>n <span>u</span>s!
                                 </p>
-                            </p>
+                            </a>
                         </div>
                     </div>
                     <div className="leftImg">
