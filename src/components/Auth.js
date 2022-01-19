@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import db, { auth } from "../utils/firebase";
 import {
+  userID,
+  setUserID,
   signInWithEmailAndPassword,
   getAuth,
   signInWithPopup,
@@ -11,7 +13,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import GoogleIcon from "@mui/icons-material/Google";
 import "../style/login.css";
 
-function Auth({ loginRedboxClass }) {
+function Auth({ userID, setUserID, loginRedboxClass }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const NameInput = useRef();
@@ -65,7 +67,9 @@ function Auth({ loginRedboxClass }) {
         emailRef.current.value,
         passwordRef.current.value
       ).then(async (cred) => {
-        // console.log(cred)
+        //console.log(cred.user.uid);
+        setUserID(cred.user.uid);
+        console.log(userID, "this is user ?");
         await setDoc(doc(db, "users", `${cred.user.uid}`), {
           userData: [
             {
@@ -75,7 +79,7 @@ function Auth({ loginRedboxClass }) {
           ],
         });
         if (cred) {
-          window.location = "/marketplace";
+          //  window.location = "/marketplace";
         }
       });
     } catch (error) {

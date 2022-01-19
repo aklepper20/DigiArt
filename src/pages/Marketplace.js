@@ -24,190 +24,198 @@ import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // require("dotenv").config();
 function Marketplace({
-    username,
-    user,
-    userData,
-    copyFeatured,
-    mrkt,
-    filteredMrkt,
-    filterMarket,
-    setFilterMarket,
+  userID,
+  setUserID,
+  username,
+  user,
+  userData,
+  copyFeatured,
+  mrkt,
+  filteredMrkt,
+  filterMarket,
+  setFilterMarket,
 }) {
-    // console.log(filterMarket, "openseamrkt");
+  // console.log(filterMarket, "openseamrkt");
 
-    //upload model below
-    const [inputName, setInputName] = useState("");
-    const [inputPrice, setInputPrice] = useState("");
-    const [inputFile, setInputFile] = useState({});
+  //upload model below
+  const [inputName, setInputName] = useState("");
+  const [inputPrice, setInputPrice] = useState("");
+  const [inputFile, setInputFile] = useState({});
 
-    // when i type, a function should run that saves the states of the input
-    const handleChangeName = (e) => {
-        setInputName(e.target.value);
-    };
+  // when i type, a function should run that saves the states of the input
+  const handleChangeName = (e) => {
+    setInputName(e.target.value);
+  };
 
-    const handleChangeFile = (e) => {
-        const file = e.target.files[0];
-        const user = auth.currentUser.email;
-        const storage = getStorage();
-        const storageRef = ref(storage, user + "/" + file.name);
-        uploadBytes(storageRef, file).then((snapshot) => {
-            console.log("Uploaded a blob or file!");
-        });
-        console.log("handle file", file, user, storageRef);
-    };
+  const handleChangeFile = (e) => {
+    const file = e.target.files[0];
+    const user = auth.currentUser.email;
+    const storage = getStorage();
+    const storageRef = ref(storage, user + "/" + file.name);
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+    console.log("handle file", file, user, storageRef);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (inputFile && inputPrice && inputName) {
-            const file = e.target.files[0];
-            const user = auth.currentUser.email;
-            const storage = getStorage();
-            const storageRef = ref(storage, user + "/" + file.name);
-            uploadBytes(storageRef, file).then((snapshot) => {
-                console.log("Uploaded a blob or file!");
-            });
-            console.log("handle file", file, user, storageRef);
-        } else {
-            alert("please update all informatiom");
-        }
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputFile && inputPrice && inputName) {
+      const file = e.target.files[0];
+      const user = auth.currentUser.email;
+      const storage = getStorage();
+      const storageRef = ref(storage, user + "/" + file.name);
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      });
+      // create a database of array that will take objects with values productName, productPrice: inputPrice
 
-    const logout = async () => {
-        await signOut(auth);
-        window.location = "/";
-    };
+      console.log("handle file", file, user, storageRef);
+    } else {
+      alert("please update all informatiom");
+    }
 
-    const [open, setOpen] = React.useState(false);
+    //setdoc to new array productInfo
+    // setDoc(doc(db, "users", `${cred.user.uid}`), {
+    //  productInfo: [
+    //  {
+    //    productName: inputName,
+    //    productPrice: inputPrice,
+    //  },
+    //  ],
+    // });
+  };
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const logout = async () => {
+    await signOut(auth);
+    window.location = "/";
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const [open, setOpen] = React.useState(false);
 
-    // console.log({username})
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    // const handleSubmit = () => {
-    //     console.log("upload successful");
-    // };
-    ///upload modal ends
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    return (
-        <div className="marketplace">
-            <Navbar />
-            <div className="marketplace-wrapper">
-                <div className="welcome">Welcome, {username}</div>
-                <div className="options">
-                    <div className="categories">
-                        <FilterControl
-                            setFilterMarket={setFilterMarket}
-                            filterMarket={filterMarket}
-                        />
-                    </div>
-                </div>
-                <div className="mrkt-title">
-                    <p className="title">Featured Products</p>
-                    {/* upload modal html begins here */}
-                    <div className="addItem">
-                        <Button
-                            style={{
-                                width: "280px",
-                                height: "80px",
-                                ":hover": {
-                                    bgcolor: "pink",
-                                    color: "white",
-                                },
-                            }}
-                            onClick={handleClickOpen}
-                        >
-                            Upload
-                        </Button>
-                        <Dialog open={open} onClose={handleClose}>
-                            <DialogTitle>Upload your Art!!!</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText></DialogContentText>
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="name"
-                                    label="Name of the product"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    onChange={handleChangeName}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="name"
-                                    label="Price"
-                                    type="number"
-                                    fullWidth
-                                    variant="standard"
-                                    // onChange={handleChangePrice}
-                                />
-                                <Input type="file" accept="image/*" />
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleClose}>Cancel</Button>
-                                <Button onClick={handleSubmit}>Submit</Button>
-                            </DialogActions>
-                        </Dialog>
-                    </div>
-                    {/* upload modal HTML ends here */}
-                </div>
-                <div className="market-place-features">
-                    {copyFeatured &&
-                        copyFeatured.map((nft) => {
-                            return (
-                                <>
-                                    <Grid key={nft.id}>
-                                        <Card
-                                            id={nft.id}
-                                            name={nft.collection.name}
-                                            img={nft.image_url}
-                                            price={nft.price}
-                                            description={
-                                                nft.collection.description
-                                            }
-                                        />
-                                    </Grid>
-                                </>
-                            );
-                        })}
-                </div>
-                <h2 className="title">Assets</h2>
-                <div className="market-place-assets">
-                    {filteredMrkt &&
-                        filteredMrkt.map((nft) => {
-                            return (
-                                <>
-                                    <Grid key={nft.id}>
-                                        <Card
-                                            id={nft.id}
-                                            {...nft}
-                                            // id={nft.id}
-                                            name={
-                                                nft.name || nft.collection.name
-                                            }
-                                            img={nft.image_url}
-                                            // // price={Number(nft.stats.average_price).toFixed(
-                                            // //     2
-                                            // // )}
-                                            description={
-                                                nft.collection.description
-                                            }
-                                        />
-                                    </Grid>
-                                </>
-                            );
-                        })}
-                </div>
-            </div>
+  // console.log({username})
+
+  // const handleSubmit = () => {
+  //     console.log("upload successful");
+  // };
+  ///upload modal ends
+
+  return (
+    <div className="marketplace">
+      <Navbar />
+      <div className="marketplace-wrapper">
+        <div className="welcome">Welcome, </div>
+        <div className="options">
+          <div className="categories">
+            <FilterControl
+              setFilterMarket={setFilterMarket}
+              filterMarket={filterMarket}
+            />
+          </div>
         </div>
-    );
+        <div className="mrkt-title">
+          <p className="title">Featured Products</p>
+          {/* upload modal html begins here */}
+          <div className="addItem">
+            <Button
+              style={{
+                width: "280px",
+                height: "80px",
+                ":hover": {
+                  bgcolor: "pink",
+                  color: "white",
+                },
+              }}
+              onClick={handleClickOpen}
+            >
+              Upload
+            </Button>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Upload your Art!!!</DialogTitle>
+              <DialogContent>
+                <DialogContentText></DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Name of the product"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChangeName}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Price"
+                  type="number"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChangePrice}
+                />
+                <Input type="file" accept="image/*" />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+          {/* upload modal HTML ends here */}
+        </div>
+        <div className="market-place-features">
+          {copyFeatured &&
+            copyFeatured.map((nft) => {
+              return (
+                <>
+                  <Grid key={nft.id}>
+                    <Card
+                      id={nft.id}
+                      name={nft.collection.name}
+                      img={nft.image_url}
+                      price={nft.price}
+                      description={nft.collection.description}
+                    />
+                  </Grid>
+                </>
+              );
+            })}
+        </div>
+        <h2 className="title">Assets</h2>
+        <div className="market-place-assets">
+          {filteredMrkt &&
+            filteredMrkt.map((nft) => {
+              return (
+                <>
+                  <Grid key={nft.id}>
+                    <Card
+                      id={nft.id}
+                      {...nft}
+                      // id={nft.id}
+                      name={nft.name || nft.collection.name}
+                      img={nft.image_url}
+                      // // price={Number(nft.stats.average_price).toFixed(
+                      // //     2
+                      // // )}
+                      description={nft.collection.description}
+                    />
+                  </Grid>
+                </>
+              );
+            })}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Marketplace;
