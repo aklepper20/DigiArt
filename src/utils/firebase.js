@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { getStorage, ref } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -20,13 +19,13 @@ import { getStorage, ref } from "firebase/storage";
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDhYJAPsD7tVujtLmMIlHakXVdNkWyc4_Y",
-  authDomain: "capstone-e452d.firebaseapp.com",
-  projectId: "capstone-e452d",
-  storageBucket: "capstone-e452d.appspot.com",
-  messagingSenderId: "266376065424",
-  appId: "1:266376065424:web:6b16e8c4a856431d7d8315",
-  measurementId: "G-BRS5MKJLWX",
+    apiKey: "AIzaSyDhYJAPsD7tVujtLmMIlHakXVdNkWyc4_Y",
+    authDomain: "capstone-e452d.firebaseapp.com",
+    projectId: "capstone-e452d",
+    storageBucket: "capstone-e452d.appspot.com",
+    messagingSenderId: "266376065424",
+    appId: "1:266376065424:web:6b16e8c4a856431d7d8315",
+    measurementId: "G-BRS5MKJLWX",
 };
 
 // Initialize Firebase
@@ -34,5 +33,5 @@ export const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 export const auth = getAuth(app);
-export const storage = getStorage();
+// export const storage = getStorage();
 export default db;
