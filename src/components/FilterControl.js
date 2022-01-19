@@ -3,10 +3,8 @@ import "../style/FilterControl.css";
 
 function FilterControl({ filterMarket, setFilterMarket }) {
     const handleStatus = (e) => {
-        // console.log(e);
         setFilterMarket(e);
     };
-    console.log(filterMarket);
     return (
         <div className="items-statuses">
             <span

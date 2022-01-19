@@ -1,12 +1,14 @@
-import React from "react";
-import Card from "../components/Card";
+import React, { useState } from "react";
 import ImageSlider from "../components/ImageSlider";
-import Navbar from "../components/Navbar";
 import "../style/LandingPage.css";
 
 function LandingPage({ slides }) {
+    const [isActive, setActive] = useState("false");
     const randomNum = () => Math.floor(Math.random() * 50);
-    let getSlides = slides.slice(0, 8);
+    let getSlides = slides.slice(0, 15);
+    const handleToggle = () => {
+        setActive(!isActive);
+    };
     // const [loginRedboxClass, setLoginRedboxClass] = useState("");
     // const [signupRedboxClass, setSignupRedboxClass] = useState("right-panel-active");
 
@@ -28,25 +30,34 @@ function LandingPage({ slides }) {
     // };
     return (
         <div className="landingPage">
-            <div className="landingNavbar">
+            <nav className="nav">
                 <div className="navbar__logo">
-                    <img
-                        src="https://cdn.logo.com/hotlink-ok/logo-social.png"
-                        alt="DigiArt Logo"
-                    />
+                    <img src="./images/logo.png" alt="DigiArt Logo" />
                     <h2>
-                        <a href="/">DigiArt</a>
+                        <a href="#">DigiArt</a>
                     </h2>
                 </div>
-                <div className="landingbtns">
-                    <button className="btns">
-                        <a href="/login">Sign Up</a>
-                    </button>
-                    <button className="btns">
-                        <a href="/login  ">Login</a>
-                    </button>
+                <div
+                    className={`hamburger ${!isActive ? "toggle" : ""}`}
+                    onClick={handleToggle}
+                >
+                    <div className="line1"></div>
+                    <div className="line2"></div>
+                    <div className="line3"></div>
                 </div>
-            </div>
+                <ul className={`nav-links ${!isActive ? "open" : ""}`}>
+                    <li className={`${!isActive ? "fade" : ""}`}>
+                        <button className="join-button">
+                            <a href="/login">Login</a>
+                        </button>
+                    </li>
+                    <li className={`${!isActive ? "fade" : ""}`}>
+                        <button className="join-button" href="/login">
+                            <a href="/login">Join</a>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
             <div className="landingPage-wrapper">
                 <div className="container">
                     <div className="blockRight">
@@ -55,16 +66,16 @@ function LandingPage({ slides }) {
                             sell easy with any item
                         </p>
                         <p id="smallerText">Get ahead of the future...</p>
-                        <button className="btns">
-                            <a href="/login">Sign Up</a>
-                        </button>
-                    </div>
-                    <div className="blockLeft">
-                        <div className="leftImg">
-                            NFT ART
-                            {/* <img src="huh.jpeg" alt="nft"/> */}
-                            <ImageSlider getSlides={getSlides} />
+                        <div class="join-logo" href="/login">
+                            <p>
+                                <p>
+                                    j<span>oi</span>n <span>u</span>s!
+                                </p>
+                            </p>
                         </div>
+                    </div>
+                    <div className="leftImg">
+                        <ImageSlider getSlides={getSlides} />
                     </div>
                 </div>
             </div>
