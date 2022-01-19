@@ -17,7 +17,7 @@ import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
-import storage from "../utils/firebase";
+//import storage from "../utils/firebase";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
 
@@ -51,18 +51,27 @@ function Marketplace({
   const handleChangeFile = (e) => {
     const file = e.target.files[0];
     const user = auth.currentUser.email;
-
-    const storageRef = ref(storage, "upload.jpg");
-    const uploadTask = uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file!", file.name);
+    const storage = getStorage();
+    const storageRef = ref(storage, user + "/" + file.name);
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
     });
     console.log("handle file", file, user, storageRef);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputFile) {
-      console.log(inputName, inputPrice, inputFile);
+    if (inputFile && inputPrice && inputName) {
+      const file = e.target.files[0];
+      const user = auth.currentUser.email;
+      const storage = getStorage();
+      const storageRef = ref(storage, user + "/" + file.name);
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      });
+      console.log("handle file", file, user, storageRef);
+    } else {
+      alert("please update all informatiom");
     }
   };
 
@@ -142,11 +151,7 @@ function Marketplace({
                   variant="standard"
                   onChange={handleChangePrice}
                 />
-                <Input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleChangeFile}
-                />
+                <Input type="file" accept="image/*" />
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
