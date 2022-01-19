@@ -34,7 +34,8 @@ function NftCard({ img, ID }) {
       <Popper id={id} open={open} anchorEl={anchorEl}>
         <Box
           style={{
-            width: "300px",
+            textSize: "12px",
+            width: "220px",
             backgroundColor: "black",
             color: "white",
             display: "flex",
@@ -46,7 +47,7 @@ function NftCard({ img, ID }) {
           }}
           sx={{ border: 1, p: 1, bgcolor: "background.paper" }}
         >
-          Are you sure you want to DELETE? ID: 342
+          Are you sure you want to DELETE? ID: {ID}
           <div className="nftCard__btns">
             <button onClick={handleDelete}>DELETE</button>
             <button onClick={() => setAnchorEl(null)}>CANCEL</button>

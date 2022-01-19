@@ -10,14 +10,17 @@ import Cart from "./pages/Cart";
 import UploadForm from "./components/UploadForm";
 import { REACT_APP_API_KEY } from "./utils/keys";
 import Auth from "./components/Auth";
+
 import db, { auth } from "./utils/firebase";
 import { onSnapshot, doc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
+
 const deadFellazApi = "0x2acab3dea77832c09420663b0e1cb386031ba17b";
 const pudgyPenguinsApi = "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8";
 const mutantApeApi = "0x60E4d786628Fea6478F785A6d7e704777c86a7c6";
 const shibaApi = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
 const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
+
 function App() {
     //// user verification code starts here
     const data = [];
@@ -73,6 +76,47 @@ function App() {
     };
     // console.log(mrkt);
     // 7. useEffefct that has a handleFilter() function
+    useEffect(() => {
+        // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+        const handleFilter = () => {
+            if (filterMarket === "Mutant Ape Yacht Club") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "Mutant Ape Yacht Club"
+                    )
+                );
+            } else if (filterMarket === "DeadFellaz") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "DeadFellaz"
+                    )
+                );
+            } else if (filterMarket === "Pudgy Penguins") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "Pudgy Penguins"
+                    )
+                );
+            } else if (filterMarket === "World of Women") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "World of Women"
+                    )
+                );
+            } else if (filterMarket === "Bored Ape Kennel Club") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "Bored Ape Kennel Club"
+                    )
+                );
+            } else {
+                // if the status is all setFilteredMrkt to mrkt
+                return setFilteredMrkt(copyMrkt);
+            }
+        };
+        handleFilter();
+    }, [filterMarket, mrkt]);
+    //************     featured */
     useEffect(() => {
         // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
         const handleFilter = () => {
@@ -182,7 +226,6 @@ function App() {
         return array;
     }
     shuffle(copyMrkt);
-    // console.log(filterMarket);
     // ******************* opensea api end **********
     return (
         <BrowserRouter>
@@ -232,4 +275,5 @@ function App() {
         </BrowserRouter>
     );
 }
+
 export default App;
