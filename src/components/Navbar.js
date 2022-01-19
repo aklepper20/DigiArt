@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import "../style/Navbar.css";
 import { Link } from "react-router-dom";
@@ -6,12 +6,12 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import CloseIcon from "@mui/icons-material/Close";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useStateValue } from "../StateProvider";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 
-function Navbar({ logoutbtn }) {
+function Navbar() {
     const [{ basket }] = useStateValue();
     const [isActive, setActive] = useState("false");
     const [state, setState] = useState({
@@ -20,15 +20,15 @@ function Navbar({ logoutbtn }) {
         bottom: false,
         right: false,
     });
+    const [filterNav, setFilterNav] = useState("all");
+    // const [filteredNav, setFilteredNav] = useState(mrkt);
     const handleToggle = () => {
         setActive(!isActive);
     };
-
     const logout = async () => {
         await signOut(auth);
         window.location = "/";
     };
-
     const toggleDrawer = (anchor, open) => (event) => {
         if (
             event.type === "keydown" &&
@@ -38,7 +38,6 @@ function Navbar({ logoutbtn }) {
         }
         setState({ ...state, [anchor]: open });
     };
-
     const list = (anchor) => (
         <Box
             sx={{
@@ -67,75 +66,11 @@ function Navbar({ logoutbtn }) {
             </div>
         </Box>
     );
-
+    const handleActive = (e) => {
+        console.log(e);
+        setFilterNav(e);
+    };
     return (
-        // <div className="navbar">
-        //   <div className="navbar__logo">
-        //     <img
-        //       src="https://cdn.logo.com/hotlink-ok/logo-social.png"
-        //       alt="DigiArt Logo"
-        //     />
-        //     <h2>
-        //       <Link to="/">
-        //         <a href="/">DigiArt</a>
-        //       </Link>
-        //     </h2>
-        //     {logoutbtn}
-        //   </div>
-
-        //   <div className="navbar__options">
-        //     <div className="navbar__list">
-        // <ul>
-        //   <li>
-        //     <Link to="/marketplace">
-        //       <a href="/marketplace">Marketplace</a>
-        //     </Link>
-        //   </li>
-        // <li>
-        //   <Link to="/cart">
-        //     <div style={{ display: "flex" }}>
-        //       <a href="/cart">Cart</a>
-        //       <ShoppingBagIcon style={{ color: "yellow" }} />
-        //       <div style={{ margin: "0px 5px" }}>{basket?.length}</div>
-        //     </div>
-        //   </Link>
-        // </li>
-        // <li>
-        //   <Link to="/profile">
-        //     <a href="/profile">My Profile</a>
-        //   </Link>
-        // </li>
-        // <li>
-        //   <div className="navbar__wallet">
-        //     <div>
-        //       {["right"].map((anchor) => (
-        //         <React.Fragment key={anchor}>
-        //           <Button onClick={toggleDrawer(anchor, true)}>
-        //             <AccountBalanceWalletIcon />
-        //           </Button>
-        //           <Drawer
-        //             PaperProps={{
-        //               style: {
-        //                 height: "30vh",
-        //                 borderRadius: "10px 0 0 10px",
-        //                 marginTop: "60px",
-        //               },
-        //             }}
-        //             anchor={anchor}
-        //             open={state[anchor]}
-        //             onClose={toggleDrawer(anchor, false)}
-        //           >
-        //             {list(anchor)}
-        //           </Drawer>
-        //         </React.Fragment>
-        //       ))}
-        //     </div>
-        //   </div>
-        // </li>
-        // </ul>
-        //     </div>
-        //   </div>
-        // </div>
         <nav>
             <div className="navbar__logo">
                 <img src="./images/logo.png" alt="DigiArt Logo" />
@@ -144,7 +79,6 @@ function Navbar({ logoutbtn }) {
                         <a href="/">DigiArt</a>
                     </Link>
                 </h2>
-                {logoutbtn}
             </div>
             <div
                 className={`hamburger ${!isActive ? "toggle" : ""}`}
@@ -155,28 +89,40 @@ function Navbar({ logoutbtn }) {
                 <div className="line3"></div>
             </div>
             <ul className={`nav-links ${!isActive ? "open" : ""}`}>
-                <li className={`${!isActive ? "fade" : ""}`}>
-                    <Link to="/marketplace">
-                        <a href="/marketplace">Marketplace</a>
-                    </Link>
-                </li>
-                <li className={`${!isActive ? "fade" : ""}`}>
+                <li
+                    className={`link ${!isActive ? "fade" : ""} ${
+                        filterNav === "cart" ? "active" : ""
+                    }`}
+                    onClick={() => handleActive("cart")}
+                >
                     <Link to="/cart">
-                        <div style={{ display: "flex" }}>
-                            <a href="/cart">Cart</a>
-                            <ShoppingBagIcon style={{ color: "yellow" }} />
-                            <div style={{ margin: "0px 5px" }}>
-                                {basket?.length}
-                            </div>
-                        </div>
+                        <ShoppingCartIcon />
+                        {basket?.length}
                     </Link>
                 </li>
-                <li className={`${!isActive ? "fade" : ""}`}>
-                    <Link to="/profile">
-                        <a href="/profile">My Profile</a>
-                    </Link>
+                <li
+                    className={`link ${!isActive ? "fade" : ""} ${
+                        filterNav === "Marketplace" ? "active" : ""
+                    }`}
+                    onClick={() => handleActive("Marketplace")}
+                >
+                    <Link to="/marketplace">Marketplace</Link>
                 </li>
-                <li className={`${!isActive ? "fade" : ""}`}>
+
+                <li
+                    className={`link ${!isActive ? "fade" : ""} ${
+                        filterNav === "My Portfile" ? "active" : ""
+                    }`}
+                    onClick={() => handleActive("My Portfile")}
+                >
+                    <Link to="/profile">My Profile</Link>
+                </li>
+                <li
+                    className={`link ${!isActive ? "fade" : ""} ${
+                        filterNav === "wallet" ? "active" : ""
+                    }`}
+                    onClick={() => handleActive("wallet")}
+                >
                     <div className="navbar__wallet">
                         <div>
                             {["right"].map((anchor) => (
@@ -205,17 +151,10 @@ function Navbar({ logoutbtn }) {
                         </div>
                     </div>
                 </li>
-                <li className={`${!isActive ? "fade" : ""}`}>
-                    <button className="login-button" href="#">
-                        Login
-                    </button>
-                </li>
-                <li className={`${!isActive ? "fade" : ""}`}>
-                    <button className="join-button" href="#">
-                        Join
-                    </button>
-                </li>
-                <li className={`${!isActive ? "fade" : ""}`} onClick={logout}>
+                <li
+                    className={`link ${!isActive ? "fade" : ""}`}
+                    onClick={logout}
+                >
                     <button className="join-button" href="#">
                         Logout
                     </button>
