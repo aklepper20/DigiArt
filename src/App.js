@@ -66,6 +66,7 @@ function App() {
 
     let copyFeatured = [];
     let copyMrkt = [];
+
     // ******************* opensea api **********
     const options = {
         method: "GET",
@@ -74,49 +75,6 @@ function App() {
             "X-API-KEY": REACT_APP_API_KEY,
         },
     };
-    // console.log(mrkt);
-    // 7. useEffefct that has a handleFilter() function
-    useEffect(() => {
-        // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
-        const handleFilter = () => {
-            if (filterMarket === "Mutant Ape Yacht Club") {
-                return setFilteredMrkt(
-                    copyMrkt.filter(
-                        (nft) => nft.collection.name === "Mutant Ape Yacht Club"
-                    )
-                );
-            } else if (filterMarket === "DeadFellaz") {
-                return setFilteredMrkt(
-                    copyMrkt.filter(
-                        (nft) => nft.collection.name === "DeadFellaz"
-                    )
-                );
-            } else if (filterMarket === "Pudgy Penguins") {
-                return setFilteredMrkt(
-                    copyMrkt.filter(
-                        (nft) => nft.collection.name === "Pudgy Penguins"
-                    )
-                );
-            } else if (filterMarket === "World of Women") {
-                return setFilteredMrkt(
-                    copyMrkt.filter(
-                        (nft) => nft.collection.name === "World of Women"
-                    )
-                );
-            } else if (filterMarket === "Bored Ape Kennel Club") {
-                return setFilteredMrkt(
-                    copyMrkt.filter(
-                        (nft) => nft.collection.name === "Bored Ape Kennel Club"
-                    )
-                );
-            } else {
-                // if the status is all setFilteredMrkt to mrkt
-                return setFilteredMrkt(copyMrkt);
-            }
-        };
-        handleFilter();
-    }, [filterMarket, mrkt]);
-    //************     featured */
     useEffect(() => {
         // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
         const handleFilter = () => {
@@ -195,7 +153,6 @@ function App() {
         };
         fetchData();
     }, []);
-    // console.log(mrkt, "new data");
     const randomNum = () => {
         return Math.floor(Math.random() * 9) + 1;
     };
