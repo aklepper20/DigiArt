@@ -73,7 +73,7 @@
     transition: 0.6s ease-in-out;
 }
 
-.overlay {
+.auth-overlay {
     /* background: #ff416c; */
     /* background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
     background: linear-gradient(to right, #ff4b2b, #ff416c); */
@@ -97,7 +97,7 @@
     transition: transform 0.6s ease-in-out;
 }
 
-.form-container.right-panel-active .overlay {
+.form-container.right-panel-active .auth-overlay {
     transform: translateX(50%);
 }
 
@@ -108,7 +108,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 15px;
-    padding: 0 40px;
+    padding: 0 10px;
     text-align: center;
     top: 0;
     height: 100%;
@@ -118,7 +118,7 @@
 }
 
 .overlay-left {
-    transform: translateX(-50%);
+    transform: translateX(0);
 }
 
 .form-container.right-panel-active .overlay-left {

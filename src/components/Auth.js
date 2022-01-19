@@ -11,50 +11,13 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import GoogleIcon from "@mui/icons-material/Google";
 import "../style/login.css";
 
-function Auth(
-    {
-        // title,
-        // button,
-        // href,
-        // link,
-        // headerStatement,
-        // emailInput,
-        // passwordInput,
-        // nameInputBlock,
-        // btnFunction,
-        // googleFunction,
-    }
-) {
+function Auth({ loginRedboxClass }) {
     const emailRef = useRef();
     const passwordRef = useRef();
-    // const emailRef = useRef();
-    // const passwordRef = useRef();
     const NameInput = useRef();
-    const loginEmailRef = useRef()
-    const loginPasswordRef = useRef()
+    const loginEmailRef = useRef();
+    const loginPasswordRef = useRef();
 
-    // const googleFunction = async () => {
-    //     const provider = new GoogleAuthProvider();
-    //     const auth = getAuth();
-    //     signInWithPopup(auth, provider)
-    //         .then((result) => {
-    //             // This gives you a Google Access Token. You can use it to access the Google API.
-    //             // const credential = GoogleAuthProvider.credentialFromResult(result);
-    //             // const token = credential.accessToken;
-    //             // The signed-in user info.
-    //             const user = result.user;
-    //             console.log(user);
-    //             const username = user.displayName;
-
-    //             if (user) {
-    //                 console.log(user);
-    //                 window.location = "/marketplace";
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // };
     const googleFunction = async (e) => {
         e.preventDefault();
         const provider = new GoogleAuthProvider();
@@ -66,12 +29,10 @@ function Auth(
                 // console.log(username)
                 // console.log(user.email
                 await setDoc(doc(db, "users", `${user.uid}`), {
-                    userData: 
-                        {
-                            emailID: user.email,
-                            name: username,
-                        },
-                    
+                    userData: {
+                        emailID: user.email,
+                        name: username,
+                    },
                 });
                 if (user) {
                     window.location = "/marketplace";
@@ -81,20 +42,21 @@ function Auth(
             alert(error.message);
         }
     };
-    const login = async() => {
-        try{
-            await signInWithEmailAndPassword(auth, loginEmailRef.current.value, loginPasswordRef.current.value)
-            .then((user)=>{
-              if(user){
-                window.location = '/marketplace'
-              }
-            })
-          }
-          catch(error){
-            alert(error.message, "error")
-          }
+    const login = async () => {
+        try {
+            await signInWithEmailAndPassword(
+                auth,
+                loginEmailRef.current.value,
+                loginPasswordRef.current.value
+            ).then((user) => {
+                if (user) {
+                    window.location = "/marketplace";
+                }
+            });
+        } catch (error) {
+            alert(error.message, "error");
         }
-    
+    };
     const register = async (e) => {
         e.preventDefault();
         try {
@@ -105,12 +67,10 @@ function Auth(
             ).then(async (cred) => {
                 // console.log(cred)
                 await setDoc(doc(db, "users", `${cred.user.uid}`), {
-                    userData: 
-                        {
-                            emailID: emailRef.current.value,
-                            name: NameInput.current.value,
-                        },
-                    
+                    userData: {
+                        emailID: emailRef.current.value,
+                        name: NameInput.current.value,
+                    },
                 });
                 if (cred) {
                     window.location = "/marketplace";
@@ -131,42 +91,6 @@ function Auth(
         }
     };
     return (
-        // <div className="login">
-        //     <div className="login-container">
-        //         <h1 className="login-heading">{title}</h1>
-        //         {nameInputBlock}
-        //         <input
-        //             ref={emailInput}
-        //             className="login-email"
-        //             type="email"
-        //             placeholder="Email"
-        //         />
-        //         <input
-        //             ref={passwordInput}
-        //             className="login-password"
-        //             type="password"
-        //             placeholder="Password"
-        //         />
-        //         <button onClick={btnFunction} className="login-button">
-        //             {button}
-        //         </button>
-        // <button
-        //     id="Gbtn"
-        //     onClick={googleFunction}
-        //     className="google-button"
-        // >
-        //     {title} with <GoogleIcon />
-        // </button>
-        // <div className="links">
-        //     <p>{headerStatement}</p>
-        //     <a href={href}>{link}</a>
-        //     <div className="links">
-        //         <p>{headerStatement}</p>
-        //         <a href={href}>{link}</a>
-        //     </div>
-        // </div>
-        // </div>
-        // </div>
         <div className="outer-form__container">
             <div className={`form-container ${redboxClass}`}>
                 <form action="" className="loginContainer">
@@ -238,11 +162,11 @@ function Auth(
                     </div>
                 </form>
                 <div className="overlay-container">
-                    <div className="overlay">
+                    <div className="auth-overlay">
                         <div className="overlay-panel overlay-left">
                             <h1>Welcome Back!</h1>
                             <p>
-                                To keep connected with us please login with your
+                                Stay connected with us please login with your
                                 personal info
                             </p>
                             <button

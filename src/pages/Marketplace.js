@@ -20,8 +20,17 @@ import { setDoc, doc } from "firebase/firestore";
 import db from "../utils/firebase";
 
 // require("dotenv").config();
-function Marketplace({ username, user, userData, copyFeatured, mrkt }) {
-    // console.log(mrkt, "openseamrkt");
+function Marketplace({
+    username,
+    user,
+    userData,
+    copyFeatured,
+    mrkt,
+    filteredMrkt,
+    filterMarket,
+    setFilterMarket,
+}) {
+    // console.log(filterMarket, "openseamrkt");
 
     //upload model below
     const [inputName, setInputName] = useState("");
@@ -77,7 +86,10 @@ function Marketplace({ username, user, userData, copyFeatured, mrkt }) {
                 <div className="welcome">Welcome, {username}</div>
                 <div className="options">
                     <div className="categories">
-                        <FilterControl />
+                        <FilterControl
+                            setFilterMarket={setFilterMarket}
+                            filterMarket={filterMarket}
+                        />
                     </div>
                 </div>
                 <div className="mrkt-title">
@@ -157,8 +169,8 @@ function Marketplace({ username, user, userData, copyFeatured, mrkt }) {
                 </div>
                 <h2 className="title">Assets</h2>
                 <div className="market-place-assets">
-                    {mrkt &&
-                        mrkt.map((nft) => {
+                    {filteredMrkt &&
+                        filteredMrkt.map((nft) => {
                             return (
                                 <>
                                     <Grid key={nft.id}>

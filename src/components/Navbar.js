@@ -138,10 +138,7 @@ function Navbar({ logoutbtn }) {
         // </div>
         <nav>
             <div className="navbar__logo">
-                <img
-                    src="https://cdn.logo.com/hotlink-ok/logo-social.png"
-                    alt="DigiArt Logo"
-                />
+                <img src="./images/logo.png" alt="DigiArt Logo" />
                 <h2>
                     <Link to="/">
                         <a href="/">DigiArt</a>
