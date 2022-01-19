@@ -24,6 +24,7 @@ const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 function App() {
   //// user verification code starts here
   const data = [];
+  const [userID, setUserID] = useState("");
   const [userData, setUserData] = useState({});
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState(userData);
@@ -235,6 +236,8 @@ function App() {
             path="/marketplace"
             element={
               <Marketplace
+                setUserID={setUserID}
+                userID={userID}
                 copyFeatured={copyFeatured}
                 mrkt={copyMrkt}
                 filterMarket={filterMarket}
@@ -255,7 +258,11 @@ function App() {
             path="/cart"
             element={<Cart randomUserCoin={randomUserCoin} />}
           />
-          <Route exact path="/login" element={<Auth />} />
+          <Route
+            exact
+            path="/login"
+            element={<Auth setUserID={setUserID} userID={userID} />}
+          />
           <Route exact path="/upload" element={<UploadForm />} />
         </Routes>
       </div>
