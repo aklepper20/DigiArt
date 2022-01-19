@@ -23,6 +23,8 @@ import db from "../utils/firebase";
 
 // require("dotenv").config();
 function Marketplace({
+  userID,
+  setUserID,
   username,
   user,
   userData,
@@ -69,10 +71,22 @@ function Marketplace({
       uploadBytes(storageRef, file).then((snapshot) => {
         console.log("Uploaded a blob or file!");
       });
+      // create a database of array that will take objects with values productName, productPrice: inputPrice
+
       console.log("handle file", file, user, storageRef);
     } else {
       alert("please update all informatiom");
     }
+
+    //setdoc to new array productInfo
+    // setDoc(doc(db, "users", `${cred.user.uid}`), {
+    //  productInfo: [
+    //  {
+    //    productName: inputName,
+    //    productPrice: inputPrice,
+    //  },
+    //  ],
+    // });
   };
 
   const logout = async () => {
@@ -101,7 +115,7 @@ function Marketplace({
     <div className="marketplace">
       <Navbar />
       <div className="marketplace-wrapper">
-        <div className="welcome">Welcome, {username}</div>
+        <div className="welcome">Welcome, </div>
         <div className="options">
           <div className="categories">
             <FilterControl
