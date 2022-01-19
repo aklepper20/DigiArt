@@ -17,7 +17,7 @@ import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
 // import { uploadBytes } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
-import storage from "../utils/firebase";
+//import storage from "../utils/firebase";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
@@ -45,27 +45,32 @@ function Marketplace({
         setInputName(e.target.value);
     };
 
-    const handleChangePrice = (e) => {
-        setInputPrice(e.target.value);
-    };
+  const handleChangeFile = (e) => {
+    const file = e.target.files[0];
+    const user = auth.currentUser.email;
+    const storage = getStorage();
+    const storageRef = ref(storage, user + "/" + file.name);
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+    console.log("handle file", file, user, storageRef);
+  };
 
-    const handleChangeFile = (e) => {
-        const file = e.target.files[0];
-        const user = auth.currentUser.email;
-        const storage = getStorage();
-        const storageRef = ref(storage, user + "/" + file.name);
-        uploadBytes(storageRef, file).then((snapshot) => {
-            console.log("Uploaded a blob or file!");
-        });
-        console.log("handle file", file, user, storageRef);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (inputFile) {
-            console.log(inputName, inputPrice, inputFile);
-        }
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputFile && inputPrice && inputName) {
+      const file = e.target.files[0];
+      const user = auth.currentUser.email;
+      const storage = getStorage();
+      const storageRef = ref(storage, user + "/" + file.name);
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      });
+      console.log("handle file", file, user, storageRef);
+    } else {
+      alert("please update all informatiom");
+    }
+  };
 
     const logout = async () => {
         await signOut(auth);
@@ -89,120 +94,110 @@ function Marketplace({
     // };
     ///upload modal ends
 
-    return (
-        <div className="marketplace">
-            <Navbar />
-            <div className="marketplace-wrapper">
-                <div className="welcome">Welcome, {username}</div>
-                <div className="options">
-                    <div className="categories">
-                        <FilterControl
-                            setFilterMarket={setFilterMarket}
-                            filterMarket={filterMarket}
-                        />
-                    </div>
-                </div>
-                <div className="mrkt-title">
-                    <p className="title">Featured Products</p>
-                    {/* upload modal html begins here */}
-                    <div className="addItem">
-                        <Button
-                            style={{
-                                width: "280px",
-                                height: "80px",
-                                ":hover": {
-                                    bgcolor: "pink",
-                                    color: "white",
-                                },
-                            }}
-                            onClick={handleClickOpen}
-                        >
-                            Upload
-                        </Button>
-                        <Dialog open={open} onClose={handleClose}>
-                            <DialogTitle>Upload your Art!!!</DialogTitle>
-                            <DialogContent>
-                                <DialogContentText></DialogContentText>
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="name"
-                                    label="Name of the product"
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    onChange={handleChangeName}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    id="name"
-                                    label="Price"
-                                    type="number"
-                                    fullWidth
-                                    variant="standard"
-                                    onChange={handleChangePrice}
-                                />
-                                <Input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={handleChangeFile}
-                                />
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleClose}>Cancel</Button>
-                                <Button onClick={handleSubmit}>Submit</Button>
-                            </DialogActions>
-                        </Dialog>
-                    </div>
-                    {/* upload modal HTML ends here */}
-                </div>
-                <div className="market-place-features">
-                    {copyFeatured &&
-                        copyFeatured.map((nft) => {
-                            return (
-                                <>
-                                    <Grid key={nft.id}>
-                                        <Card
-                                            id={nft.id}
-                                            name={nft.collection.name}
-                                            img={nft.image_url}
-                                            price={nft.price}
-                                            description={
-                                                nft.collection.description
-                                            }
-                                        />
-                                    </Grid>
-                                </>
-                            );
-                        })}
-                </div>
-                <h2 className="title">Assets</h2>
-                <div className="market-place-assets">
-                    {filteredMrkt &&
-                        filteredMrkt.map((nft) => {
-                            return (
-                                <>
-                                    <Grid key={nft.id}>
-                                        <Card
-                                            id={nft.id}
-                                            {...nft}
-                                            // id={nft.id}
-                                            name={
-                                                nft.name || nft.collection.name
-                                            }
-                                            img={nft.image_url}
-                                            // // price={Number(nft.stats.average_price).toFixed(
-                                            // //     2
-                                            // // )}
-                                            description={
-                                                nft.collection.description
-                                            }
-                                        />
-                                    </Grid>
-                                </>
-                            );
-                        })}
+  return (
+    <div className="marketplace">
+      <Navbar />
+      <div className="marketplace-wrapper">
+        <div className="welcome">Welcome, {username}</div>
+        <div className="options">
+          <div className="categories">
+            <FilterControl
+              setFilterMarket={setFilterMarket}
+              filterMarket={filterMarket}
+            />
+          </div>
+        </div>
+        <div className="mrkt-title">
+          <p className="title">Featured Products</p>
+          {/* upload modal html begins here */}
+          <div className="addItem">
+            <Button
+              style={{
+                width: "280px",
+                height: "80px",
+                ":hover": {
+                  bgcolor: "pink",
+                  color: "white",
+                },
+              }}
+              onClick={handleClickOpen}
+            >
+              Upload
+            </Button>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Upload your Art!!!</DialogTitle>
+              <DialogContent>
+                <DialogContentText></DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Name of the product"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChangeName}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Price"
+                  type="number"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChangePrice}
+                />
+                <Input type="file" accept="image/*" />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
+              </DialogActions>
+            </Dialog>
+          </div>
+          {/* upload modal HTML ends here */}
+        </div>
+        <div className="market-place-features">
+          {copyFeatured &&
+            copyFeatured.map((nft) => {
+              return (
+                <>
+                  <Grid key={nft.id}>
+                    <Card
+                      id={nft.id}
+                      name={nft.collection.name}
+                      img={nft.image_url}
+                      price={nft.price}
+                      description={nft.collection.description}
+                    />
+                  </Grid>
+                </>
+              );
+            })}
+        </div>
+        <h2 className="title">Assets</h2>
+        <div className="market-place-assets">
+          {filteredMrkt &&
+            filteredMrkt.map((nft) => {
+              return (
+                <>
+                  <Grid key={nft.id}>
+                    <Card
+                      id={nft.id}
+                      {...nft}
+                      // id={nft.id}
+                      name={nft.name || nft.collection.name}
+                      img={nft.image_url}
+                      // // price={Number(nft.stats.average_price).toFixed(
+                      // //     2
+                      // // )}
+                      description={nft.collection.description}
+                    />
+                  </Grid>
+                </>
+              );
+            })}
                 </div>
             </div>
         </div>

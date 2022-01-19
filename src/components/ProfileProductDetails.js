@@ -10,7 +10,7 @@ function ProfileProductDetails({ mrkt, selectedNft }) {
   useEffect(() => {
     setActiveNft(mrkt[selectedNft]);
   }, [mrkt, selectedNft]);
-  console.log(activeNft);
+  //console.log(activeNft);
   return (
     <div className="profile__itemDesc">
       <img src={activeNft?.image_url} alt={activeNft?.name} />
