@@ -43,6 +43,7 @@ function App() {
     auth.onAuthStateChanged((currentUser) => {
       if (currentUser.uid) {
         setUser(currentUser.uid);
+
         console.log("user set");
       } else {
         console.log("please sign in");
@@ -56,7 +57,7 @@ function App() {
       // .data()
       //.userData.map((data, id) => ({ ...data, id: id }));
       // what do u need this data to do?
-      //setProfile(eachUserData) data with users uploads if any
+      //dasetProfile(eachUserData) ta with users uploads if any
       // setUserProfile(eachUserData);
       console.log(snapshot.data().userData.emailID, "userprofile has been set");
     });
