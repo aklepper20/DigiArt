@@ -10,7 +10,7 @@ const ImageSlider = ({ getSlides }) => {
     useEffect(() => {
         const timeout = setTimeout(
             () => setCurrent((current + 1 + length) % length),
-            4200
+            6200
         );
 
         return () => clearTimeout(timeout);
@@ -30,8 +30,6 @@ const ImageSlider = ({ getSlides }) => {
 
     return (
         <section className="slider">
-            <ArrowBackIosIcon className="left-arrow" onClick={prevSlide} />
-            <ArrowForwardIosIcon className="right-arrow" onClick={nextSlide} />
             {getSlides.map((slide, index) => {
                 return (
                     <div
@@ -49,6 +47,11 @@ const ImageSlider = ({ getSlides }) => {
                     </div>
                 );
             })}
+            <p>
+                “People don't understand NFTs, Metaverse, and crypto today the
+                same way they didn't understand online shopping in the 1995” ―
+                Anuj Jasani
+            </p>
         </section>
     );
 };

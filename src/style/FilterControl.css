@@ -27,7 +27,7 @@
     transition: all 500ms ease-in-out;
 }
 .items-statuses span:hover {
-    background-color: #cfb6b6;
+    background-color: hsl(220, 98%, 61%);
     color: #fff;
 }
 .addItem {
