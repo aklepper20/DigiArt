@@ -45,24 +45,29 @@ function App() {
       if (currentUser.uid) {
         setUser(currentUser.uid);
 
-        console.log("user set");
+        console.log(currentUser, "user set");
       } else {
         console.log("please sign in");
         //do something that user cant see the marketplace without signing in
       }
     });
     //onsnapshot gets data from our database
+
     onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
-      //let username = snapshot.data().userData[0].name;
-      // let eachUserData = snapshot
-      // .data()
-      //.userData.map((data, id) => ({ ...data, id: id }));
+      let userEmail = snapshot.data();
+      //console.log(userEmail);
+
+      let eachUserData = snapshot
+        .data()
+        .userData.map((data, id) => ({ ...data, id: id }));
+      console.log(userEmail);
+
       // what do u need this data to do?
       //dasetProfile(eachUserData) ta with users uploads if any
-      // setUserProfile(eachUserData);
-      console.log(snapshot.data().userData.emailID, "userprofile has been set");
+
+      console.log("userprofile has been set");
     });
-  }, []);
+  }, [user]);
   //// user verification code ends here
   const [featured, setFeatured] = useState([]);
   const [mrkt, setMrkt] = useState([]);

@@ -43,6 +43,8 @@ function Marketplace({
   const [inputFile, setInputFile] = useState({});
 
   // when i type, a function should run that saves the states of the input
+
+  console.log(user, userID, "this is user and userID");
   const handleChangeName = (e) => {
     setInputName(e.target.value);
   };
@@ -160,7 +162,7 @@ function Marketplace({
                   type="number"
                   fullWidth
                   variant="standard"
-                  onChange={handleChangePrice}
+                  //   onChange={handleChangePrice}
                 />
                 <Input type="file" accept="image/*" />
               </DialogContent>
