@@ -44,21 +44,25 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
       alert(error.message);
     }
   };
-  const login = async () => {
+
+  const login = async (e) => {
+    e.preventDefault();
     try {
       await signInWithEmailAndPassword(
         auth,
         loginEmailRef.current.value,
         loginPasswordRef.current.value
       ).then((user) => {
+        // console.log("user logged in");
         if (user) {
           window.location = "/marketplace";
         }
       });
     } catch (error) {
-      alert(error.message, "error");
+      console.log(error.message, "error message for login issues");
     }
   };
+
   const register = async (e) => {
     e.preventDefault();
     try {
@@ -79,7 +83,7 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
           ],
         });
         if (cred) {
-          //  window.location = "/marketplace";
+          window.location = "/marketplace";
         }
       });
     } catch (error) {
