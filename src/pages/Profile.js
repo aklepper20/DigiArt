@@ -5,7 +5,7 @@ import "../style/NftCard.css";
 import NftCard from "../components/NftCard";
 import ProfileProductDetails from "../components/ProfileProductDetails";
 
-function Profile({ randomUserCoin, mrkt }) {
+function Profile({ randomUserCoin, mrkt, userProfileName, userProfileEmail }) {
   const [selectedNft, setSelectedNft] = useState(0);
   // const [editInputs, setEditInputs] = useState(false);
   // const [activeNft, setActiveNft] = useState(mrkt[0]);
@@ -25,8 +25,8 @@ function Profile({ randomUserCoin, mrkt }) {
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7xkKmOxNZeatDKzjesmJG-s2clYi3gsncQ&usqp=CAU"
                 alt=""
               />
-              <h2>Kwesi</h2>
-              <p>@KwesiB</p>
+              <h2>{userProfileName}</h2>
+              <p>{userProfileEmail}</p>
               <p>eth: {randomUserCoin}</p>
             </div>
 
