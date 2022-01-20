@@ -28,6 +28,8 @@ function App() {
   const [userData, setUserData] = useState({});
   const [user, setUser] = useState({});
   const [userProfile, setUserProfile] = useState(userData);
+  const [userProfileName, setUserProfileName] = useState("");
+  const [userProfileEmail, setUserProfileEmail] = useState("");
 
   let [randomUserCoin, setRandomUserCoin] = useState(null);
   useEffect(() => {
@@ -54,18 +56,26 @@ function App() {
     //onsnapshot gets data from our database
 
     onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
-      let userEmail = snapshot.data();
+      let userEmail = snapshot.data().userData[0].emailID;
       //console.log(userEmail);
-
+      let userName = snapshot.data().userData[0].name;
       let eachUserData = snapshot
         .data()
         .userData.map((data, id) => ({ ...data, id: id }));
-      console.log(userEmail);
 
+      console.log(userEmail, userName);
+      setUserProfileName(userName);
+      setUserProfileEmail(userEmail);
+
+      //add a condition
       // what do u need this data to do?
       //dasetProfile(eachUserData) ta with users uploads if any
 
-      console.log("userprofile has been set");
+      console.log(
+        "userprofile has been set",
+        userProfileName,
+        userProfileEmail
+      );
     });
   }, [user]);
   //// user verification code ends here
@@ -207,6 +217,8 @@ function App() {
             path="/marketplace"
             element={
               <Marketplace
+                user={user}
+                userProfileName={userProfileName}
                 setUserID={setUserID}
                 userID={userID}
                 copyFeatured={copyFeatured}
@@ -221,7 +233,12 @@ function App() {
             exact
             path="/profile"
             element={
-              <Profile mrkt={copyMrkt} randomUserCoin={randomUserCoin} />
+              <Profile
+                userProfileName={userProfileName}
+                userProfileEmail={userProfileEmail}
+                mrkt={copyMrkt}
+                randomUserCoin={randomUserCoin}
+              />
             }
           />
           <Route
