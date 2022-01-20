@@ -16,7 +16,7 @@ import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
 // import { uploadBytes } from "firebase/storage";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, addDoc, doc } from "firebase/firestore";
 //import storage from "../utils/firebase";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
@@ -24,6 +24,7 @@ import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 // require("dotenv").config();
 function Marketplace({
+  userProfileName,
   userID,
   setUserID,
   username,
@@ -49,42 +50,57 @@ function Marketplace({
     setInputName(e.target.value);
   };
 
+  const handleChangePrice = (e) => {
+    setInputPrice(e.target.value);
+  };
+
   const handleChangeFile = (e) => {
     const file = e.target.files[0];
     const user = auth.currentUser.email;
     const storage = getStorage();
     const storageRef = ref(storage, user + "/" + file.name);
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    });
-    console.log("handle file", file, user, storageRef);
+    setInputFile(
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log("Uploaded a blob or file!");
+      })
+    );
+    console.log("handle file", e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputFile && inputPrice && inputName) {
-      const file = e.target.files[0];
-      const user = auth.currentUser.email;
-      const storage = getStorage();
-      const storageRef = ref(storage, user + "/" + file.name);
-      uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      });
-      // create a database of array that will take objects with values productName, productPrice: inputPrice
+    if (inputPrice && inputName) {
+      //handleChangeFile(inputFile);
 
-      console.log("handle file", file, user, storageRef);
+      //   const file = e.target.files[0];
+      //   const user = auth.currentUser.email;
+      //   const storage = getStorage();
+      //   const storageRef = ref(storage, user + "/" + file.name);
+      //   uploadBytes(storageRef, file).then((snapshot) => {
+      //     console.log("Uploaded a blob or file!");
+      //   });
+      // create a database of array that will take objects with values productName, productPrice: inputPrice
+      //console.log("handle file", user, storageRef);
+      setDoc(doc(db, "user", `${user}`), {
+        productInfo: [
+          {
+            productName: inputName,
+            productPrice: inputPrice,
+          },
+        ],
+      });
     } else {
       alert("please update all informatiom");
     }
 
     //setdoc to new array productInfo
-    // setDoc(doc(db, "users", `${cred.user.uid}`), {
-    //  productInfo: [
-    //  {
-    //    productName: inputName,
-    //    productPrice: inputPrice,
-    //  },
-    //  ],
+    // setDoc(doc(db, "user", `${user}`), {
+    //   productInfo: [
+    //     {
+    //       productName: inputName,
+    //       productPrice: inputPrice,
+    //     },
+    //   ],
     // });
   };
 
@@ -114,7 +130,7 @@ function Marketplace({
     <div className="marketplace">
       <Navbar />
       <div className="marketplace-wrapper">
-        <div className="welcome">Welcome, </div>
+        <div className="welcome">Welcome, {userProfileName} </div>
         <div className="options">
           <div className="categories">
             <FilterControl
@@ -159,12 +175,16 @@ function Marketplace({
                   margin="dense"
                   id="name"
                   label="Price"
-                  type="number"
+                  type="text"
                   fullWidth
                   variant="standard"
-                  //   onChange={handleChangePrice}
+                  onChange={handleChangePrice}
                 />
-                <Input type="file" accept="image/*" />
+                <Input
+                  onChange={handleChangeFile}
+                  type="file"
+                  accept="image/*"
+                />
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
