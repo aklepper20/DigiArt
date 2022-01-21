@@ -18,13 +18,15 @@
     flex-wrap: wrap;
 }
 .items-statuses span {
-    background-color: #41ead4;
     border-radius: 10px/20px;
+    background-color: rgba(58, 123, 253, 0.2);
+    color: #fff;
     text-align: center;
     width: 150px;
     padding: 5px 0;
     cursor: pointer;
     transition: all 500ms ease-in-out;
+    border: 2px solid hsl(220, 98%, 61%);
 }
 .items-statuses span:hover {
     background-color: hsl(220, 98%, 61%);
@@ -33,7 +35,9 @@
 .addItem {
     height: 30px;
     width: 100px;
-    background-color: #41ead4;
+    background-color: rgba(58, 123, 253, 0.2);
+    border: 2px solid hsl(220, 98%, 61%);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
