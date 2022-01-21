@@ -11,7 +11,7 @@ import { useStateValue } from "../StateProvider";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 
-function Navbar() {
+function Navbar({ userProfileName }) {
     const [{ basket }] = useStateValue();
     const [isActive, setActive] = useState("false");
     const [state, setState] = useState({
@@ -61,8 +61,8 @@ function Navbar() {
                         alt="ethereum logo"
                     />
                 </div>
-                <p className="eth__number">Eth: {0.3}</p>
-                <p className="eth__username">@user</p>
+                <p className="eth__number">ETH: {1.7}</p>
+                <p className="eth__username">@{userProfileName}</p>
                 {/* </div> */}
             </div>
         </Box>
