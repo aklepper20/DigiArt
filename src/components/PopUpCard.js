@@ -1,6 +1,7 @@
 import React from "react";
 
-function PopUpCard({ name, img, description, price }) {
+function PopUpCard({ name, img, description, price, nftSymbol, openSeaLink }) {
+    console.log(nftSymbol);
     return (
         <div id="popup1" className="overlay">
             <div className="popup">
@@ -11,9 +12,48 @@ function PopUpCard({ name, img, description, price }) {
                         <img src={img} alt="" />
                     </div>
                     <div className="description">
-                        <h6 className="price">{price}</h6>
-                        <p>{description}</p>
+                        <div className="info-table">
+                            <div className="tbl-header">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th>Price</th>
+                                            <th>Symbol</th>
+                                            <th>OpeanSea</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div className="tbl-content">
+                                <table
+                                    cellpadding="0"
+                                    cellspacing="0"
+                                    border="0"
+                                >
+                                    <tbody>
+                                        <tr>
+                                            <td>ETH: {price}</td>
+                                            <td>{`N/A` || `${nftSymbol}`}</td>
+                                            <td>
+                                                <a
+                                                    rel="noreferrer"
+                                                    href={`${openSeaLink}`}
+                                                    target="_blank"
+                                                >
+                                                    Make Offer
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
+                    <p className="popup-description">{description}</p>
                 </div>
             </div>
         </div>
