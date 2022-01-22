@@ -17,6 +17,8 @@
   height: 167px;
   margin: 0px 20px 4px 20px;
   border-radius: 12px;
+  max-width: 156px;
+  object-fit: contain;
 }
 
 .nftCard__details {
