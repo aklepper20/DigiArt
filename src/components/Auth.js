@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import db, { auth } from "../utils/firebase";
 import {
   userID,
@@ -20,6 +21,8 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
   const loginEmailRef = useRef();
   const loginPasswordRef = useRef();
 
+  const navigate = useNavigate();
+
   const googleFunction = async (e) => {
     e.preventDefault();
     const provider = new GoogleAuthProvider();
@@ -37,7 +40,8 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
           },
         });
         if (user) {
-          window.location = "/marketplace";
+          // window.location = "/marketplace";
+          navigate("/marketplace");
         }
       });
     } catch (error) {
@@ -55,7 +59,8 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
       ).then((user) => {
         // console.log("user logged in");
         if (user) {
-          window.location = "/marketplace";
+          // window.location = "/marketplace";
+          navigate("/marketplace");
         }
       });
     } catch (error) {
@@ -83,7 +88,8 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
           ],
         });
         if (cred) {
-          window.location = "/marketplace";
+          // window.location = "/marketplace";
+          navigate("/marketplace");
         }
       });
     } catch (error) {
