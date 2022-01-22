@@ -2,29 +2,44 @@ import React, { useState, useEffect } from "react";
 import "../style/Profile.css";
 import EditInputs from "../components/EditInputs";
 import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
+import { updateDoc, doc, arrayUnion, setDoc } from "firebase/firestore";
+import db from "../utils/firebase";
+import { StateProvider } from "../StateProvider";
 
-function ProfileProductDetails({ mrkt, selectedNft }) {
+function ProfileProductDetails({ profileInfo, selectedNft, user }) {
   const [editInputs, setEditInputs] = useState(false);
-  const [activeNft, setActiveNft] = useState(mrkt[0]);
+  const [activeNft, setActiveNft] = useState(profileInfo[0]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
-    setActiveNft(mrkt[selectedNft]);
-  }, [mrkt, selectedNft]);
-  //console.log(activeNft);
+    setActiveNft(profileInfo[selectedNft]);
+  }, [profileInfo, selectedNft]);
+
+  const updatePrice = (selectedNft) => {
+    profileInfo.forEach((nft) => {
+      if (nft.id === selectedNft) {
+        setDoc(doc(db, "user", `${user}`), {
+          productInfo: (nft.productPrice = input),
+        });
+      }
+    });
+
+    setEditInputs(false);
+    setInput("");
+  };
+  console.log(profileInfo);
   return (
     <div className="profile__itemDesc">
-      <img src={activeNft?.image_url} alt={activeNft?.name} />
+      <img src={activeNft?.productImage} alt={activeNft?.productName} />
       <div className="profile__productDetails">
-        <h2 style={{ color: "white" }}>
-          {activeNft?.name || activeNft?.collection.name}
-        </h2>
+        <h2 style={{ color: "white" }}>{activeNft?.productName}</h2>
         {editInputs ? (
-          <EditInputs activeNft={activeNft} />
+          <EditInputs activeNft={activeNft} input={input} setInput={setInput} />
         ) : (
           <ProfileNFTDisplay activeNft={activeNft} />
         )}
         <div className="profile__btns">
-          <button onClick={() => setEditInputs(false)}>Save</button>
+          <button onClick={() => updatePrice(selectedNft)}>Save</button>
           <button onClick={() => setEditInputs(true)}>Edit</button>
         </div>
       </div>
