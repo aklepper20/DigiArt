@@ -32,58 +32,58 @@ function App() {
   const [userProfileEmail, setUserProfileEmail] = useState("");
   const [profileInfo, setProfileInfo] = useState([]);
 
-  let [randomUserCoin, setRandomUserCoin] = useState(null);
-  useEffect(() => {
-    const randomEth = () => {
-      let random = Math.random() * (15 - 5) + 5;
-      setRandomUserCoin(random.toFixed(2));
-    };
-    randomEth();
-  }, []);
+    let [randomUserCoin, setRandomUserCoin] = useState(null);
+    useEffect(() => {
+        const randomEth = () => {
+            let random = Math.random() * (15 - 5) + 5;
+            setRandomUserCoin(random.toFixed(2));
+        };
+        randomEth();
+    }, []);
 
-  // database access and user verification
-  useEffect(() => {
-    //verify the user who signed in using "user" usestate
-    auth.onAuthStateChanged((currentUser) => {
-      if (currentUser.uid) {
-        setUser(currentUser.uid);
+    // database access and user verification
+    useEffect(() => {
+        //verify the user who signed in using "user" usestate
+        auth.onAuthStateChanged((currentUser) => {
+            if (currentUser.uid) {
+                setUser(currentUser.uid);
 
-        console.log(currentUser, "user set");
-      } else {
-        console.log("please sign in");
-        //do something that user cant see the marketplace without signing in
-      }
-    });
-    //onsnapshot gets data from our database
+                // console.log(currentUser, "user set");
+            } else {
+                console.log("please sign in");
+                //do something that user cant see the marketplace without signing in
+            }
+        });
+        //onsnapshot gets data from our database
 
-    onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
-      let userEmail = snapshot.data().userData[0].emailID;
-      //console.log(userEmail);
-      let userName = snapshot.data().userData[0].name;
-      let eachUserData = snapshot
-        .data()
-        .userData.map((data, id) => ({ ...data, id: id }));
+        onSnapshot(doc(db, "users", `${user}`), (snapshot) => {
+            let userEmail = snapshot.data().userData[0].emailID;
+            //console.log(userEmail);
+            let userName = snapshot.data().userData[0].name;
+            let eachUserData = snapshot
+                .data()
+                .userData.map((data, id) => ({ ...data, id: id }));
 
-      console.log(userEmail, userName);
-      setUserProfileName(userName);
-      setUserProfileEmail(userEmail);
+            // console.log(userEmail, userName);
+            setUserProfileName(userName);
+            setUserProfileEmail(userEmail);
 
-      //add a condition
-      // what do u need this data to do?
-      //dasetProfile(eachUserData) ta with users uploads if any
+            //add a condition
+            // what do u need this data to do?
+            //dasetProfile(eachUserData) ta with users uploads if any
 
-      console.log(
-        "userprofile has been set",
-        userProfileName,
-        userProfileEmail
-      );
-    });
-  }, [user]);
-  //// user verification code ends here
-  const [featured, setFeatured] = useState([]);
-  const [mrkt, setMrkt] = useState([]);
-  const [filterMarket, setFilterMarket] = useState("all");
-  const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
+            // console.log(
+            //   "userprofile has been set",
+            //   userProfileName,
+            //   userProfileEmail
+            // );
+        });
+    }, [user]);
+    //// user verification code ends here
+    const [featured, setFeatured] = useState([]);
+    const [mrkt, setMrkt] = useState([]);
+    const [filterMarket, setFilterMarket] = useState("all");
+    const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
 
   let copyFeatured = [];
   let copyMrkt = [];
@@ -129,77 +129,118 @@ function App() {
         // if the status is all setFilteredMrkt to mrkt
         return setFilteredMrkt(copyMrkt);
       }
+
     };
-    handleFilter();
-  }, [filterMarket, mrkt]);
-  //************     featured */
-  useEffect(() => {
-    fetch(
-      `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${mutantApeApi}&order_direction=desc&offset=0&limit=4`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => setFeatured(response))
-      .catch((err) => console.error(err));
-  }, []);
-  // ************ merging all api calls into one array */
-  useEffect(() => {
-    const fetchData = async () => {
-      let market = [];
-      let finishedArr = [];
-      const arr = [
-        mutantApeApi,
-        deadFellazApi,
-        pudgyPenguinsApi,
-        wowApi,
-        shibaApi,
-      ];
-      for (let i = 0; i < arr.length; i++) {
-        await fetch(
-          `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+    // console.log(mrkt);
+    // 7. useEffefct that has a handleFilter() function
+    useEffect(() => {
+        // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+        const handleFilter = () => {
+            if (filterMarket === "Mutant Ape Yacht Club") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "Mutant Ape Yacht Club"
+                    )
+                );
+            } else if (filterMarket === "DeadFellaz") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "DeadFellaz"
+                    )
+                );
+            } else if (filterMarket === "Pudgy Penguins") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "Pudgy Penguins"
+                    )
+                );
+            } else if (filterMarket === "World of Women") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "World of Women"
+                    )
+                );
+            } else if (filterMarket === "Bored Ape Kennel Club") {
+                return setFilteredMrkt(
+                    copyMrkt.filter(
+                        (nft) => nft.collection.name === "Bored Ape Kennel Club"
+                    )
+                );
+            } else {
+                // if the status is all setFilteredMrkt to mrkt
+                return setFilteredMrkt(copyMrkt);
+            }
+        };
+        handleFilter();
+    }, [filterMarket, mrkt]);
+    //************     featured */
+    useEffect(() => {
+        fetch(
+            `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${mutantApeApi}&order_direction=desc&offset=0&limit=4`,
+            options
         )
-          .then((res) => res.json())
-          .then((response) => market.push(response.assets));
-      }
-      market.map((mrktItem) => {
-        mrktItem.map((item) => {
-          return finishedArr.push(item);
-        });
-      });
-      setMrkt(finishedArr);
+            .then((response) => response.json())
+            .then((response) => setFeatured(response))
+            .catch((err) => console.error(err));
+    }, []);
+    // ************ merging all api calls into one array */
+    useEffect(() => {
+        const fetchData = async () => {
+            let market = [];
+            let finishedArr = [];
+            const arr = [
+                mutantApeApi,
+                deadFellazApi,
+                pudgyPenguinsApi,
+                wowApi,
+                shibaApi,
+            ];
+            for (let i = 0; i < arr.length; i++) {
+                await fetch(
+                    `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+                )
+                    .then((res) => res.json())
+                    .then((response) => market.push(response.assets));
+            }
+            market.map((mrktItem) => {
+                mrktItem.map((item) => {
+                    return finishedArr.push(item);
+                });
+            });
+            setMrkt(finishedArr);
+        };
+        fetchData();
+    }, []);
+    // console.log(mrkt, "new data");
+    const randomNum = () => {
+        return Math.floor(Math.random() * 9) + 1;
     };
-    fetchData();
-  }, []);
-  // console.log(mrkt, "new data");
-  const randomNum = () => {
-    return Math.floor(Math.random() * 9) + 1;
-  };
-  featured.assets &&
-    featured.assets.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      newKey.category = "crypto punk";
-      return copyFeatured.push(newKey);
-    });
-  mrkt &&
-    mrkt.map((nft) => {
-      let newKey = Object.assign({}, nft);
-      newKey.price = `0.${randomNum()} ETH`;
-      return copyMrkt.push(newKey);
-    });
-  function shuffle(array) {
-    let currentIndex = array.length,
-      randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex],
-        array[currentIndex],
-      ];
+    featured.assets &&
+        featured.assets.map((nft) => {
+            let newKey = Object.assign({}, nft);
+            newKey.price = `0.${randomNum()}`;
+            newKey.category = "crypto punk";
+            return copyFeatured.push(newKey);
+        });
+    mrkt &&
+        mrkt.map((nft) => {
+            let newKey = Object.assign({}, nft);
+            newKey.price = `0.${randomNum()}`;
+            return copyMrkt.push(newKey);
+        });
+    function shuffle(array) {
+        let currentIndex = array.length,
+            randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex],
+                array[currentIndex],
+            ];
+        }
+        return array;
     }
-    return array;
-  }
 
   shuffle(copyMrkt);
   // ******************* opensea api end **********

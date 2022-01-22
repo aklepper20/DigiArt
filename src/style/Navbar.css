@@ -79,6 +79,50 @@ nav {
 .nav-links li:last-child button {
     width: 100px;
 }
+/* eth wallet */
+
+.navbar__drawer {
+    background-color: #141418;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 30px;
+    color: #fff;
+}
+.navbar__drawer p:last-child {
+    color: #61dafb;
+    font-weight: 800;
+}
+.navbar__eth img {
+    width: 75px;
+    text-shadow: 0 34px 4px #bceefc;
+    cursor: pointer;
+    filter: drop-shadow(0px 2px 5px #e31313) invert(1);
+    transition: all 600ms ease-in-out;
+}
+.navbar__eth img:hover {
+    filter: drop-shadow(0px 2px 5px #e31313) invert(0);
+}
+.wave {
+    display: inline-block;
+    animation: animate-wave 900ms infinite ease-in-out;
+    font-size: 32px;
+}
+/* wave animation */
+@keyframes animate-wave {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
 /*Styling Buttons*/
 .login-button {
     background-color: transparent;

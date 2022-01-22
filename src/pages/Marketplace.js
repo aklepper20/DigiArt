@@ -242,33 +242,36 @@ function Marketplace({
                 </>
               );
             })}
+                </div>
+                <h2 className="title">Assets</h2>
+                <div className="market-place-assets">
+                    {filteredMrkt &&
+                        filteredMrkt.map((nft) => {
+                            return (
+                                <>
+                                    <Grid key={nft.id}>
+                                        <Card
+                                            id={nft.id}
+                                            nftSymbol={
+                                                nft.asset_contract.symbol
+                                            }
+                                            name={
+                                                nft.name || nft.collection.name
+                                            }
+                                            openSeaLink={nft.permalink}
+                                            img={nft.image_url}
+                                            description={
+                                                nft.collection.description
+                                            }
+                                        />
+                                    </Grid>
+                                </>
+                            );
+                        })}
+                </div>
+            </div>
         </div>
-        <h2 className="title">Assets</h2>
-        <div className="market-place-assets">
-          {filteredMrkt &&
-            filteredMrkt.map((nft) => {
-              return (
-                <>
-                  <Grid key={nft.id}>
-                    <Card
-                      id={nft.id}
-                      {...nft}
-                      // id={nft.id}
-                      name={nft.name || nft.collection.name}
-                      img={nft.image_url}
-                      // // price={Number(nft.stats.average_price).toFixed(
-                      // //     2
-                      // // )}
-                      description={nft.collection.description}
-                    />
-                  </Grid>
-                </>
-              );
-            })}
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Marketplace;
