@@ -137,7 +137,7 @@
 input {
     background-color: #eee;
     border: none;
-    padding: 12px 0;
+    padding: 12px 10px;
     margin: 8px 0;
     width: 100%;
 }
@@ -152,6 +152,7 @@ input {
     font-size: 12px;
     font-weight: bold;
     /* padding: 0 32px; */
+    margin: 5px 0;
     height: 40px;
     width: 90px;
     letter-spacing: 1px;
