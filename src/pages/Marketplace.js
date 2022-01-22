@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "../style/LandingPage.css";
 import "../style/Card.css";
 import Navbar from "../components/Navbar";
@@ -21,9 +21,12 @@ import { setDoc, addDoc, doc } from "firebase/firestore";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDoc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
 
 // require("dotenv").config();
 function Marketplace({
+  setProfileInfo,
+  profileInfo,
   userProfileName,
   userID,
   setUserID,
@@ -55,54 +58,72 @@ function Marketplace({
   };
 
   const handleChangeFile = (e) => {
-    const file = e.target.files[0];
-    const user = auth.currentUser.email;
-    const storage = getStorage();
-    const storageRef = ref(storage, user + "/" + file.name);
-    setInputFile(
-      uploadBytes(storageRef, file).then((snapshot) => {
-        console.log("Uploaded a blob or file!");
-      })
-    );
-    console.log("handle file", e.target.value);
+    // const file = e.target.files[0];
+    // const user = auth.currentUser.email;
+    // const storage = getStorage();
+    // const storageRef = ref(storage, user + "/" + file.name);
+    // setInputFile(
+    //   uploadBytes(storageRef, file).then((snapshot) => {
+    //     console.log("Uploaded a blob or file!");
+    //   })
+    // );
+    // console.log("handle file", e.target.value);
+    setInputFile(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (inputPrice && inputName) {
-      //handleChangeFile(inputFile);
+  // const handleSnapshot = () => {
+  //   onSnapshot(doc(db, "user", `${user}`), (snapshot) => {
+  //     let eachUserData = snapshot.data().productInfo;
 
-      //   const file = e.target.files[0];
-      //   const user = auth.currentUser.email;
-      //   const storage = getStorage();
-      //   const storageRef = ref(storage, user + "/" + file.name);
-      //   uploadBytes(storageRef, file).then((snapshot) => {
-      //     console.log("Uploaded a blob or file!");
-      //   });
-      // create a database of array that will take objects with values productName, productPrice: inputPrice
-      //console.log("handle file", user, storageRef);
-      setDoc(doc(db, "user", `${user}`), {
-        productInfo: [
-          {
-            productName: inputName,
-            productPrice: inputPrice,
-          },
-        ],
+  //     setProfileInfo(eachUserData);
+  //   });
+  // };
+
+  const handleSnapshot = () => {
+    onSnapshot(doc(db, "user", `${user}`), (snapshot) => {
+      let eachUserData = snapshot
+        .data()
+        .productInfo.map((data, id) => ({ ...data, id: id }));
+      //  let eachUserData = snapshot.data().productInfo
+      setProfileInfo(eachUserData);
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //  console.log(db._authCredentials.currentUser.uid, "this is Db")
+    if (inputPrice && inputName) {
+      let docRef = doc(db, "user", `${user}`);
+      let docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        await setDoc(doc(db, "user", `${user}`), {
+          productInfo: [
+            {
+              productName: inputName,
+              productPrice: inputPrice,
+              productImage: inputFile,
+            },
+          ],
+        });
+      }
+      await updateDoc(doc(db, "user", `${user}`), {
+        productInfo: arrayUnion({
+          productName: inputName,
+          productPrice: inputPrice,
+          productImage: inputFile,
+        }),
       });
+      setProfileInfo([]);
+      handleSnapshot();
     } else {
       alert("please update all informatiom");
     }
-
-    //setdoc to new array productInfo
-    // setDoc(doc(db, "user", `${user}`), {
-    //   productInfo: [
-    //     {
-    //       productName: inputName,
-    //       productPrice: inputPrice,
-    //     },
-    //   ],
-    // });
+    setOpen(false);
   };
+
+  useEffect(() => {
+    handleSnapshot();
+  }, [user]);
 
   const logout = async () => {
     await signOut(auth);
@@ -180,10 +201,20 @@ function Marketplace({
                   variant="standard"
                   onChange={handleChangePrice}
                 />
-                <Input
+                {/* <Input
                   onChange={handleChangeFile}
                   type="file"
                   accept="image/*"
+                /> */}
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Enter image link"
+                  type="text"
+                  fullWidth
+                  variant="standard"
+                  onChange={handleChangeFile}
                 />
               </DialogContent>
               <DialogActions>
