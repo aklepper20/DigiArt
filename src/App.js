@@ -22,14 +22,15 @@ const shibaApi = "0xba30E5F9Bb24caa003E9f2f0497Ad287FDF95623";
 const wowApi = "0xe785e82358879f061bc3dcac6f0444462d4b5330";
 
 function App() {
-    //// user verification code starts here
-    const data = [];
-    const [userID, setUserID] = useState("");
-    const [userData, setUserData] = useState({});
-    const [user, setUser] = useState({});
-    const [userProfile, setUserProfile] = useState(userData);
-    const [userProfileName, setUserProfileName] = useState("");
-    const [userProfileEmail, setUserProfileEmail] = useState("");
+  //// user verification code starts here
+  const data = [];
+  const [userID, setUserID] = useState("");
+  const [userData, setUserData] = useState({});
+  const [user, setUser] = useState({});
+  const [userProfile, setUserProfile] = useState(userData);
+  const [userProfileName, setUserProfileName] = useState("");
+  const [userProfileEmail, setUserProfileEmail] = useState("");
+  const [profileInfo, setProfileInfo] = useState([]);
 
     let [randomUserCoin, setRandomUserCoin] = useState(null);
     useEffect(() => {
@@ -84,15 +85,51 @@ function App() {
     const [filterMarket, setFilterMarket] = useState("all");
     const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
 
-    let copyFeatured = [];
-    let copyMrkt = [];
-    // ******************* opensea api **********
-    const options = {
-        method: "GET",
-        headers: {
-            Accept: "application/json",
-            "X-API-KEY": REACT_APP_API_KEY,
-        },
+  let copyFeatured = [];
+  let copyMrkt = [];
+  // ******************* opensea api **********
+  const options = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "X-API-KEY": REACT_APP_API_KEY,
+    },
+  };
+
+  // console.log(mrkt);
+  // 7. useEffefct that has a handleFilter() function
+  useEffect(() => {
+    // 7a. handle function should have an if statement that depending on the filterMarket it will setFilterMarketTasks() with the filtered tasks
+    const handleFilter = () => {
+      if (filterMarket === "Mutant Ape Yacht Club") {
+        return setFilteredMrkt(
+          copyMrkt.filter(
+            (nft) => nft.collection.name === "Mutant Ape Yacht Club"
+          )
+        );
+      } else if (filterMarket === "DeadFellaz") {
+        return setFilteredMrkt(
+          copyMrkt.filter((nft) => nft.collection.name === "DeadFellaz")
+        );
+      } else if (filterMarket === "Pudgy Penguins") {
+        return setFilteredMrkt(
+          copyMrkt.filter((nft) => nft.collection.name === "Pudgy Penguins")
+        );
+      } else if (filterMarket === "World of Women") {
+        return setFilteredMrkt(
+          copyMrkt.filter((nft) => nft.collection.name === "World of Women")
+        );
+      } else if (filterMarket === "Bored Ape Kennel Club") {
+        return setFilteredMrkt(
+          copyMrkt.filter(
+            (nft) => nft.collection.name === "Bored Ape Kennel Club"
+          )
+        );
+      } else {
+        // if the status is all setFilteredMrkt to mrkt
+        return setFilteredMrkt(copyMrkt);
+      }
+
     };
     // console.log(mrkt);
     // 7. useEffefct that has a handleFilter() function
@@ -205,65 +242,66 @@ function App() {
         return array;
     }
 
-    shuffle(copyMrkt);
-    // ******************* opensea api end **********
-    return (
-        <BrowserRouter>
-            <div className="App">
-                <Routes>
-                    <Route
-                        exact
-                        path="/"
-                        element={
-                            <LandingPage
-                                slides={copyMrkt.slice(0, copyMrkt.length)}
-                            />
-                        }
-                    />
-                    <Route
-                        exact
-                        path="/marketplace"
-                        element={
-                            <Marketplace
-                                user={user}
-                                userProfileName={userProfileName}
-                                setUserID={setUserID}
-                                userID={userID}
-                                copyFeatured={copyFeatured}
-                                mrkt={copyMrkt}
-                                filterMarket={filterMarket}
-                                setFilterMarket={setFilterMarket}
-                                filteredMrkt={filteredMrkt}
-                            />
-                        }
-                    />
-                    <Route
-                        exact
-                        path="/profile"
-                        element={
-                            <Profile
-                                userProfileName={userProfileName}
-                                userProfileEmail={userProfileEmail}
-                                mrkt={copyMrkt}
-                                randomUserCoin={randomUserCoin}
-                            />
-                        }
-                    />
-                    <Route
-                        exact
-                        path="/cart"
-                        element={<Cart randomUserCoin={randomUserCoin} />}
-                    />
-                    <Route
-                        exact
-                        path="/login"
-                        element={<Auth setUserID={setUserID} userID={userID} />}
-                    />
-                    <Route exact path="/upload" element={<UploadForm />} />
-                </Routes>
-            </div>
-        </BrowserRouter>
-    );
+  shuffle(copyMrkt);
+  // ******************* opensea api end **********
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <LandingPage slides={copyMrkt.slice(0, copyMrkt.length)} />
+            }
+          />
+          <Route
+            exact
+            path="/marketplace"
+            element={
+              <Marketplace
+                user={user}
+                userProfileName={userProfileName}
+                setUserID={setUserID}
+                userID={userID}
+                copyFeatured={copyFeatured}
+                mrkt={copyMrkt}
+                filterMarket={filterMarket}
+                setFilterMarket={setFilterMarket}
+                filteredMrkt={filteredMrkt}
+                profileInfo={profileInfo}
+                setProfileInfo={setProfileInfo}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/profile"
+            element={
+              <Profile
+                user={user}
+                userProfileName={userProfileName}
+                userProfileEmail={userProfileEmail}
+                profileInfo={profileInfo}
+                randomUserCoin={randomUserCoin}
+              />
+            }
+          />
+          <Route
+            exact
+            path="/cart"
+            element={<Cart randomUserCoin={randomUserCoin} />}
+          />
+          <Route
+            exact
+            path="/login"
+            element={<Auth setUserID={setUserID} userID={userID} />}
+          />
+          <Route exact path="/upload" element={<UploadForm />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
