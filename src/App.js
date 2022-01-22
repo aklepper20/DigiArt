@@ -30,6 +30,7 @@ function App() {
   const [userProfile, setUserProfile] = useState(userData);
   const [userProfileName, setUserProfileName] = useState("");
   const [userProfileEmail, setUserProfileEmail] = useState("");
+  const [profileInfo, setProfileInfo] = useState([]);
 
   let [randomUserCoin, setRandomUserCoin] = useState(null);
   useEffect(() => {
@@ -94,6 +95,7 @@ function App() {
       "X-API-KEY": REACT_APP_API_KEY,
     },
   };
+
   // console.log(mrkt);
   // 7. useEffefct that has a handleFilter() function
   useEffect(() => {
@@ -226,6 +228,8 @@ function App() {
                 filterMarket={filterMarket}
                 setFilterMarket={setFilterMarket}
                 filteredMrkt={filteredMrkt}
+                profileInfo={profileInfo}
+                setProfileInfo={setProfileInfo}
               />
             }
           />
@@ -234,9 +238,10 @@ function App() {
             path="/profile"
             element={
               <Profile
+                user={user}
                 userProfileName={userProfileName}
                 userProfileEmail={userProfileEmail}
-                mrkt={copyMrkt}
+                profileInfo={profileInfo}
                 randomUserCoin={randomUserCoin}
               />
             }
