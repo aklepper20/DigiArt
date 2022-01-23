@@ -9,8 +9,9 @@
 }
 
 .cart {
-  height: fit-content;
+  height: 700px;
   background-color: #041010;
+  overflow: scroll;
 }
 
 .cart-wrapper h3 {

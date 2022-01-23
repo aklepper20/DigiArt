@@ -28,7 +28,14 @@ function NftCard({ img, price, name, ID, profileInfo, user }) {
 
   return (
     <>
-      <div style={{ height: "35px", display: "flex", justifyContent: "end" }}>
+      <div
+        style={{
+          height: "35px",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <span>{ID}</span>
         <button
           style={{ background: "none" }}
           aria-describedby={id}
@@ -65,7 +72,7 @@ function NftCard({ img, price, name, ID, profileInfo, user }) {
       <img src={img} alt="Nft card display" />
       <div className="nftCard__details">
         <p>{name}</p>
-        <p>ID: {ID}</p>
+        <p>Price: {price}</p>
       </div>
     </>
   );

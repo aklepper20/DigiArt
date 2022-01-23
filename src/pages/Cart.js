@@ -45,10 +45,6 @@ function Cart({ randomUserCoin }) {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    let updatedWallet = (randomUserCoin - cartSum).toFixed(2);
-    if (updatedWallet <= 0) {
-      alert("Insufficient Wallet Funds");
-    }
     let sum = 0;
 
     basket.map((nft) => {
