@@ -328,22 +328,25 @@ function Marketplace({
             {/* upload modal HTML ends here */}
           </div>
           <div className="market-place-features">
-            {copyFeatured &&
-              copyFeatured.map((nft) => {
-                return (
-                  <>
-                    <Grid key={nft.id}>
-                      <Card
-                        id={nft.id}
-                        name={nft.collection.name}
-                        img={nft.image_url}
-                        price={nft.price}
-                        description={nft.collection.description}
-                      />
-                    </Grid>
-                  </>
-                );
-              })}
+            {profileInfo &&
+              [...profileInfo]
+                .reverse()
+                .slice(0, 10)
+                .map((nft) => {
+                  return (
+                    <>
+                      <Grid key={nft.id}>
+                        <Card
+                          id={nft.id}
+                          name={nft.productName}
+                          img={nft.productImage}
+                          price={nft.productPrice}
+                          description={nft.category}
+                        />
+                      </Grid>
+                    </>
+                  );
+                })}
           </div>
           <h2 className="title">Assets</h2>
           <div className="market-place-assets">
