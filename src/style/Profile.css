@@ -66,14 +66,10 @@ h2 {
   width: 329px;
   border-radius: 5px;
   border-right: 2px solid #292929;
-}
-
-.profile__user img {
-  width: 270px;
-  height: 270px;
-  object-fit: contain;
-  margin-left: 15px;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile__user h2 {
