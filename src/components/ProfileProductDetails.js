@@ -27,7 +27,6 @@ function ProfileProductDetails({ profileInfo, selectedNft, user }) {
     setEditInputs(false);
     setInput("");
   };
-  console.log(profileInfo);
   return (
     <div className="profile__itemDesc">
       <img src={activeNft?.productImage} alt={activeNft?.productName} />

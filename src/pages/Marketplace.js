@@ -38,6 +38,7 @@ function Marketplace({
   filteredMrkt,
   filterMarket,
   setFilterMarket,
+  profileImg,
 }) {
   // console.log(filterMarket, "openseamrkt");
 
@@ -135,17 +136,17 @@ function Marketplace({
   // when i type, a function should run that saves the states of the input
 
   console.log(user, userID, "this is user and userID");
-  const handleChangeName = (e) => {
-    setInputName(e.target.value);
-  };
+  // const handleChangeName = (e) => {
+  //   setInputName(e.target.value);
+  // };
 
-  const handleChangePrice = (e) => {
-    setInputPrice(e.target.value);
-  };
+  // const handleChangePrice = (e) => {
+  //   setInputPrice(e.target.value);
+  // };
 
-  const handleChangeFile = (e) => {
-    setInputFile(e.target.value);
-  };
+  // const handleChangeFile = (e) => {
+  //   setInputFile(e.target.value);
+  // };
 
   // const handleSnapshot = () => {
   //   onSnapshot(doc(db, "user", `${user}`), (snapshot) => {
@@ -286,7 +287,7 @@ function Marketplace({
                   type="text"
                   fullWidth
                   variant="standard"
-                  onChange={handleChangeName}
+                  onChange={(e) => setInputName(e.target.value)}
                 />
                 <TextField
                   autoFocus
@@ -296,7 +297,7 @@ function Marketplace({
                   type="text"
                   fullWidth
                   variant="standard"
-                  onChange={handleChangePrice}
+                  onChange={(e) => setInputPrice(e.target.value)}
                 />
                 {/* <Input
                   onChange={handleChangeFile}
@@ -311,7 +312,7 @@ function Marketplace({
                   type="text"
                   fullWidth
                   variant="standard"
-                  onChange={handleChangeFile}
+                  onChange={(e) => setInputFile(e.target.value)}
                 />
               </DialogContent>
               <DialogActions>
