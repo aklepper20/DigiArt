@@ -61,9 +61,10 @@ function App() {
       let userEmail = snapshot.data().userData[0].emailID;
       //console.log(userEmail);
       let userName = snapshot.data().userData[0].name;
-      let eachUserData = snapshot
-        .data()
-        .userData.map((data, id) => ({ ...data, id: id }));
+      let eachUserData = snapshot.data().userData.map((data, id) => ({
+        ...data,
+        id: id,
+      }));
 
       // console.log(userEmail, userName);
       setUserProfileName(userName);
@@ -225,6 +226,7 @@ function App() {
       newKey.price = `0.${randomNum()}`;
       return copyMrkt.push(newKey);
     });
+
   function shuffle(array) {
     let currentIndex = array.length,
       randomIndex;
