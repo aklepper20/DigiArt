@@ -4,6 +4,7 @@ import "../style/Profile.css";
 import "../style/NftCard.css";
 import NftCard from "../components/NftCard";
 import ProfileProductDetails from "../components/ProfileProductDetails";
+import Avatar from "@mui/material/Avatar";
 
 function Profile({
   randomUserCoin,
@@ -11,6 +12,7 @@ function Profile({
   userProfileName,
   userProfileEmail,
   user,
+  profileImg,
 }) {
   const [selectedNft, setSelectedNft] = useState(profileInfo.length - 1);
 
@@ -20,9 +22,15 @@ function Profile({
       <div className="profile">
         <div className="profile__top">
           <div className="profile__user">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz7xkKmOxNZeatDKzjesmJG-s2clYi3gsncQ&usqp=CAU"
-              alt=""
+            <Avatar
+              className="img"
+              src={profileImg}
+              style={{
+                width: "150px",
+                height: "150px",
+                objectFit: "contain",
+                border: "5px solid #292929",
+              }}
             />
             <h2>{userProfileName}</h2>
             <p>{userProfileEmail}</p>
