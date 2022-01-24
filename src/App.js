@@ -32,14 +32,24 @@ function App() {
   const [userProfileName, setUserProfileName] = useState("");
   const [userProfileEmail, setUserProfileEmail] = useState("");
   const [profileInfo, setProfileInfo] = useState([]);
-
+  const [profileImage, setProfileImage] = useState("");
   let [randomUserCoin, setRandomUserCoin] = useState(null);
+
   useEffect(() => {
     const randomEth = () => {
       let random = Math.random() * (15 - 5) + 5;
       setRandomUserCoin(random.toFixed(2));
     };
     randomEth();
+  }, []);
+
+  useEffect(() => {
+    const fetchProfileImg = async () => {
+      const res = await fetch("https://randomuser.me/api/");
+      const data = await res.json();
+      return setProfileImage(data.results[0].picture.large);
+    };
+    fetchProfileImg();
   }, []);
 
   // database access and user verification
@@ -270,6 +280,7 @@ function App() {
                 filteredMrkt={filteredMrkt}
                 profileInfo={profileInfo}
                 setProfileInfo={setProfileInfo}
+                profileImg={profileImage}
               />
             }
           />
@@ -283,6 +294,7 @@ function App() {
                 userProfileEmail={userProfileEmail}
                 profileInfo={profileInfo}
                 randomUserCoin={randomUserCoin}
+                profileImg={profileImage}
               />
             }
           />
