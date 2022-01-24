@@ -12,7 +12,7 @@ function Profile({
   userProfileEmail,
   user,
 }) {
-  const [selectedNft, setSelectedNft] = useState(0);
+  const [selectedNft, setSelectedNft] = useState(profileInfo.length - 1);
 
   return (
     <>
@@ -53,7 +53,7 @@ function Profile({
         ) : (
           <div className="profile__bottom">
             <div className="market-place-features">
-              {profileInfo.map((obj, index) => (
+              {[...profileInfo].reverse().map((obj, index) => (
                 <div
                   className="card"
                   key={obj.index}
