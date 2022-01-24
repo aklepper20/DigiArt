@@ -36,6 +36,7 @@ function Marketplace({
   copyFeatured,
   mrkt,
   filteredMrkt,
+  setFilteredMrkt,
   filterMarket,
   setFilterMarket,
   profileImg,
@@ -54,6 +55,7 @@ function Marketplace({
   const [avatarName, setAvatarName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [button, setButton] = useState(false);
+  const [copyProfileInfo, setCopyProfileInfo] = useState(profileInfo);
 
   useEffect(() => {
     const handleGenerateNFT = async () => {
@@ -135,7 +137,7 @@ function Marketplace({
 
   // when i type, a function should run that saves the states of the input
 
-  console.log(user, userID, "this is user and userID");
+  // console.log(user, userID, "this is user and userID");
   // const handleChangeName = (e) => {
   //   setInputName(e.target.value);
   // };
@@ -158,9 +160,11 @@ function Marketplace({
 
   const handleSnapshot = () => {
     onSnapshot(doc(db, "user", `${user}`), (snapshot) => {
-      let eachUserData = snapshot
-        .data()
-        .productInfo.map((data, id) => ({ ...data, id: id }));
+      let eachUserData = snapshot.data().productInfo.map((data, id) => ({
+        ...data,
+        id: id,
+        category: "userData",
+      }));
       //  let eachUserData = snapshot.data().productInfo
       setProfileInfo(eachUserData);
     });

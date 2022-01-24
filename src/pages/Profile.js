@@ -18,7 +18,7 @@ function Profile({
 
   return (
     <>
-      <Navbar randomUserCoin={randomUserCoin} />
+      <Navbar randomUserCoin={randomUserCoin} user={userProfileName} />
       <div className="profile">
         <div className="profile__top">
           <div className="profile__user">
