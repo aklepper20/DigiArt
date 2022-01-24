@@ -60,7 +60,7 @@ function Profile({
           <p style={{ color: "white" }}>You have no NFTS...</p>
         ) : (
           <div className="profile__bottom">
-            <div className="market-place-features">
+            <div className="profile__nftDisplay">
               {[...profileInfo].reverse().map((obj, index) => (
                 <div
                   className="card"
