@@ -39,9 +39,9 @@
   justify-content: center;
 }
 .topImg img {
-  width: 100%;
   height: 200px;
   border-radius: 10px;
+  max-width: 200px;
 }
 .description {
   display: flex;
