@@ -41,12 +41,10 @@ function Marketplace({
   setFilterMarket,
   profileImg,
 }) {
-  // console.log(filterMarket, "openseamrkt");
-
-  //upload model below
   const [inputName, setInputName] = useState("");
   const [inputPrice, setInputPrice] = useState("");
   const [inputFile, setInputFile] = useState({});
+  const [open, setOpen] = useState(false);
 
   const [seed, setSeed] = useState("");
   const [seedColor, setSeedColor] = useState("");
@@ -135,44 +133,21 @@ function Marketplace({
   let randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
   let avatarEth = Math.random() * (0.9 - 0.05) + 0.05;
 
-  // when i type, a function should run that saves the states of the input
-
-  // console.log(user, userID, "this is user and userID");
-  // const handleChangeName = (e) => {
-  //   setInputName(e.target.value);
-  // };
-
-  // const handleChangePrice = (e) => {
-  //   setInputPrice(e.target.value);
-  // };
-
-  // const handleChangeFile = (e) => {
-  //   setInputFile(e.target.value);
-  // };
-
-  // const handleSnapshot = () => {
-  //   onSnapshot(doc(db, "user", `${user}`), (snapshot) => {
-  //     let eachUserData = snapshot.data().productInfo;
-
-  //     setProfileInfo(eachUserData);
-  //   });
-  // };
-
   const handleSnapshot = () => {
     onSnapshot(doc(db, "user", `${user}`), (snapshot) => {
       let eachUserData = snapshot.data().productInfo.map((data, id) => ({
         ...data,
         id: id,
-        category: "userData",
+        category: "My Digitally Generated Assets",
       }));
-      //  let eachUserData = snapshot.data().productInfo
+
       setProfileInfo(eachUserData);
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //  console.log(db._authCredentials.currentUser.uid, "this is Db")
+
     if (inputPrice && inputName) {
       let docRef = doc(db, "user", `${user}`);
       let docSnap = await getDoc(docRef);
@@ -211,23 +186,6 @@ function Marketplace({
     window.location = "/";
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  // console.log({username})
-
-  // const handleSubmit = () => {
-  //     console.log("upload successful");
-  // };
-  ///upload modal ends
-
   return (
     <>
       <div className="marketplace">
@@ -244,7 +202,6 @@ function Marketplace({
           </div>
           <div className="mrkt-title">
             <p className="title">Featured Products</p>
-            {/* upload modal html begins here */}
             <div className="button-container">
               <div
                 className="generate-nft"
@@ -273,13 +230,13 @@ function Marketplace({
                       color: "white",
                     },
                   }}
-                  onClick={handleClickOpen}
+                  onClick={() => setOpen(true)}
                 >
                   Upload
                 </Button>
               </div>
             </div>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={() => setOpen(false)}>
               <DialogTitle>Upload your Art!!!</DialogTitle>
               <DialogContent>
                 <DialogContentText></DialogContentText>
@@ -303,11 +260,6 @@ function Marketplace({
                   variant="standard"
                   onChange={(e) => setInputPrice(e.target.value)}
                 />
-                {/* <Input
-                  onChange={handleChangeFile}
-                  type="file"
-                  accept="image/*"
-                /> */}
                 <TextField
                   autoFocus
                   margin="dense"
@@ -320,12 +272,10 @@ function Marketplace({
                 />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={() => setOpen(false)}>Cancel</Button>
                 <Button onClick={handleSubmit}>Submit</Button>
               </DialogActions>
             </Dialog>
-
-            {/* upload modal HTML ends here */}
           </div>
           <div className="market-place-features">
             {profileInfo &&
