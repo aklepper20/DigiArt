@@ -1,5 +1,6 @@
 export const initialState = {
   basket: [],
+  bid: 0,
   // user: null,
 };
 
@@ -34,6 +35,12 @@ const reducer = (state, action) => {
           item.id === action.id ? (item.qty = action.qty) : item.qty
         ),
       };
+
+    case "BID":
+      return {
+        bid: action.item,
+      };
+
     default:
       return state;
   }
