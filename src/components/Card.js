@@ -4,6 +4,8 @@ import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
 import PopUpCard from "./PopUpCard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+import Bid from "./Bid";
 import { useStateValue } from "../StateProvider";
 
 const StyledModal = styled(ModalUnstyled)`
@@ -51,6 +53,7 @@ function Card({
   const [{ basket }, dispatch] = useStateValue();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const [bidOpen, setBidOpen] = useState(false);
 
   // console.log(openSeaLink);
   const addToBasket = () => {
@@ -66,6 +69,16 @@ function Card({
     });
   };
 
+  const bidInfo = () => {
+    setBidOpen(true);
+    dispatch({
+      type: "BID",
+      item: {
+        price: price,
+      },
+    });
+  };
+
   return (
     <div className="card" key={key}>
       <div className="topImg">
@@ -77,6 +90,8 @@ function Card({
         <p>{description}</p>
       </div>
       <div className="card-btns">
+        <RequestQuoteIcon onClick={bidInfo} />
+        {bidOpen === true && <Bid setBidOpen={setBidOpen} />}
         <button
           className="moredts"
           type="button"
