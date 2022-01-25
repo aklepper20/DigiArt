@@ -48,6 +48,7 @@ function NftCard({ img, price, name, ID, profileInfo, user }) {
             position: "absolute",
             top: "0",
             left: "0",
+            border: "3px solid hsl(220, 98%, 61%)",
           }}
           sx={{ border: 1, p: 1, bgcolor: "background.paper" }}
         >
