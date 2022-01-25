@@ -66,7 +66,6 @@ function Profile({
                   className="card"
                   key={obj.index}
                   onClick={() => setSelectedNft(obj.id)}
-                  // className="nftCard"
                 >
                   <NftCard
                     profileInfo={profileInfo}
