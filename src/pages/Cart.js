@@ -7,6 +7,37 @@ import ModalUnstyled from "@mui/base/ModalUnstyled";
 import { useStateValue } from "../StateProvider";
 import { Link } from "react-router-dom";
 
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const Backdrop = styled("div")`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`;
+const style = {
+  width: 480,
+  bgcolor: "#041010",
+  color: "white",
+  border: "2px solid #6bbaec",
+  p: 2,
+  px: 4,
+  pb: 3,
+};
+
 function Cart({ randomUserCoin }) {
   const [{ basket }, dispatch] = useStateValue();
   let [cartSum, setCartSum] = useState(0);
@@ -17,6 +48,7 @@ function Cart({ randomUserCoin }) {
   useEffect(() => {
     if ((randomUserCoin - cartSum).toFixed(2) <= 0) {
       alert("Insufficient wallet funds...");
+      return;
     }
 
     let sum = 0;
@@ -81,12 +113,6 @@ function Cart({ randomUserCoin }) {
               </div>
             </div>
             <div className="cart__checkout">
-              <div className="cart__total">
-                {/* <p>
-                  Wallet:<span>{randomUserCoin} eth</span>
-                </p> */}
-              </div>
-              {/* </div> */}
               <div
                 style={{
                   display: "flex",
@@ -187,34 +213,3 @@ function Cart({ randomUserCoin }) {
 }
 
 export default Cart;
-
-const StyledModal = styled(ModalUnstyled)`
-  position: fixed;
-  z-index: 1300;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-const Backdrop = styled("div")`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-tap-highlight-color: transparent;
-`;
-const style = {
-  width: 480,
-  bgcolor: "#041010",
-  color: "white",
-  border: "2px solid #6bbaec",
-  p: 2,
-  px: 4,
-  pb: 3,
-};
