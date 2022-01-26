@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
@@ -241,7 +241,12 @@ function App() {
           <Route
             exact
             path="/cart"
-            element={<Cart randomUserCoin={randomUserCoin} />}
+            element={
+              <Cart
+                randomUserCoin={randomUserCoin}
+                userProfileName={userProfileName}
+              />
+            }
           />
           <Route
             exact
