@@ -59,7 +59,6 @@ function Marketplace({
   const [avatarName, setAvatarName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState(null);
   const [button, setButton] = useState(false);
-  const [copyProfileInfo, setCopyProfileInfo] = useState(profileInfo);
 
   useEffect(() => {
     const handleGenerateNFT = async () => {
