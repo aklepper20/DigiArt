@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
 import { doc, setDoc } from "firebase/firestore";
 import db from "../utils/firebase";
-import { useStateValue } from "../StateProvider";
 
 function NftCard({ img, price, name, ID, profileInfo, user }) {
   const [anchorEl, setAnchorEl] = useState(null);

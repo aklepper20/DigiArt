@@ -14,13 +14,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import GoogleIcon from "@mui/icons-material/Google";
 import "../style/login.css";
 
-function Auth({
-  userID,
-  setUserID,
-  loginRedboxClass,
-  setUserProfileEmail,
-  setUserProfileName,
-}) {
+function Auth({ userID, setUserID, setUserProfileEmail, setUserProfileName }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const NameInput = useRef();

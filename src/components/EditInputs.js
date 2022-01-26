@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import "../style/EditInputs.css";
 
 function EditInputs({ activeNft, input, setInput }) {

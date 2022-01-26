@@ -55,7 +55,6 @@ function Card({
   const handleClose = () => setOpen(false);
   const [bidOpen, setBidOpen] = useState(false);
 
-  // console.log(openSeaLink);
   const addToBasket = () => {
     dispatch({
       type: "ADD_TO_BASKET",

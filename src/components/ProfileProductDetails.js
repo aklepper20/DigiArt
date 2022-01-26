@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../style/Profile.css";
 import EditInputs from "../components/EditInputs";
 import ProfileNFTDisplay from "../components/ProfileNFTDisplay";
-import { updateDoc, doc, arrayUnion, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import db from "../utils/firebase";
-import { StateProvider } from "../StateProvider";
 
 function ProfileProductDetails({ profileInfo, selectedNft, user }) {
   const [editInputs, setEditInputs] = useState(false);
