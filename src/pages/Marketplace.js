@@ -16,12 +16,18 @@ import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
 // import { uploadBytes } from "firebase/storage";
-import { setDoc, addDoc, doc } from "firebase/firestore";
+import { setDoc, addDoc, doc, orderBy } from "firebase/firestore";
 //import storage from "../utils/firebase";
 // #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { getDoc, onSnapshot, updateDoc, arrayUnion } from "firebase/firestore";
+import {
+  getDoc,
+  onSnapshot,
+  updateDoc,
+  arrayUnion,
+  Timestamp,
+} from "firebase/firestore";
 
 // require("dotenv").config();
 function Marketplace({
@@ -96,6 +102,7 @@ function Marketplace({
               productName: avatarName,
               productPrice: randomNftEth,
               productImage: avatarUrl,
+              createdAt: Timestamp.now(),
             },
           ],
         });
@@ -105,6 +112,7 @@ function Marketplace({
           productName: avatarName,
           productPrice: randomNftEth,
           productImage: avatarUrl,
+          createdAt: Timestamp.now(),
         }),
       });
     }
@@ -139,8 +147,8 @@ function Marketplace({
         ...data,
         id: id,
         category: "My Digitally Generated Assets",
+        createdAt: Timestamp.now(),
       }));
-
       setProfileInfo(eachUserData);
     });
   };
@@ -158,6 +166,7 @@ function Marketplace({
               productName: inputName,
               productPrice: inputPrice,
               productImage: inputFile,
+              createdAt: Timestamp.now(),
             },
           ],
         });
@@ -167,6 +176,7 @@ function Marketplace({
           productName: inputName,
           productPrice: inputPrice,
           productImage: inputFile,
+          createdAt: Timestamp.now(),
         }),
       });
       setProfileInfo([]);

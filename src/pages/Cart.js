@@ -41,9 +41,7 @@ const style = {
 function Cart({ randomUserCoin }) {
   const [{ basket }, dispatch] = useStateValue();
   let [cartSum, setCartSum] = useState(0);
-  let [cartTotal, setCartTotal] = useState(0);
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     if ((randomUserCoin - cartSum).toFixed(2) <= 0) {
@@ -96,7 +94,7 @@ function Cart({ randomUserCoin }) {
           </div>
           <div className="cart__container">
             <div className="cart">
-              {basket?.map((obj) => {
+              {[...basket]?.reverse().map((obj) => {
                 return (
                   <CartCard
                     img={obj.img}
@@ -179,7 +177,7 @@ function Cart({ randomUserCoin }) {
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"
                 open={open}
-                onClose={handleClose}
+                onClose={() => setOpen(false)}
                 BackdropComponent={Backdrop}
               >
                 <Box sx={style}>
