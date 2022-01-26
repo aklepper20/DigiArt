@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { styled, Box } from "@mui/system";
 import ModalUnstyled from "@mui/base/ModalUnstyled";
 import { useStateValue } from "../StateProvider";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -38,17 +38,12 @@ const style = {
   pb: 3,
 };
 
-function Cart({ randomUserCoin }) {
-  const [{ basket }, dispatch] = useStateValue();
+function Cart({ randomUserCoin, userProfileName }) {
+  const [{ basket }] = useStateValue();
   let [cartSum, setCartSum] = useState(0);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if ((randomUserCoin - cartSum).toFixed(2) <= 0) {
-      alert("Insufficient wallet funds...");
-      return;
-    }
-
     let sum = 0;
     basket.map((nft) => {
       let price = nft.price.slice(0, 4);
@@ -61,6 +56,7 @@ function Cart({ randomUserCoin }) {
   return (
     <>
       <Navbar />
+      {!userProfileName && <Navigate to="/" />}
       {basket?.length === 0 ? (
         <div className="cart__emptyCart">
           <div className="cart__emptyDetails">
