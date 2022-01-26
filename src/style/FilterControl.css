@@ -1,74 +1,81 @@
 .options {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 30px 20px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 20px;
+  justify-content: center;
+  align-items: center;
 }
 .categories {
-    color: black;
-    font-weight: 800;
-    font-size: 16px;
+  color: black;
+  font-weight: 800;
+  font-size: 16px;
 }
 .items-statuses {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 .items-statuses span {
-    border-radius: 10px/20px;
-    background-color: rgba(58, 123, 253, 0.2);
-    color: #fff;
-    text-align: center;
-    width: 150px;
-    padding: 5px 0;
-    cursor: pointer;
-    transition: all 500ms ease-in-out;
-    border: 2px solid hsl(220, 98%, 61%);
+  border-radius: 10px/20px;
+  background-color: rgba(58, 123, 253, 0.2);
+  color: #fff;
+  text-align: center;
+  width: 150px;
+  padding: 5px 0;
+  cursor: pointer;
+  transition: all 500ms ease-in-out;
+  border: 2px solid hsl(220, 98%, 61%);
 }
 .items-statuses span:hover {
-    background-color: hsl(220, 98%, 61%);
-    color: #fff;
+  background-color: hsl(220, 98%, 61%);
+  color: #fff;
 }
 .addItem,
 .generate-nft {
-    height: 30px;
-    width: 140px;
-    background-color: rgba(58, 123, 253, 0.2);
-    border: 2px solid hsl(220, 98%, 61%);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 115px;
-    cursor: pointer;
-    border-radius: 10px;
-    color: black;
-    font-weight: 800;
-    font-size: 20px;
+  height: 30px;
+  width: 140px;
+  background-color: rgba(58, 123, 253, 0.2);
+  border: 2px solid hsl(220, 98%, 61%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 115px;
+  cursor: pointer;
+  border-radius: 10px;
+  color: black;
+  font-weight: 800;
+  font-size: 20px;
 }
 .generate-nft {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 .mrkt-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .title {
-    width: 200px;
-    font-size: 20px;
-    color: white;
-    margin-left: 115px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+  width: 200px;
+  font-size: 20px;
+  color: white;
+  margin-left: 115px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
 }
 .items-statuses .active {
-    background-color: hsl(220, 98%, 61%);
+  background-color: hsl(220, 98%, 61%);
 }
 .button-container {
+  display: flex;
+}
+
+@media (max-width: 786px) {
+  .button-container {
     display: flex;
+    flex-direction: column;
+  }
 }
