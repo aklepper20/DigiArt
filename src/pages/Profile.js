@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Navigate } from "react-router";
 import Navbar from "../components/Navbar";
 import "../style/Profile.css";
 import "../style/NftCard.css";
@@ -19,6 +20,7 @@ function Profile({
   return (
     <>
       <Navbar randomUserCoin={randomUserCoin} user={userProfileName} />
+      {!userProfileName && <Navigate to="/" />}
       <div className="profile">
         <div className="profile__top">
           <div className="profile__user">
