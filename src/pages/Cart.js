@@ -172,7 +172,7 @@ function Cart({ randomUserCoin, userProfileName }) {
                   <>
                     <h3 style={{ color: "red" }}>Insufficient Funds</h3>
                     <button
-                      value={disabled}
+                      disabled
                       style={{ backgroundColor: "gray", color: "red" }}
                     >
                       Checkout
