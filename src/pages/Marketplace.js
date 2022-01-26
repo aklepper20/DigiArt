@@ -12,13 +12,11 @@ import DialogContent from "@mui/material/DialogContent";
 import Grid from "@mui/material/Grid";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Input } from "@mui/material";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
-import { setDoc, addDoc, doc, orderBy } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import db from "../utils/firebase";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
 import {
   getDoc,
   onSnapshot,
@@ -27,23 +25,14 @@ import {
   Timestamp,
 } from "firebase/firestore";
 
-// require("dotenv").config();
 function Marketplace({
   setProfileInfo,
   profileInfo,
   userProfileName,
-  userID,
-  setUserID,
-  username,
   user,
-  userData,
-  copyFeatured,
-  mrkt,
   filteredMrkt,
-  setFilteredMrkt,
   filterMarket,
   setFilterMarket,
-  profileImg,
 }) {
   const [inputName, setInputName] = useState("");
   const [inputPrice, setInputPrice] = useState("");
