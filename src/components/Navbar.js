@@ -21,7 +21,7 @@ function Navbar({ randomUserCoin, user }) {
     right: false,
   });
   const [filterNav, setFilterNav] = useState("all");
-  // const [filteredNav, setFilteredNav] = useState(mrkt);
+
   const handleToggle = () => {
     setActive(!isActive);
   };
@@ -160,5 +160,3 @@ function Navbar({ randomUserCoin, user }) {
 }
 
 export default Navbar;
-
-// logoutbtn ={<button onClick={logout}>LOGOUT</button>}
