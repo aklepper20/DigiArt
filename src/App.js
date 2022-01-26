@@ -251,7 +251,14 @@ function App() {
           <Route
             exact
             path="/login"
-            element={<Auth setUserID={setUserID} userID={userID} />}
+            element={
+              <Auth
+                setUserID={setUserID}
+                userID={userID}
+                setUserProfileEmail={setUserProfileEmail}
+                setUserProfileName={setUserProfileName}
+              />
+            }
           />
           <Route exact path="/upload" element={<UploadForm />} />
         </Routes>
