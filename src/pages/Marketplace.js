@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Navigate } from "react-router";
 import "../style/LandingPage.css";
 import "../style/Card.css";
 import Navbar from "../components/Navbar";
@@ -15,10 +16,7 @@ import { Input } from "@mui/material";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import FilterControl from "../components/FilterControl";
-// import { uploadBytes } from "firebase/storage";
 import { setDoc, addDoc, doc, orderBy } from "firebase/firestore";
-//import storage from "../utils/firebase";
-// #1b import db from ../utils/firebase.js
 import db from "../utils/firebase";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import {
@@ -198,6 +196,7 @@ function Marketplace({
   return (
     <>
       <div className="marketplace">
+        {!userProfileName && <Navigate to="/" />}
         <Navbar />
         <div className="marketplace-wrapper">
           <div className="welcome">Welcome, {userProfileName} </div>
