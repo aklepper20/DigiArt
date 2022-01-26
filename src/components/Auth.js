@@ -14,7 +14,13 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import GoogleIcon from "@mui/icons-material/Google";
 import "../style/login.css";
 
-function Auth({ userID, setUserID, loginRedboxClass }) {
+function Auth({
+  userID,
+  setUserID,
+  loginRedboxClass,
+  setUserProfileEmail,
+  setUserProfileName,
+}) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const NameInput = useRef();
@@ -31,7 +37,10 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
       signInWithPopup(auth, provider).then(async (result) => {
         const user = result.user;
         const username = user.displayName;
+        const userGoogleEmail = user.email;
 
+        setUserProfileName(username);
+        setUserProfileEmail(userGoogleEmail);
         await setDoc(doc(db, "users", `${user.uid}`), {
           userData: {
             emailID: user.email,
