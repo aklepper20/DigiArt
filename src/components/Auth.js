@@ -31,8 +31,7 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
       signInWithPopup(auth, provider).then(async (result) => {
         const user = result.user;
         const username = user.displayName;
-        // console.log(username)
-        // console.log(user.email
+
         await setDoc(doc(db, "users", `${user.uid}`), {
           userData: {
             emailID: user.email,
@@ -40,7 +39,6 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
           },
         });
         if (user) {
-          // window.location = "/marketplace";
           navigate("/marketplace");
         }
       });
@@ -57,9 +55,7 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
         loginEmailRef.current.value,
         loginPasswordRef.current.value
       ).then((user) => {
-        // console.log("user logged in");
         if (user) {
-          // window.location = "/marketplace";
           navigate("/marketplace");
         }
       });
@@ -76,7 +72,6 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
         emailRef.current.value,
         passwordRef.current.value
       ).then(async (cred) => {
-        //console.log(cred.user.uid);
         setUserID(cred.user.uid);
         console.log(userID, "this is user ?");
         await setDoc(doc(db, "users", `${cred.user.uid}`), {
@@ -88,7 +83,6 @@ function Auth({ userID, setUserID, loginRedboxClass }) {
           ],
         });
         if (cred) {
-          // window.location = "/marketplace";
           navigate("/marketplace");
         }
       });
