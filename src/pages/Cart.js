@@ -42,6 +42,7 @@ function Cart({ randomUserCoin, userProfileName }) {
   const [{ basket }] = useStateValue();
   let [cartSum, setCartSum] = useState(0);
   const [open, setOpen] = useState(false);
+  const [wallet, setWallet] = useState(0);
 
   useEffect(() => {
     let sum = 0;
@@ -51,12 +52,14 @@ function Cart({ randomUserCoin, userProfileName }) {
       sum += nftTotal;
       setCartSum(sum);
     });
+    setWallet((randomUserCoin - cartSum).toFixed(2));
   }, [basket, cartSum]);
 
   return (
     <>
       <Navbar />
       {!userProfileName && <Navigate to="/" />}
+
       {basket?.length === 0 ? (
         <div className="cart__emptyCart">
           <div className="cart__emptyDetails">
@@ -154,9 +157,7 @@ function Cart({ randomUserCoin, userProfileName }) {
                   >
                     Updated Wallet:{" "}
                   </span>
-                  <h2 style={{ color: "white" }}>
-                    {(randomUserCoin - cartSum).toFixed(2)}
-                  </h2>
+                  <h2 style={{ color: "white" }}>{wallet}</h2>
                 </div>
               </div>
 
@@ -167,7 +168,19 @@ function Cart({ randomUserCoin, userProfileName }) {
                   flexDirection: "column",
                 }}
               >
-                <button onClick={() => setOpen(true)}>Checkout</button>
+                {wallet <= 0 ? (
+                  <>
+                    <h3 style={{ color: "red" }}>Insufficient Funds</h3>
+                    <button
+                      value={disabled}
+                      style={{ backgroundColor: "gray", color: "red" }}
+                    >
+                      Checkout
+                    </button>
+                  </>
+                ) : (
+                  <button onClick={() => setOpen(true)}>Checkout</button>
+                )}
               </div>
               <StyledModal
                 aria-labelledby="unstyled-modal-title"
