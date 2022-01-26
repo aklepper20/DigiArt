@@ -34,12 +34,6 @@ function CartCard({ img, price, name, id, qty }) {
             outline: "none",
           }}
         >
-          {/* <InputLabel
-                            id="demo-simple-select-label"
-                            style={{ color: "black" }}
-                        >
-                            Quantity
-                        </InputLabel> */}
           <Select
             className="cart__dropDown"
             labelId="demo-simple-select-label"
