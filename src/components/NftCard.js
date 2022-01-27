@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../style/NftCard.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
