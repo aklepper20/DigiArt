@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Navigate } from "react-router";
 import Navbar from "../components/Navbar";
 import "../style/Profile.css";
-import "../style/NftCard.css";
 import NftCard from "../components/NftCard";
 import ProfileProductDetails from "../components/ProfileProductDetails";
 import Avatar from "@mui/material/Avatar";
@@ -65,7 +64,7 @@ function Profile({
             <div className="profile__nftDisplay">
               {[...profileInfo].reverse().map((obj, index) => (
                 <div
-                  className="card"
+                  className="card pop"
                   key={obj.index}
                   onClick={() => setSelectedNft(obj.id)}
                 >
