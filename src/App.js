@@ -1,14 +1,12 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import LandingPage from "./pages/LandingPage";
 import Marketplace from "./pages/Marketplace";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import Footer from "./components/Footer";
 import UploadForm from "./components/UploadForm";
-
 import { REACT_APP_API_KEY } from "./utils/keys";
 
 import Auth from "./components/Auth";
