@@ -1,40 +1,40 @@
 .cart__dropdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .cart__coin {
-  width: 200px;
+    width: 200px;
 }
 .cart__product {
-  width: 100%;
-  background-color: #474954;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border-radius: 5px;
-  color: white;
-  gap: 40px;
-  padding: 20px;
+    width: 100%;
+    background-color: #474954;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
+    color: white;
+    gap: 20px;
+    padding: 20px;
 }
 
 .cart__dropdown .MuiSelect-select {
-  width: 10px;
-  color: white;
-  background-color: rgb(225, 214, 214);
+    width: 10px;
+    color: white;
+    background-color: rgb(225, 214, 214);
 }
 .cart__dropdown .MuiSelect-select:hover {
-  background-color: #fff;
+    background-color: #fff;
 }
 .cart__product img {
-  object-fit: contain;
-  height: 100px;
-  border-radius: 5px;
+    object-fit: contain;
+    height: 100px;
+    border-radius: 5px;
 }
 
 #demo-simple-select {
-  color: black;
+    color: black;
 }
