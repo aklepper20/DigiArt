@@ -4,31 +4,31 @@ import "../style/Footer.css";
 function Footer() {
     return (
         <footer>
-            <div class="row footer__row">
-                <a href="#" class="footer__anchor">
-                    <figure class="footer__logo">
+            <div className="row footer__row">
+                <a href="#" className="footer__anchor">
+                    <figure className="footer__logo">
                         <img
                             src="./images/logo.png"
                             alt="logo"
-                            class="footer__logo-img"
+                            className="footer__logo-img"
                         />
                     </figure>
-                    <span class="footer__logo--popper">
-                        Top <i class="fas fa-arrow-up"></i>
+                    <span className="footer__logo--popper">
+                        Top <i className="fas fa-arrow-up"></i>
                     </span>
                 </a>
-                <div class="footer__social--list">
-                    <a href="/cart" class="footer__social--link">
+                <div className="footer__social--list">
+                    <a href="/cart" className="footer__social--link">
                         Cart
                     </a>
-                    <a href="/marketplace" class="footer__social--link">
+                    <a href="/marketplace" className="footer__social--link">
                         Marketplace
                     </a>
-                    <a href="/profile" class="footer__social--link">
+                    <a href="/profile" className="footer__social--link">
                         Profile
                     </a>
                 </div>
-                <div class="footer__copyright">
+                <div className="footer__copyright">
                     CopyRight &copy; 2022 DigiArt
                 </div>
             </div>
