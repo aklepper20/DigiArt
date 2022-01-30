@@ -70,6 +70,7 @@
   background-color: hsl(220, 98%, 61%);
 }
 .button-container {
+  gap: 5px;
   display: flex;
 }
 
