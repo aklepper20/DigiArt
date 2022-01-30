@@ -187,7 +187,7 @@ function Marketplace({
   return (
     <>
       <div className="marketplace">
-        {!userProfileName && <Navigate to="/" />}
+        {!user && <Navigate to="/" />}
         <Navbar randomUserCoin={randomUserCoin} user={userProfileName} />
         <div className="marketplace-wrapper">
           <div className="welcome">Welcome, {userProfileName} </div>
