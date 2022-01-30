@@ -1,229 +1,228 @@
 .market-place-features {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: scroll;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-    padding: 30px;
-    gap: 20px;
-    width: 820px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  padding: 30px;
+  gap: 20px;
 }
 .market-place-features .card {
-    width: 250px;
+  width: 250px;
 }
 .price {
-    font-weight: bold;
-    color: hsl(220, 98%, 61%);
-    font-size: 12px;
-    padding-top: 7px;
+  font-weight: bold;
+  color: hsl(220, 98%, 61%);
+  font-size: 12px;
+  padding-top: 7px;
 }
 .market-place-assets {
-    display: flex;
-    justify-content: center;
-    padding: 30px;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 .market-place-assets .card {
-    width: 250px;
+  width: 250px;
 }
 .market-place-assets .topImg,
 .market-place-features .topImg {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 .topImg {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .topImg img {
-    height: 200px;
-    border-radius: 10px;
-    max-width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  max-width: 200px;
 }
 .description {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .description .card-name {
-    font-weight: bold;
-    width: 100%;
-    text-align: center;
-    padding: 5px 0;
-    color: #fff;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  color: #fff;
 }
 .card-btns {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 20px;
-    position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
 }
 .card-btns button {
-    transition: all 500ms ease-in-out;
-    background-color: #2cb5b5;
-    padding: 5px 15px;
+  transition: all 500ms ease-in-out;
+  background-color: #2cb5b5;
+  padding: 5px 15px;
 }
 .card-btns button:hover {
-    background-color: hsl(220, 98%, 61%);
+  background-color: hsl(220, 98%, 61%);
 }
 .card-btns svg {
-    cursor: pointer;
-    font-size: 32px;
-    transition: all 500ms ease-in-out;
+  cursor: pointer;
+  font-size: 32px;
+  transition: all 500ms ease-in-out;
 }
 .card-btns svg {
-    color: #2cb5b5;
+  color: #2cb5b5;
 }
 .card-btns svg:hover {
-    transform: scale(1.2);
-    color: hsl(220, 98%, 61%);
+  transform: scale(1.2);
+  color: hsl(220, 98%, 61%);
 }
 .MuiModal-root .MuiBox-root {
-    border: none;
+  border: none;
 }
 .MuiGrid-root .description p:nth-child(3) {
-    padding: 10px 20px;
-    font-size: 14px;
-    width: 210px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: rgba(189, 189, 189, 0.7);
+  padding: 10px 20px;
+  font-size: 14px;
+  width: 210px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: rgba(189, 189, 189, 0.7);
 }
 .card .popup .content {
-    width: 300px;
+  width: 300px;
 }
 .popup .content .description {
-    padding: 20px 20px;
-    color: #000;
-    text-align: center;
-    gap: 15px;
+  padding: 20px 20px;
+  color: #000;
+  text-align: center;
+  gap: 15px;
 }
 .popup .content .description p:nth-child(2) {
-    font-size: 14px;
+  font-size: 14px;
 }
 .content .description .price {
-    font-size: 16px;
+  font-size: 16px;
 }
 .popup-description {
-    padding: 0 20px 20px;
-    font-size: 12px;
-    color: #000;
-    text-align: center;
-    gap: 10px;
+  padding: 0 20px 20px;
+  font-size: 12px;
+  color: #000;
+  text-align: center;
+  gap: 10px;
 }
 tr {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 th {
-    width: 80px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    font-size: 12px;
-    padding: 5px 0;
-    color: #000;
-    text-transform: uppercase;
-    background: linear-gradient(to right, #25c481, #25b7c4);
+  width: 80px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 12px;
+  padding: 5px 0;
+  color: #000;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #25c481, #25b7c4);
 }
 td {
-    font-size: 12px;
-    padding: 2px;
-    color: #000;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background: linear-gradient(to right, #c2eddb, #a1e4eb);
-    width: 80px;
+  font-size: 12px;
+  padding: 2px;
+  color: #000;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: linear-gradient(to right, #c2eddb, #a1e4eb);
+  width: 80px;
 }
 
 td a {
-    color: #0a0afc;
-    text-shadow: 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444;
-    animation: blink linear infinite 2s;
+  color: #0a0afc;
+  text-shadow: 0 0 1em #ff4444, 0 0 0.5em #ff4444, 0 0 0.1em #ff4444;
+  animation: blink linear infinite 2s;
 }
 .popup .content .description h3 {
-    background-color: transparent;
-    font-weight: bolder;
+  background-color: transparent;
+  font-weight: bolder;
 }
 .button {
-    font-size: 12px;
-    margin-bottom: 15px;
-    padding: 5px;
-    color: #fff;
-    border: 2px solid #06d85f;
-    border-radius: 20px/50px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease-out;
+  font-size: 12px;
+  margin-bottom: 15px;
+  padding: 5px;
+  color: #fff;
+  border: 2px solid #06d85f;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
 }
 .button:hover {
-    background: #06d85f;
+  background: #06d85f;
 }
 /* pop up card */
 .overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 500ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 500ms;
 }
 .overlay:target {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 .overlay .popup .content .topImg {
-    padding: 0 40px;
+  padding: 0 40px;
 }
 
 .popup {
-    padding: 30px;
-    background: #7a7a7a;
-    border-radius: 10px;
-    position: relative;
-    transition: all 5s ease-in-out;
+  padding: 30px;
+  background: #7a7a7a;
+  border-radius: 10px;
+  position: relative;
+  transition: all 5s ease-in-out;
 }
 
 .popup h2 {
-    padding: 20px 0 5px;
-    color: #333;
-    font-family: Tahoma, Arial, sans-serif;
-    text-align: center;
+  padding: 20px 0 5px;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  text-align: center;
 }
 .content .topImg img {
-    width: 100%;
+  width: 100%;
 }
 hr {
-    background-color: #7a7a7a;
-    padding: 0;
-    margin: 15px;
+  background-color: #7a7a7a;
+  padding: 0;
+  margin: 15px;
 }
 
 hr.hr-1 {
-    border: 0;
-    height: 4px;
-    background-image: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.75),
-        rgba(0, 0, 0, 0)
-    );
+  border: 0;
+  height: 4px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
 }
 .popup .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
 }
 .popup .close:hover {
-    color: #06d85f;
+  color: #06d85f;
 }
