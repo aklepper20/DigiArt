@@ -29,6 +29,21 @@ function App() {
   const [profileInfo, setProfileInfo] = useState([]);
   const [profileImage, setProfileImage] = useState("");
   let [randomUserCoin, setRandomUserCoin] = useState(null);
+  const [featured, setFeatured] = useState([]);
+  const [mrkt, setMrkt] = useState([]);
+  const [filterMarket, setFilterMarket] = useState("all");
+  const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
+
+  let copyFeatured = [];
+  let copyMrkt = [];
+
+  const options = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "X-API-KEY": REACT_APP_API_KEY,
+    },
+  };
 
   useEffect(() => {
     const randomEth = () => {
@@ -70,22 +85,6 @@ function App() {
       }));
     });
   }, [user]);
-
-  const [featured, setFeatured] = useState([]);
-  const [mrkt, setMrkt] = useState([]);
-  const [filterMarket, setFilterMarket] = useState("all");
-  const [filteredMrkt, setFilteredMrkt] = useState(mrkt);
-
-  let copyFeatured = [];
-  let copyMrkt = [];
-
-  const options = {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "X-API-KEY": REACT_APP_API_KEY,
-    },
-  };
 
   useEffect(() => {
     const handleFilter = () => {
@@ -143,7 +142,8 @@ function App() {
       ];
       for (let i = 0; i < arr.length; i++) {
         await fetch(
-          `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`
+          `https://api.opensea.io/api/v1/assets?asset_contract_addresses=${arr[i]}&order_direction=desc&offset=0&limit=10`,
+          options
         )
           .then((res) => res.json())
           .then((response) => market.push(response.assets));

@@ -56,9 +56,7 @@ function Marketplace({
       setSeed(Math.floor(Math.random() * 5000));
       setSeedColor("23" + fill[Math.floor(Math.random() * fill.length)]);
 
-      await fetch(
-        "https://random-word-api.herokuapp.com/word?number=10&swear=0"
-      )
+      await fetch("https://random-word-api.herokuapp.com/word?number=2")
         .then((response) => response.json())
         .then((data) => setAvatarName(`${data[0]} ${data[1]}`));
     };
@@ -170,7 +168,7 @@ function Marketplace({
       setProfileInfo([]);
       handleSnapshot();
     } else {
-      alert("please update all informatiom");
+      alert("please update all information");
     }
     setOpen(false);
   };

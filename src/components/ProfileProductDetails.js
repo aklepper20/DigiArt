@@ -15,17 +15,18 @@ function ProfileProductDetails({ profileInfo, selectedNft, user }) {
   }, [profileInfo, selectedNft]);
 
   const updatePrice = (selectedNft) => {
-    profileInfo.forEach((nft) => {
-      if (nft.id === selectedNft) {
-        setDoc(doc(db, "user", `${user}`), {
-          productInfo: (nft.productPrice = input),
-        });
-      }
+    let arrayRef = profileInfo;
+    const indexUpdate = arrayRef[selectedNft];
+    indexUpdate.productPrice = input;
+
+    setDoc(doc(db, "user", `${user}`), {
+      productInfo: arrayRef,
     });
 
     setEditInputs(false);
     setInput("");
   };
+
   return (
     <div className="profile__itemDesc">
       <img src={activeNft?.productImage} alt={activeNft?.productName} />

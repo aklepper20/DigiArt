@@ -58,7 +58,7 @@ function Profile({
         >
           Your Items
         </h2>
-        {profileInfo.length === 0 ? (
+        {profileInfo?.length === 0 ? (
           <p style={{ color: "white" }}>You have no NFTS...</p>
         ) : (
           <div className="profile__bottom">
