@@ -39,11 +39,9 @@ function App() {
 
   const options = {
     method: "GET",
-    // withCredentials: true,
     headers: {
       Accept: "application/json",
       "X-API-KEY": REACT_APP_API_KEY,
-      // "Access-Control-Allow-Origin": "*",
     },
   };
 
