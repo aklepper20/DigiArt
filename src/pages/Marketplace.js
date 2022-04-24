@@ -168,7 +168,7 @@ function Marketplace({
       setProfileInfo([]);
       handleSnapshot();
     } else {
-      alert("please update all informatiom");
+      alert("please update all information");
     }
     setOpen(false);
   };
